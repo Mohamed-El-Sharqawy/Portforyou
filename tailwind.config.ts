@@ -1,4 +1,8 @@
 import type { Config } from "tailwindcss";
+const {
+  default: flattenColorPalette,
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+} = require("tailwindcss/lib/util/flattenColorPalette");
 
 export default {
   darkMode: ["class"],
@@ -9,6 +13,17 @@ export default {
   ],
   theme: {
     extend: {
+      container: {
+        center: true,
+        padding: "2rem",
+        screens: {
+          sm: "640px",
+          md: "768px",
+          lg: "1024px",
+          xl: "1280px",
+          "2xl": "1400px",
+        },
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -50,13 +65,53 @@ export default {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
+        "color-1": "hsl(var(--color-1))",
+        "color-2": "hsl(var(--color-2))",
+        "color-3": "hsl(var(--color-3))",
+        "color-4": "hsl(var(--color-4))",
+        "color-5": "hsl(var(--color-5))",
       },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      animation: {
+        rainbow: "rainbow var(--speed, 2s) infinite linear",
+        aurora: "aurora 60s linear infinite",
+      },
+      keyframes: {
+        rainbow: {
+          "0%": {
+            "background-position": "0%",
+          },
+          "100%": {
+            "background-position": "200%",
+          },
+        },
+        aurora: {
+          from: {
+            backgroundPosition: "50% 50%, 50% 50%",
+          },
+          to: {
+            backgroundPosition: "350% 50%, 350% 50%",
+          },
+        },
+      },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  plugins: [require("tailwindcss-animate"), addVariablesForColors],
 } satisfies Config;
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function addVariablesForColors({ addBase, theme }: any) {
+  const allColors = flattenColorPalette(theme("colors"));
+  const newVars = Object.fromEntries(
+    Object.entries(allColors).map(([key, val]) => [`--${key}`, val])
+  );
+
+  addBase({
+    ":root": newVars,
+  });
+}

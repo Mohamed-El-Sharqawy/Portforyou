@@ -6,7 +6,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -64,6 +63,9 @@ body {
   }
 }
 
+.marketing-section {
+  @apply container py-20;
+}
 
 @layer base {
   * {
