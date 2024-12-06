@@ -1,0 +1,6 @@
+.hero .hero-head {
+  @apply relative text-3xl md:text-7xl font-bold dark:text-white text-center mb-4;
+}
+.hero .hero-paragraph {
+  @apply relative font-extralight text-base md:text-4xl dark:text-neutral-200 py-4 text-center;
+}
