@@ -10,7 +10,7 @@ import "./hero.css";
 
 export default function Hero() {
   return (
-    <section className="hero">
+    <section id="hero" className="hero">
       <AuroraBackground className="relative z-10 text-white">
         <motion.div
           initial={{ opacity: 0.0, y: 40 }}
@@ -20,6 +20,7 @@ export default function Hero() {
             duration: 0.8,
             ease: "easeInOut",
           }}
+          viewport={{ once: true }}
         >
           <h2 className="hero-head">
             Portfolio Creation Made Simple, Sharing Made Seamless.

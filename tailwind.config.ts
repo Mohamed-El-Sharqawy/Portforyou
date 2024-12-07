@@ -80,6 +80,7 @@ export default {
         rainbow: "rainbow var(--speed, 2s) infinite linear",
         aurora: "aurora 60s linear infinite",
         shimmer: "shimmer 2s linear infinite",
+        gradient: "gradient 8s linear infinite",
       },
       keyframes: {
         shimmer: {
@@ -104,6 +105,11 @@ export default {
           },
           to: {
             backgroundPosition: "350% 50%, 350% 50%",
+          },
+        },
+        gradient: {
+          to: {
+            backgroundPosition: "var(--bg-size) 0",
           },
         },
       },
