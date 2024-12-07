@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { Menu, XIcon } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
-import LoginButton from "./LoginButton/LoginButton";
+import LoginButton from "./LoginButton";
 
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);

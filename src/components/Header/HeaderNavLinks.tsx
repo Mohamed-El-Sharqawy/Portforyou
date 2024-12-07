@@ -1,7 +1,7 @@
 import { links } from "@/constants/navLinks";
 import Link from "next/link";
 import React from "react";
-import LoginButton from "./LoginButton/LoginButton";
+import LoginButton from "./LoginButton";
 
 export default function HeaderNavLinks() {
   return (

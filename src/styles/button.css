@@ -1,4 +1,4 @@
-button {
+button.login-button {
   position: relative;
   padding: 15px 45px;
   background: rgb(37, 99, 235);
@@ -11,11 +11,8 @@ button {
   filter: drop-shadow(2px 2px 3px rgba(0, 0, 0, 0.2));
 }
 
-button:hover {
-  background: linear-gradient(
-    85deg,
-    rgb(37, 99, 235),
-  );
+button.login-button:hover {
+  background: linear-gradient(85deg, rgb(37, 99, 235));
   animation: wind 2s ease-in-out infinite;
 }
 
@@ -44,7 +41,7 @@ button:hover {
   filter: drop-shadow(2px 2px 3px rgba(255, 255, 255, 0.3));
 }
 
-button:hover .icon-1 {
+button.login-button:hover .icon-1 {
   animation: slay-1 2s cubic-bezier(0.52, 0, 0.58, 1) infinite;
   transform: rotate(10deg);
 }
@@ -74,7 +71,7 @@ button:hover .icon-1 {
   filter: drop-shadow(2px 2px 3px rgba(255, 255, 255, 0.5));
 }
 
-button:hover .icon-2 {
+button.login-button:hover .icon-2 {
   animation: slay-2 2s cubic-bezier(0.52, 0, 0.58, 1) 1s infinite;
   transform: rotate(0);
 }
@@ -104,7 +101,7 @@ button:hover .icon-2 {
   filter: drop-shadow(2px 2px 3px rgba(255, 255, 255, 0.5));
 }
 
-button:hover .icon-3 {
+button.login-button:hover .icon-3 {
   animation: slay-3 1s cubic-bezier(0.52, 0, 0.58, 1) 1s infinite;
   transform: rotate(0);
 }
@@ -122,7 +119,6 @@ button:hover .icon-3 {
     transform: rotate(0);
   }
 }
-
 
 button.login-button svg {
   fill: white;
