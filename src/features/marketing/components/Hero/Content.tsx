@@ -25,7 +25,7 @@ export default function Content() {
           Build Stunning Portfolios Effortlessly.
         </p>
 
-        <div className="w-fit mx-auto">
+        <div className="relative z-50 w-fit mx-auto">
           <Button text="Get Started" />
         </div>
       </motion.div>
