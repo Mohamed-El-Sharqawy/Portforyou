@@ -1,4 +1,4 @@
-import "@/styles/login-button.css";
+import "@/styles/button.css";
 
 export default function LoginButton() {
   return (
