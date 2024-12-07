@@ -2,7 +2,7 @@ import SectionsHeading from "@/components/ui/SectionsHeading";
 
 export default function Contact() {
   return (
-    <section className="marketing-section">
+    <section id="contact" className="marketing-section">
       <SectionsHeading text="Contact Us" />
     </section>
   );

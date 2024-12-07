@@ -1,8 +1,8 @@
 import SectionsHeading from "@/components/ui/SectionsHeading";
 
-export default function Pricing() {
+export default function Pricings() {
   return (
-    <section className="marketing-section">
+    <section id="pricings" className="marketing-section">
       <SectionsHeading text="Pricings" />
     </section>
   );
