@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import LoginButton from "./LoginButton";
 
 import { links } from "@/constants/navLinks";
@@ -48,13 +47,23 @@ export default function MobileMenu() {
 
         <nav className="flex flex-col items-center justify-center gap-y-8">
           {links.map((link) => (
-            <Link
-              className="text-xl hover:underline underline-offset-4 relative"
+            <button
+              className="text-xl hover:underline underline-offset-4 relative cursor-pointer"
               key={link.href}
-              href={link.href}
+              role="link"
+              tabIndex={0}
+              onClick={(e) => {
+                e.preventDefault();
+
+                setIsOpen(false);
+                window.scrollTo({
+                  top: document.getElementById(link.href)?.offsetTop,
+                  behavior: "smooth",
+                });
+              }}
             >
               {link.label}
-            </Link>
+            </button>
           ))}
         </nav>
 

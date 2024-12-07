@@ -1,5 +1,3 @@
 export default function Survey() {
-  return (
-    <>Survey</>
-  )
+  return <>Survey</>;
 }
