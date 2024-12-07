@@ -1,6 +1,10 @@
 .hero .hero-head {
-  @apply relative text-3xl md:text-7xl font-bold dark:text-white text-center mb-4;
+  @apply relative text-3xl md:text-7xl font-bold dark:text-white mb-8 max-w-7xl w-full text-center;
 }
 .hero .hero-paragraph {
-  @apply relative font-extralight text-base md:text-4xl dark:text-neutral-200 py-4 text-center;
+  @apply relative font-extralight text-base md:text-3xl dark:text-neutral-200 py-4 text-center;
+}
+
+.hero > div > div {
+  @apply mt-8
 }

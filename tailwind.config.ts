@@ -79,8 +79,17 @@ export default {
       animation: {
         rainbow: "rainbow var(--speed, 2s) infinite linear",
         aurora: "aurora 60s linear infinite",
+        shimmer: "shimmer 2s linear infinite",
       },
       keyframes: {
+        shimmer: {
+          from: {
+            backgroundPosition: "0 0",
+          },
+          to: {
+            backgroundPosition: "-200% 0",
+          },
+        },
         rainbow: {
           "0%": {
             "background-position": "0%",
