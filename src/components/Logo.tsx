@@ -20,7 +20,7 @@ export default function Logo({ scrollToTop }: LogoProps) {
   return (
     <Link href={"/"} onClick={scrollToTop ? scroll : undefined}>
       <SparklesText
-        className="italic lg:text-4xl xl:text-6xl"
+        className="italic text-2xl lg:text-4xl xl:text-6xl"
         text="Portforyou"
         colors={{ first: "violet", second: "#3b82f6" }}
       />
