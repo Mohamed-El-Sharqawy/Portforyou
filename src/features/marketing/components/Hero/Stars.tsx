@@ -1,37 +1,5 @@
-"use client";
-
-import { AuroraBackground } from "@/components/ui/aurora-background";
-import Button from "@/components/ui/Button";
 import { motion } from "framer-motion";
 import { memo } from "react";
-
-export default function Content() {
-  return (
-    <AuroraBackground className="hero relative z-10 text-white">
-      <motion.div
-        initial={{ opacity: 0.0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{
-          delay: 0.3,
-          duration: 0.8,
-          ease: "easeInOut",
-        }}
-      >
-        <div className="relative">
-          <h2 className="hero-head">Portfolio Creation Made Simple, Sharing Made Seamless.</h2>
-          <MemoizedStars />
-        </div>
-        <p className="hero-paragraph">
-          Build Stunning Portfolios Effortlessly.
-        </p>
-
-        <div className="relative z-50 w-fit mx-auto">
-          <Button text="Get Started" />
-        </div>
-      </motion.div>
-    </AuroraBackground>
-  );
-}
 
 const Stars = () => {
   const randomMove = () => Math.random() * 4 - 2;
@@ -69,4 +37,4 @@ const Stars = () => {
   );
 };
 
-const MemoizedStars = memo(Stars);
+export const MemoizedStars = memo(Stars);

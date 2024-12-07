@@ -5,6 +5,6 @@
   @apply relative font-extralight text-base md:text-3xl dark:text-neutral-200 py-4 text-center;
 }
 
-.hero > div > div {
+.hero .hero-button {
   @apply mt-8
 }
