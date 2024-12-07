@@ -1,11 +1,12 @@
 "use client";
 
+import Link from "next/link";
+import LoginButton from "./LoginButton";
+
 import { links } from "@/constants/navLinks";
 import { cn } from "@/lib/utils";
 import { Menu, XIcon } from "lucide-react";
-import Link from "next/link";
 import { useState } from "react";
-import LoginButton from "./LoginButton";
 
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -57,7 +58,9 @@ export default function MobileMenu() {
           ))}
         </nav>
 
-        <div className="mx-auto w-fit"><LoginButton /></div>
+        <div className="mx-auto w-fit">
+          <LoginButton />
+        </div>
       </div>
     </div>
   );
