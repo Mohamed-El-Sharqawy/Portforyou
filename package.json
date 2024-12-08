@@ -12,6 +12,7 @@
     "@radix-ui/react-switch": "^1.1.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "framer-motion": "^12.0.0-alpha.2",
     "lenis": "^1.1.18",
     "lottie-react": "^2.4.0",
     "lucide-react": "^0.468.0",
