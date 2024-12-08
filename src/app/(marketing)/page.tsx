@@ -3,7 +3,7 @@
 import Contact from "@/features/marketing/components/Contact";
 import Hero from "@/features/marketing/components/Hero/Hero";
 import Pricings from "@/features/marketing/components/Pricings";
-import Services from "@/features/marketing/components/Services";
+import Services from "@/features/marketing/components/Services/Services";
 import Testimonials from "@/features/marketing/components/Testimonials";
 import Lenis from "lenis";
 
