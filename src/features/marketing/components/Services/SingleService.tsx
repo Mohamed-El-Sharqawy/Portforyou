@@ -19,15 +19,17 @@ export default function SingleService({
       viewport={{ once: true }}
       className="group relative overflow-hidden rounded-xl bg-slate-900/50 p-8 shadow-lg transition-all hover:shadow-xl border border-border/50 min-h-[280px] flex flex-col"
     >
-      <div className="relative z-10 flex-1">
+      <div className="relative z-50 flex-1">
         <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-background transition-colors">
           {<service.icon className="h-7 w-7" />}
         </div>
-        <h3 className="mb-3 text-lg font-semibold leading-none tracking-tight text-slate-100">
+
+        <h3 className="mb-3 text-lg font-semibold tracking-tight text-slate-100 leading-7">
           {service.title}
         </h3>
         <p className="text-sm text-slate-300">{service.description}</p>
       </div>
+
       <div
         className={cn(
           "absolute inset-0 z-0 bg-gradient-to-t from-primary/30 to-transparent opacity-0",

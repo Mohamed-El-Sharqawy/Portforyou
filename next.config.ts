@@ -6,6 +6,15 @@ const nextConfig: NextConfig = {
       {
         hostname: "avatar.vercel.sh",
       },
+      {
+        hostname: "images.unsplash.com",
+      },
+      {
+        hostname: "res.cloudinary.com",
+      },
+    ],
+    domains: [
+      "api.microlink.io", // Microlink Image Preview
     ],
   },
 };

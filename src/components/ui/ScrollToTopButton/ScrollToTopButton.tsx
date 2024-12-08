@@ -30,61 +30,15 @@ export default function ScrollToTopButton() {
 
   return (
     <button
-      onClick={() => {
-        scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
-      }}
-      role="link"
-      className="button"
       id="scrollToTopButton"
+      className="button"
+      onClick={() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }}
     >
-      <p className="button__text">
-        <span style={{ "--index": 0 } as React.CSSProperties}>S</span>
-        <span style={{ "--index": 1 } as React.CSSProperties}>C</span>
-        <span style={{ "--index": 2 } as React.CSSProperties}>R</span>
-        <span style={{ "--index": 3 } as React.CSSProperties}>O</span>
-        <span style={{ "--index": 4 } as React.CSSProperties}>L</span>
-        <span style={{ "--index": 5 } as React.CSSProperties}>L</span>
-        <span style={{ "--index": 6 } as React.CSSProperties}> </span>
-        <span style={{ "--index": 7 } as React.CSSProperties}>T</span>
-        <span style={{ "--index": 8 } as React.CSSProperties}>O</span>
-        <span style={{ "--index": 9 } as React.CSSProperties}> </span>
-        <span style={{ "--index": 10 } as React.CSSProperties}>T</span>
-        <span style={{ "--index": 11 } as React.CSSProperties}>O</span>
-        <span style={{ "--index": 12 } as React.CSSProperties}>P</span>
-        <span style={{ "--index": 14 } as React.CSSProperties}>❤️</span>
-        <span style={{ "--index": 17 } as React.CSSProperties}>❤️</span>
-      </p>
-
-      <div className="button__circle">
-        <svg
-          viewBox="0 0 14 15"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="button__icon"
-          width="14"
-        >
-          <path
-            d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"
-            fill="currentColor"
-          />
-        </svg>
-
-        <svg
-          viewBox="0 0 14 15"
-          fill="none"
-          width="14"
-          xmlns="http://www.w3.org/2000/svg"
-          className="button__icon button__icon--copy"
-        >
-          <path
-            d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"
-            fill="currentColor"
-          />
-        </svg>
-      </div>
+      <svg viewBox="0 0 384 512" className="svgIcon">
+        <path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"></path>
+      </svg>
     </button>
   );
 }

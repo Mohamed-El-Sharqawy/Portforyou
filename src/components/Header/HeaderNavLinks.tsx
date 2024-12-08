@@ -1,6 +1,7 @@
 import React from "react";
 
 import { links } from "@/constants/navLinks";
+import { LinkPreview } from "../ui/link-preview";
 import LoginButton from "./LoginButton";
 
 export default function HeaderNavLinks() {
@@ -22,7 +23,7 @@ export default function HeaderNavLinks() {
             });
           }}
         >
-          {link.label}
+          {<LinkPreview url={link.src}>{link.label}</LinkPreview>}
         </button>
       ))}
 

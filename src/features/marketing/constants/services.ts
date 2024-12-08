@@ -1,13 +1,13 @@
 import {
-  Code2,
-  Palette,
-  Laptop,
-  Megaphone,
   LineChart,
-  ShieldCheck,
-  Rocket,
-  Wrench,
   LucideIcon,
+  Layout,
+  Brain,
+  MonitorSmartphone,
+  Cloud,
+  Box,
+  CopyPlus,
+  Sparkles,
 } from "lucide-react";
 
 export type Service = {
@@ -18,51 +18,51 @@ export type Service = {
 
 export const services: Service[] = [
   {
-    title: "Web Development",
+    title: "Customizable Templates",
     description:
-      "Building responsive and performant web applications using modern technologies and frameworks.",
-    icon: Code2,
+      "Choose from a variety of modern, professionally designed templates tailored to suit your unique needs and style.",
+    icon: Layout,
   },
   {
-    title: "UI/UX Design",
+    title: "AI-Powered Content Suggestions",
     description:
-      "Creating intuitive and visually appealing user interfaces with a focus on user experience.",
-    icon: Palette,
+      "Let our AI Writer generate compelling text suggestions, making it easier to craft engaging content for your portfolio.",
+    icon: Brain,
   },
   {
-    title: "Software Solutions",
+    title: "Responsive Design for All Devices",
     description:
-      "Developing custom software solutions tailored to your business needs and requirements.",
-    icon: Laptop,
+      "Ensure your portfolio looks stunning on desktops, tablets, and mobile devices with fully responsive design.",
+    icon: MonitorSmartphone,
   },
   {
-    title: "Digital Marketing",
+    title: "Portfolio Hosting with CDN",
     description:
-      "Implementing effective digital marketing strategies to grow your online presence.",
-    icon: Megaphone,
+      "Host your portfolio on a global Content Delivery Network (CDN) for lightning-fast access and a custom shareable link.",
+    icon: Cloud,
   },
   {
-    title: "Analytics & SEO",
+    title: "Advanced Animations and Effects",
     description:
-      "Optimizing your digital presence with data-driven insights and search engine optimization.",
+      "Add a professional touch with advanced animations and effects to captivate your audience.",
+    icon: Sparkles,
+  },
+  {
+    title: "3D Model Integration",
+    description:
+      "Integrate 3D models seamlessly into your portfolio to create an interactive and visually striking experience.",
+    icon: Box,
+  },
+  {
+    title: "Multi-Portfolio Management",
+    description:
+      "Create and manage multiple unique portfolios to cater to different audiences or professional needs.",
+    icon: CopyPlus,
+  },
+  {
+    title: "Real-Time Analytics and Insights",
+    description:
+      "Gain insights into your portfolio's performance with real-time analytics, helping you improve and reach your goals.",
     icon: LineChart,
-  },
-  {
-    title: "Security Solutions",
-    description:
-      "Implementing robust security measures to protect your digital assets and data.",
-    icon: ShieldCheck,
-  },
-  {
-    title: "Performance Optimization",
-    description:
-      "Enhancing application performance and user experience through optimization techniques.",
-    icon: Rocket,
-  },
-  {
-    title: "Maintenance & Support",
-    description:
-      "Providing ongoing maintenance and technical support for your digital solutions.",
-    icon: Wrench,
   },
 ];

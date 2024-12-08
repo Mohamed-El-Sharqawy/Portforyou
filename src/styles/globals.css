@@ -64,7 +64,7 @@ body {
 }
 
 .marketing-section {
-  @apply container py-20;
+  @apply container py-20 max-[400px]:px-4;
 }
 
 @layer base {

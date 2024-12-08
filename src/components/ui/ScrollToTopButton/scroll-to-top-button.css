@@ -1,85 +1,59 @@
 .button {
-  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  border-radius: 20%;
+  background-color: #3b82f6;
   border: none;
-  background: #3b82f6;
-  color: #fff;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  overflow: hidden;
-  position: fixed;
-  display: grid;
-  place-content: center;
-  transition: background 300ms, transform 200ms, opacity 500ms;
-  font-weight: 600;
-  bottom: 1rem;
-  right: 1rem;
-  z-index: 50;
-  font-family: Arial, Helvetica, sans-serif;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.button.show {
-  opacity: 100;
-  pointer-events: auto;
-}
-
-.button__text {
-  position: absolute;
-  inset: 0;
-  animation: text-rotation 8s linear infinite;
-
-  > span {
-    position: absolute;
-    transform: rotate(calc(19deg * var(--index)));
-    inset: 7px;
-  }
-}
-
-.button__circle {
-  position: relative;
-  width: 40px;
-  height: 40px;
-  overflow: hidden;
-  background: #fff;
-  color: #3b82f6;
-  border-radius: 50%;
+  font-weight: 300;
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition-duration: 0.3s;
+  overflow: hidden;
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
 }
 
-.button .button__icon {
-  transform: rotate(-45deg);
+.svgIcon {
+  width: 12px;
+  transition-duration: 0.3s;
 }
 
-.button__icon--copy {
-  position: absolute;
-  transform: translate(-150%, 150%);
+.svgIcon path {
+  fill: #e9e9e9;
 }
 
 .button:hover {
-  background: #523bf6;
-  transform: scale(1.1);
+  width: 140px;
+  border-radius: 15px;
+  transition-duration: 0.3s;
+  background-color: #1b5eca;
+  align-items: center;
 }
 
-.button:hover .button__icon {
-  color: #523bf6;
+.button:hover .svgIcon {
+  /* width: 20px; */
+  transition-duration: 0.3s;
+  transform: translateY(-200%);
 }
 
-.button:hover .button__icon:first-child {
-  transition: transform 0.3s ease-in-out;
-  transform: translate(150%, -150%), rotate(-45deg);
+.button::before {
+  position: absolute;
+  bottom: -20px;
+  content: "Back to Top";
+  color: #e9e9e9;
+  /* transition-duration: .3s; */
+  font-size: 0px;
 }
 
-.button:hover .button__icon--copy {
-  transition: transform 0.3s ease-in-out 0.1s;
-  transform: translate(0), rotate(-45deg);
-}
-
-@keyframes text-rotation {
-  to {
-    rotate: 360deg;
-  }
+.button:hover::before {
+  font-family: Garet;
+  font-size: 15px;
+  opacity: 1;
+  bottom: unset;
+  /* transform: translateY(-30px); */
+  transition-duration: 0.3s;
 }
