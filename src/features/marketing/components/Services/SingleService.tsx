@@ -16,11 +16,11 @@ export default function SingleService({
   return (
     <motion.div
       key={service.title}
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       viewport={{ once: true }}
-      className="group relative overflow-hidden rounded-xl bg-slate-900/50 p-8 shadow-lg transition-all hover:shadow-xl border border-border/50 min-h-[280px] flex flex-col"
+      className="group relative overflow-hidden rounded-xl bg-slate-900/50 p-8 shadow-lg hover:shadow-xl border border-border/50 min-h-[280px] flex flex-col"
     >
       <div className="relative z-50 flex-1">
         <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-lg bg-primary/10 text-primary group-hover:bg-primary group-hover:text-background transition-colors">
