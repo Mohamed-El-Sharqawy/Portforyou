@@ -141,12 +141,14 @@ export const AnimatedTestimonials = ({
             <button
               onClick={handlePrev}
               className="h-7 w-7 rounded-full bg-primary/65 hover:bg-primary/100 transition duration-500 flex items-center justify-center group/button"
+              aria-label="Previous testimonial/review"
             >
               <IconArrowLeft className="h-5 w-5 text-white group-hover/button:rotate-12 transition-transform duration-300" />
             </button>
             <button
               onClick={handleNext}
               className="h-7 w-7 rounded-full bg-primary/65 hover:bg-primary/100 transition duration-500 flex items-center justify-center group/button"
+              aria-label="Next testimonial/review"
             >
               <IconArrowRight className="h-5 w-5 text-white group-hover/button:-rotate-12 transition-transform duration-300" />
             </button>

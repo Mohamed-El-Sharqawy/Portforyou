@@ -15,9 +15,9 @@ export default function ContactForm() {
           onSubmit={(e) => e.preventDefault()}
           className="max-w-2xl mx-auto p-4 space-y-8"
         >
-          <h1 className="relative z-10 text-lg md:text-7xl  bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  text-center font-sans font-bold">
+          <h2 className="relative z-10 text-lg md:text-7xl  bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  text-center font-sans font-bold">
             Stay Updated with Portforyou
-          </h1>
+          </h2>
           <p></p>
           <p className="text-neutral-500 max-w-lg mx-auto my-2 text-center relative z-10">
             Join the waitlist to be the first to know when we launch. Get
