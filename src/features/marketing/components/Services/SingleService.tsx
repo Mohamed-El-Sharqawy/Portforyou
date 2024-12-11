@@ -27,9 +27,9 @@ export default function SingleService({
           {<service.icon className="h-7 w-7" />}
         </div>
 
-        <h3 className="mb-3 text-lg font-semibold tracking-tight text-slate-100 leading-7">
+        <h2 className="mb-3 text-lg font-semibold tracking-tight text-slate-100 leading-7">
           {service.title}
-        </h3>
+        </h2>
 
         <p className="text-sm text-slate-300">{service.description}</p>
       </div>

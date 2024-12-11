@@ -24,9 +24,9 @@ export default function PricingCard({
       >
         <div className="absolute inset-0 rounded-[22px]" />
 
-        <h4 className="relative text-[40px] mt-5 font-bold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
+        <h2 className="relative text-[40px] mt-5 font-bold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
           {plan.subscription}
-        </h4>
+        </h2>
 
         <div className="relative my-8">
           <span className="text-sm text-zinc-400 uppercase">Price</span>
