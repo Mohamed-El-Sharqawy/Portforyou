@@ -1,12 +1,12 @@
 "use client";
 
+import Portal from "../Portal";
 import LoginButton from "./LoginButton";
 
 import { links } from "@/constants/navLinks";
 import { cn } from "@/lib/utils";
 import { Menu, XIcon } from "lucide-react";
 import { useState } from "react";
-import { createPortal } from "react-dom";
 
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,7 +33,7 @@ export default function MobileMenu() {
       </div>
 
       {/* Navbar */}
-      {createPortal(
+      <Portal selector={"body"}>
         <div
           className={cn(
             "fixed inset-y-0 right-[-300px] w-[300px] bg-primary-foreground transition-all duration-500 z-[1002] space-y-10",
@@ -65,20 +65,19 @@ export default function MobileMenu() {
           <div className="mx-auto w-fit">
             <LoginButton />
           </div>
-        </div>,
-        document.body
-      )}
+        </div>
+      </Portal>
 
       {/* Overlay */}
-      {isOpen &&
-        createPortal(
+      {isOpen && (
+        <Portal selector={"body"}>
           <div
             className="fixed inset-0 bg-black/50 z-[1000]"
             onClick={() => setIsOpen(false)}
             aria-hidden="true"
-          />,
-          document.body
-        )}
+          />
+        </Portal>
+      )}
     </div>
   );
 }

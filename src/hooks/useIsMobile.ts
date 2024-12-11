@@ -16,7 +16,7 @@ function debounce<F extends (...args: any[]) => any>(func: F, delay: number) {
 }
 
 export const useIsMobile = () => {
-  const [isMobile, setIsMobile] = useState<boolean>(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   const handleResize = useCallback(
     debounce(() => {
@@ -26,13 +26,19 @@ export const useIsMobile = () => {
   );
 
   useEffect(() => {
-    // Add event listener
-    window.addEventListener("resize", handleResize);
+    // Check if window is defined (client-side)
+    if (typeof window !== "undefined") {
+      // Set initial value
+      setIsMobile(window.innerWidth < 768);
 
-    // Clean up event listener
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
+      // Add event listener
+      window.addEventListener("resize", handleResize);
+
+      // Clean up event listener
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }
   }, [handleResize]);
 
   return isMobile;

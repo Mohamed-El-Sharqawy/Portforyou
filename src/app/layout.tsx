@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://portforyou-xi.vercel.app"),
   title:
     "Portforyou - Create and Share Stunning Portfolios with AI-Powered Customization",
   description:
@@ -21,14 +22,6 @@ export const metadata: Metadata = {
       "Design and publish professional portfolios effortlessly with Portforyou. Enjoy customizable templates, AI content writing, 3D models, and affordable subscription plans. Tailored for professionals across all fields, with hosting included.",
     url: "portforyou-xi.vercel.app",
     siteName: "Portforyou",
-    images: [
-      {
-        url: "https://portforyou-xi.vercel.app/og.png",
-        width: 1200,
-        height: 630,
-        alt: "Portforyou",
-      },
-    ],
   },
 };
 
