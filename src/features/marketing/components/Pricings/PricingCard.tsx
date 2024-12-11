@@ -16,7 +16,7 @@ export default function PricingCard({
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1}}
       transition={{ duration: 1, delay: index * 0.2 }}
-      viewport={{ once: true, amount: 0.75 }}
+      viewport={{ once: true, amount: 0.40 }}
     >
       <ShineBorder
         className="relative p-8 pt-0 flex w-full flex-col items-start overflow-hidden rounded-lg border md:shadow-xl"

@@ -12,7 +12,7 @@ export const links = [
     href: "testimonials",
   },
   {
-    label: "Contact",
-    href: "contact",
+    label: "Newsletter",
+    href: "newsletter",
   },
 ];
