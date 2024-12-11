@@ -14,9 +14,9 @@ export default function PricingCard({
   return (
     <motion.div
       initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1}}
+      whileInView={{ opacity: 1 }}
       transition={{ duration: 1, delay: index * 0.2 }}
-      viewport={{ once: true, amount: 0.40 }}
+      viewport={{ once: true, amount: 0.4 }}
     >
       <ShineBorder
         className="relative p-8 pt-0 flex w-full flex-col items-start overflow-hidden rounded-lg border md:shadow-xl"
@@ -24,13 +24,13 @@ export default function PricingCard({
       >
         <div className="absolute inset-0 rounded-[22px]" />
 
-        <h3 className="relative text-[40px] mt-5 font-bold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
+        <h4 className="relative text-[40px] mt-5 font-bold bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
           {plan.subscription}
-        </h3>
+        </h4>
 
         <div className="relative my-8">
           <span className="text-sm text-zinc-400 uppercase">Price</span>
-          <h4 className="text-[48px] font-bold text-white">{plan.price}</h4>
+          <p className="text-[48px] font-bold text-white">{plan.price}</p>
         </div>
 
         <div className="relative space-y-4">
