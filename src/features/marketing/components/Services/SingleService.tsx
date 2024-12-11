@@ -1,5 +1,8 @@
-import { cn } from "@/lib/utils";
+"use client";
+
 import Meteors from "@/components/ui/meteors";
+
+import { cn } from "@/lib/utils";
 import { motion } from "motion/react";
 import { Service } from "../../constants/services";
 
@@ -27,6 +30,7 @@ export default function SingleService({
         <h3 className="mb-3 text-lg font-semibold tracking-tight text-slate-100 leading-7">
           {service.title}
         </h3>
+
         <p className="text-sm text-slate-300">{service.description}</p>
       </div>
 
@@ -36,6 +40,7 @@ export default function SingleService({
           "transition-all duration-300 group-hover:opacity-100"
         )}
       />
+
       <Meteors />
     </motion.div>
   );

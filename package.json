@@ -20,7 +20,6 @@
     "lucide-react": "^0.468.0",
     "motion": "^12.0.0-alpha.2",
     "next": "15.0.4",
-    "qss": "^3.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "tailwind-merge": "^2.5.5",

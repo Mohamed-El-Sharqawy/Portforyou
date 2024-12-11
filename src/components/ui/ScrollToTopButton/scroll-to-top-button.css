@@ -1,4 +1,4 @@
-.button {
+.scrollToTopButton {
   width: 50px;
   height: 50px;
   border-radius: 20%;
@@ -15,6 +15,13 @@
   position: fixed;
   bottom: 1rem;
   right: 1rem;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scrollToTopButton.show {
+  opacity: 100;
+  pointer-events: auto;
 }
 
 .svgIcon {
@@ -26,7 +33,7 @@
   fill: #e9e9e9;
 }
 
-.button:hover {
+.scrollToTopButton:hover {
   width: 140px;
   border-radius: 15px;
   transition-duration: 0.3s;
@@ -34,13 +41,13 @@
   align-items: center;
 }
 
-.button:hover .svgIcon {
+.scrollToTopButton:hover .svgIcon {
   /* width: 20px; */
   transition-duration: 0.3s;
   transform: translateY(-200%);
 }
 
-.button::before {
+.scrollToTopButton::before {
   position: absolute;
   bottom: -20px;
   content: "Back to Top";
@@ -49,7 +56,7 @@
   font-size: 0px;
 }
 
-.button:hover::before {
+.scrollToTopButton:hover::before {
   font-family: Garet;
   font-size: 15px;
   opacity: 1;

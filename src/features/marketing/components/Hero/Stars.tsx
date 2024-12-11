@@ -1,13 +1,17 @@
+import { useIsMobile } from "@/hooks/useIsMobile";
 import { motion } from "framer-motion";
 import { memo } from "react";
 
 const Stars = () => {
+  const isMobile = useIsMobile();
+
   const randomMove = () => Math.random() * 4 - 2;
   const randomOpacity = () => Math.random();
   const random = () => Math.random();
+
   return (
-    <div className="absolute inset-0">
-      {[...Array(80)].map((_, i) => (
+    <div className="absolute inset-0" key={+isMobile}>
+      {[...Array(isMobile ? 10 : 30)].map((_, i) => (
         <motion.span
           key={`star-${i}`}
           animate={{

@@ -6,7 +6,7 @@ export default function Footer() {
   return (
     <footer className="border-t py-12 font-sans mx-auto px-4 space-y-4 text-center">
       <p>
-        Made with ❤️ and dedication by{" "}
+        Made with Love and dedication by{" "}
         <Link
           href={"https://mohamed-elsharqawy.vercel.app"}
           target="_blank"

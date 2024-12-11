@@ -12,7 +12,7 @@ export default function ScrollToTopButton() {
         document.body.scrollTop > screenHeight ||
         document.documentElement.scrollTop > screenHeight;
 
-      const button = document.getElementById("scrollToTopButton");
+      const button = document.querySelector(".scrollToTopButton");
 
       if (isEqualToScreenHeight) {
         button?.classList.add("show");
@@ -30,8 +30,7 @@ export default function ScrollToTopButton() {
 
   return (
     <button
-      id="scrollToTopButton"
-      className="button"
+      className="scrollToTopButton"
       onClick={() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }}

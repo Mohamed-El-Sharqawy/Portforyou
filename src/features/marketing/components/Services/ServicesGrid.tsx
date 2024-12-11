@@ -1,5 +1,6 @@
-import { services } from "../../constants/services";
 import SingleService from "./SingleService";
+
+import { services } from "../../constants/services";
 
 export default function ServicesGrid() {
   return (

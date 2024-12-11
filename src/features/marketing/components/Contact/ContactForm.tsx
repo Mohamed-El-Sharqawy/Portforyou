@@ -35,6 +35,7 @@ export default function ContactForm() {
             </button>
           </div>
         </form>
+
         <BackgroundBeams />
       </div>
     </ShineBorder>
