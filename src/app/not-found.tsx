@@ -2,7 +2,7 @@
 
 export default function NotFound() {
   return (
-    <div className="h-screen flex items-center justify-center flex-col gap-4 p-4">
+    <section className="h-screen flex items-center justify-center flex-col gap-4 p-4">
       <h1 className="text-6xl font-bold text-primary">404</h1>
       <h2 className="text-2xl font-semibold text-center">Page Not Found</h2>
       <p className="text-muted-foreground text-center max-w-md">
@@ -16,6 +16,6 @@ export default function NotFound() {
       >
         Return Home
       </button>
-    </div>
+    </section>
   );
 }

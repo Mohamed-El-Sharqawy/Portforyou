@@ -34,7 +34,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`font-serif antialiased dark overflow-x-hidden`}>
         <Header />
-        {children}
+        <main>{children}</main>
         <Footer />
         <ScrollToTopButton />
       </body>

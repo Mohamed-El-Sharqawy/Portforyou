@@ -15,12 +15,12 @@ function debounce<F extends (...args: any[]) => any>(func: F, delay: number) {
   };
 }
 
-export const useIsMobile = () => {
+export const useIsMobile = (breakpoint: number = 768) => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
   const handleResize = useCallback(
     debounce(() => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < breakpoint);
     }, 250),
     []
   );
@@ -29,7 +29,7 @@ export const useIsMobile = () => {
     // Check if window is defined (client-side)
     if (typeof window !== "undefined") {
       // Set initial value
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < breakpoint);
 
       // Add event listener
       window.addEventListener("resize", handleResize);
@@ -39,7 +39,7 @@ export const useIsMobile = () => {
         window.removeEventListener("resize", handleResize);
       };
     }
-  }, [handleResize]);
+  }, [handleResize, breakpoint]);
 
   return isMobile;
 };
