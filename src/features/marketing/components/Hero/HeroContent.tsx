@@ -17,11 +17,11 @@ export default function HeroContent() {
       viewport={{ once: true }}
       className="relative z-10"
     >
-      <h1 className="relative text-2xl sm:text-3xl md:text-5xl xl:text-7xl font-bold dark:text-white mb-8 max-w-7xl w-full text-center">
+      <h1 className="relative text-xl px-4 sm:px-0 sm:text-3xl md:text-5xl xl:text-7xl font-bold dark:text-white mb-8 max-w-7xl w-full text-center">
         Portfolio Creation Made Simple, Sharing Made Seamless.
       </h1>
 
-      <p className="relative font-extralight text-base md:text-3xl dark:text-neutral-200 py-4 text-center">
+      <p className="relative font-extralight text-base px-4 sm:px-0 md:text-3xl dark:text-neutral-200 py-4 text-center">
         Build Stunning Portfolios Effortlessly.
       </p>
 
