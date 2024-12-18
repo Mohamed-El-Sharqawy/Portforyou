@@ -40,7 +40,7 @@ export default function Home() {
     };
   }, [isMobile]);
 
-  if (isSignedIn) return router.push("/survey");
+  if (isSignedIn) return router.replace("/survey");
 
   return (
     <>

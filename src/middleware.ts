@@ -1,9 +1,14 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
 
-const isProtectedRoute = createRouteMatcher(["/survey(.*)"]);
+const isProtectedRoute = createRouteMatcher(["/survey", "/templates"]);
 
 export default clerkMiddleware(async (auth, request) => {
-  if (isProtectedRoute(request)) await auth.protect();
+  if (isProtectedRoute(request)) {
+    await auth.protect();
+  } else {
+    return NextResponse.next();
+  }
 });
 
 export const config = {

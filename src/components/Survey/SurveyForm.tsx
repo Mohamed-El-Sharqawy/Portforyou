@@ -1,11 +1,13 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useSurveyData } from "@/hooks/useSurveyData";
 import Link from "next/link";
-import { useState } from "react";
 import Portal from "../Portal";
+
+import { useState } from "react";
+import { motion } from "framer-motion";
+
 import { useAuth } from "@clerk/nextjs";
+import { useSurveyData } from "@/hooks/useSurveyData";
 import { useRouter } from "next/navigation";
 
 const colorOptions = [
@@ -70,7 +72,9 @@ export default function SurveyForm() {
     setShowModal(true);
   };
 
-  if(!isSignedIn) router.push("/");
+  if(!isSignedIn) {
+    router.replace("/");
+  };
 
   return (
     <div className="px-0 py-8 mx-auto space-y-12 max-w-4xl sm:px-8">
