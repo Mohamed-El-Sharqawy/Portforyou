@@ -3,7 +3,7 @@ import TestimonialsContent from "./TestimonialsContent";
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="marketing-section space-y-20">
+    <section id="testimonials" className="section space-y-20">
       <SectionsHeading text="Testimonials" />
 
       <TestimonialsContent />

@@ -17,16 +17,16 @@ export default function HeroContent() {
       viewport={{ once: true }}
       className="relative z-10"
     >
-      <h1 className="relative text-xl px-4 sm:px-0 sm:text-3xl md:text-5xl xl:text-7xl font-bold dark:text-white mb-8 max-w-7xl w-full text-center">
+      <h1 className="relative px-4 mb-8 w-full max-w-7xl text-xl font-bold text-center sm:px-0 sm:text-3xl md:text-5xl xl:text-7xl dark:text-white">
         Portfolio Creation Made Simple, Sharing Made Seamless.
       </h1>
 
-      <p className="relative font-extralight text-base px-4 sm:px-0 md:text-3xl dark:text-neutral-200 py-4 text-center">
+      <p className="relative px-4 py-4 text-base font-extralight text-center sm:px-0 md:text-3xl dark:text-neutral-200">
         Build Stunning Portfolios Effortlessly.
       </p>
 
-      <div className="relative z-50 w-fit mx-auto mt-8">
-        <Button text="Get Started" />
+      <div className="relative z-50 mx-auto mt-8 w-fit">
+        <Button href="/sign-in" text="Get Started" />
       </div>
     </motion.div>
   );

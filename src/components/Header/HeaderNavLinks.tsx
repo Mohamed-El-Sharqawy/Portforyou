@@ -1,7 +1,7 @@
-import React from "react";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import LoginButton from "./LoginButton";
 
 import { links } from "@/constants/navLinks";
-import LoginButton from "./LoginButton";
 
 export default function HeaderNavLinks() {
   const handleClick = (e: React.MouseEvent, link: { href: string }) => {
@@ -19,10 +19,10 @@ export default function HeaderNavLinks() {
   };
 
   return (
-    <nav className="items-center gap-x-4 hidden lg:flex">
+    <nav className="hidden gap-x-4 items-center lg:flex">
       {links.map((link) => (
         <button
-          className="text-xl hover:underline underline-offset-4 relative cursor-pointer"
+          className="relative text-xl cursor-pointer hover:underline underline-offset-4"
           key={link.href}
           role="link"
           tabIndex={0}
@@ -32,7 +32,12 @@ export default function HeaderNavLinks() {
         </button>
       ))}
 
-      <LoginButton />
+      <SignedIn>
+        <UserButton />
+      </SignedIn>
+      <SignedOut>
+        <LoginButton />
+      </SignedOut>
     </nav>
   );
 }

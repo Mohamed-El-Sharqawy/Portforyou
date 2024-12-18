@@ -72,6 +72,6 @@ body {
   }
 }
 
-.marketing-section {
+.section {
   @apply container py-20 max-[400px]:px-4;
 }

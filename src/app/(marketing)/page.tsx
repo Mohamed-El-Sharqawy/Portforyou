@@ -1,18 +1,23 @@
 "use client";
 
+import Lenis from "lenis";
 import Contact from "@/features/marketing/components/Contact/Contact";
 import Hero from "@/features/marketing/components/Hero/Hero";
 import Pricings from "@/features/marketing/components/Pricings/Pricings";
 import Services from "@/features/marketing/components/Services/Services";
 import Testimonials from "@/features/marketing/components/Testimonials/Testimonials";
-import { useIsMobile } from "@/hooks/useIsMobile";
 
-import Lenis from "lenis";
+import { useIsMobile } from "@/hooks/useIsMobile";
+import { useAuth } from "@clerk/nextjs";
+
+import { useRouter } from "next/navigation";
 
 import { useEffect } from "react";
 
 export default function Home() {
   const isMobile = useIsMobile(1024);
+  const { isSignedIn } = useAuth();
+  const router = useRouter();
 
   useEffect(() => {
     // Initialize Lenis
@@ -34,6 +39,8 @@ export default function Home() {
       lenis.destroy();
     };
   }, [isMobile]);
+
+  if (isSignedIn) return router.push("/survey");
 
   return (
     <>
