@@ -41,8 +41,8 @@ export default function RootLayout({
           colorBackground: "#020817",
         },
       }}
-      signUpUrl="/sign-up"
-      signInUrl="/sign-in"    >
+      afterSignOutUrl={"/"}
+    >
       <html lang="en">
         <body className={`overflow-x-hidden font-serif antialiased dark`}>
           <Header />

@@ -5,6 +5,7 @@ import LoginButton from "./LoginButton";
 
 import { links } from "@/constants/navLinks";
 import { cn } from "@/lib/utils";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Menu, XIcon } from "lucide-react";
 import { useState } from "react";
 
@@ -36,7 +37,7 @@ export default function MobileMenu() {
       <Portal selector={"body"}>
         <div
           className={cn(
-            "fixed inset-y-0 right-[-300px] w-[300px] bg-primary-foreground transition-all duration-500 z-[1002] space-y-10",
+            "fixed inset-y-0 space-y-10 transition-all duration-500 right-[-300px] w-[300px] bg-primary-foreground z-[1002]",
             isOpen ? "right-[0]" : "right-[-300px]"
           )}
         >
@@ -48,10 +49,10 @@ export default function MobileMenu() {
             />
           </div>
 
-          <nav className="flex flex-col items-center justify-center gap-y-8">
+          <nav className="flex flex-col gap-y-8 justify-center items-center">
             {links.map((link) => (
               <button
-                className="text-xl hover:underline underline-offset-4 relative cursor-pointer"
+                className="relative text-xl cursor-pointer hover:underline underline-offset-4"
                 key={link.href}
                 role="link"
                 tabIndex={0}
@@ -63,7 +64,12 @@ export default function MobileMenu() {
           </nav>
 
           <div className="mx-auto w-fit">
-            <LoginButton />
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
+            <SignedOut>
+              <LoginButton />
+            </SignedOut>
           </div>
         </div>
       </Portal>
