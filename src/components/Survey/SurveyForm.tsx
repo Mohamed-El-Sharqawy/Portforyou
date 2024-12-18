@@ -5,6 +5,8 @@ import { useSurveyData } from "@/hooks/useSurveyData";
 import Link from "next/link";
 import { useState } from "react";
 import Portal from "../Portal";
+import { useAuth } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 const colorOptions = [
   { id: "pink", color: "#ff9a9e" },
@@ -31,6 +33,9 @@ const professions = [
 ];
 
 export default function SurveyForm() {
+  const { isSignedIn } = useAuth();
+  const router = useRouter();
+
   const { surveyData, updateColors, updateProfession, isComplete, progress } =
     useSurveyData();
   const [showModal, setShowModal] = useState(false);
@@ -50,7 +55,9 @@ export default function SurveyForm() {
     updateProfession(prof);
   };
 
-  const handleOtherProfessionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOtherProfessionChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setOtherProfession(e.target.value);
   };
 
@@ -62,6 +69,8 @@ export default function SurveyForm() {
     // Here you would typically send the data to your backend
     setShowModal(true);
   };
+
+  if(!isSignedIn) router.push("/");
 
   return (
     <div className="px-0 py-8 mx-auto space-y-12 max-w-4xl sm:px-8">
@@ -122,7 +131,7 @@ export default function SurveyForm() {
               </button>
             ))}
           </div>
-          
+
           {/* Other Profession Input */}
           {surveyData.profession === "Other" && (
             <motion.div

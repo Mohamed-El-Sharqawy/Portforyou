@@ -1,5 +1,3 @@
-"use client";
-
 import SurveyForm from "@/components/Survey/SurveyForm";
 
 export default function Survey() {
