@@ -41,8 +41,6 @@ export default function RootLayout({
           colorBackground: "#020817",
         },
       }}
-      afterSignOutUrl={"/"}
-      afterMultiSessionSingleSignOutUrl={"/"}
     >
       <html lang="en">
         <body className={`overflow-x-hidden font-serif antialiased dark`}>
