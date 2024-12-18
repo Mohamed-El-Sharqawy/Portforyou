@@ -42,6 +42,7 @@ export default function RootLayout({
         },
       }}
       afterSignOutUrl={"/"}
+      afterMultiSessionSingleSignOutUrl={"/"}
     >
       <html lang="en">
         <body className={`overflow-x-hidden font-serif antialiased dark`}>
