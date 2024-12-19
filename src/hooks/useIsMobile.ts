@@ -17,12 +17,14 @@ function debounce<F extends (...args: any[]) => any>(func: F, delay: number) {
 
 export const useIsMobile = (breakpoint: number = 768) => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  console.log("test")
 
   const handleResize = useCallback(
-    debounce(() => {
-      setIsMobile(window.innerWidth < breakpoint);
-    }, 250),
-    []
+    () =>
+      debounce(() => {
+        setIsMobile(window.innerWidth < breakpoint);
+      }, 250),
+    [breakpoint]
   );
 
   useEffect(() => {

@@ -72,23 +72,33 @@ export default function SurveyForm() {
     setShowModal(true);
   };
 
-  if(!isSignedIn) {
+  if (!isSignedIn) {
     router.replace("/");
-  };
+  }
 
   return (
     <>
-      <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} className="mx-auto max-w-3xl font-serif text-xl text-center text-white sm:text-3xl md:text-4xl">
+      <motion.h1
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+        className="mx-auto max-w-3xl font-serif text-xl text-center text-white sm:text-3xl md:text-4xl"
+      >
         Your preferences and profession help us improve your experience
       </motion.h1>
       <div className="px-0 py-8 mx-auto space-y-12 max-w-4xl sm:px-8">
         {/* Progress Bar */}
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.3 }} className="w-full bg-gray-700/30 rounded-full h-2.5 mb-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="w-full bg-gray-700/30 rounded-full h-2.5 mb-6"
+        >
           <motion.div
             className="h-full bg-blue-600 rounded-full"
             initial={{ width: 0 }}
             animate={{ width: `${progress}%` }}
-            transition={{ duration: 0.5}}
+            transition={{ duration: 0.5 }}
           />
         </motion.div>
 
@@ -113,7 +123,7 @@ export default function SurveyForm() {
                   className={`w-12 h-12 rounded-lg transition-all duration-200 transform hover:scale-110
               ${
                 surveyData.colors.includes(option.id) ? "ring-4 ring-white" : ""
-                }`}
+              }`}
                   style={{ backgroundColor: option.color }}
                 />
               ))}
@@ -131,10 +141,10 @@ export default function SurveyForm() {
                   onClick={() => handleProfessionSelect(prof)}
                   className={`p-2.5 text-sm text-center rounded-lg transition-all duration-200
                     ${
-                surveyData.profession === prof
-                  ? "text-white bg-blue-600"
-                  : "text-gray-300 bg-gray-800/50 hover:bg-gray-700/50"
-                }`}
+                      surveyData.profession === prof
+                        ? "text-white bg-blue-600"
+                        : "text-gray-300 bg-gray-800/50 hover:bg-gray-700/50"
+                    }`}
                 >
                   {prof}
                 </button>
@@ -171,10 +181,10 @@ export default function SurveyForm() {
               disabled={!isComplete}
               className={`px-8 py-3 rounded-lg transition-all duration-200 font-medium
                 ${
-    isComplete
-      ? "text-white bg-blue-600 hover:bg-blue-700"
-      : "text-gray-300 bg-gray-600 cursor-not-allowed"
-    }`}
+                  isComplete
+                    ? "text-white bg-blue-600 hover:bg-blue-700"
+                    : "text-gray-300 bg-gray-600 cursor-not-allowed"
+                }`}
             >
               Submit Survey
             </button>
