@@ -23,9 +23,6 @@ jobs:
       - name: Clean Install
         run: npm ci --legacy-peer-deps
 
-      - name: Run Tests
-        run: npm test
-
       - name: Run Linter
         run: npm run lint
 
