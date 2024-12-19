@@ -1,7 +1,6 @@
 import HeroContent from "./HeroContent";
 
 import { AuroraBackground } from "@/components/ui/aurora-background";
-import { MemoizedStars } from "./Stars";
 
 export default function Hero() {
   return (
@@ -9,8 +8,6 @@ export default function Hero() {
       <AuroraBackground>
         <HeroContent />
       </AuroraBackground>
-
-      <MemoizedStars />
     </section>
   );
 }

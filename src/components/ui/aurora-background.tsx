@@ -6,13 +6,13 @@ import { ReactNode } from "react";
 
 interface AuroraBackgroundProps extends React.HTMLProps<HTMLDivElement> {
   children: ReactNode;
-  showRadialGradient?: boolean;
+  // showRadialGradient?: boolean;
 }
 
 export const AuroraBackground = ({
   className,
   children,
-  showRadialGradient = true,
+  // showRadialGradient = true,
   ...props
 }: AuroraBackgroundProps) => {
   return (
@@ -29,7 +29,7 @@ export const AuroraBackground = ({
         transition={{ duration: 1, delay: 0.3 }}
         className="overflow-hidden absolute inset-0"
       >
-        <div
+        {/* <div
           // I'm sorry but this is what peak developer performance looks like // trigger warning
           className={cn(
             `
@@ -51,7 +51,14 @@ export const AuroraBackground = ({
             showRadialGradient &&
               `[mask-image:radial-gradient(ellipse_at_100%_0%,black_10%,var(--transparent)_70%)]`
           )}
-        ></div>
+        ></div> */}
+        <video
+          src="https://res.cloudinary.com/dxfphp6to/video/upload/v1734601801/test_hdbfzb.mp4"
+          autoPlay
+          loop
+          muted
+          className="w-full h-full object-cover"
+        />
       </motion.div>
       {children}
     </div>
