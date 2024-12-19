@@ -21,7 +21,7 @@ jobs:
           cache: "npm"
 
       - name: Clean Install
-        run: npm ci --legacy-peer-deps
+        run: npm install --legacy-peer-deps
 
       - name: Run Linter
         run: npm run lint
