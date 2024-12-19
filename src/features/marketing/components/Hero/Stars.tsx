@@ -10,7 +10,13 @@ const Stars = () => {
   const random = () => Math.random();
 
   return (
-    <div className="absolute inset-0" key={+isMobile}>
+    <motion.div
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 1, delay: 0.75 }}
+      className="absolute inset-0"
+      key={+isMobile}
+    >
       {[...Array(isMobile ? 10 : 30)].map((_, i) => (
         <motion.span
           key={`star-${i}`}
@@ -37,7 +43,7 @@ const Stars = () => {
           }}
         ></motion.span>
       ))}
-    </div>
+    </motion.div>
   );
 };
 

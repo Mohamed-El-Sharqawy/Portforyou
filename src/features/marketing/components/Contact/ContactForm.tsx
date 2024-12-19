@@ -3,8 +3,11 @@
 import ShineBorder from "@/components/ui/shine-border";
 
 import { BackgroundBeams } from "@/components/ui/background-beams";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 export default function ContactForm() {
+  const isMobile = useIsMobile();
+
   return (
     <ShineBorder
       className="flex overflow-hidden relative flex-col justify-center items-center w-full rounded-lg border md:shadow-xl"
@@ -30,13 +33,16 @@ export default function ContactForm() {
             className="relative z-10 p-4 mt-4 w-full rounded-lg border transition outline-none border-neutral-800 focus:ring-2 focus:ring-primary/60 bg-neutral-950 placeholder:text-neutral-700"
           />
           <div className="relative z-10 mx-auto w-fit">
-            <button aria-label="Submit to send us email. So, we can contact you" className="inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-primary/75">
+            <button
+              aria-label="Submit to send us email. So, we can contact you"
+              className="inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-primary/75"
+            >
               Submit
             </button>
           </div>
         </form>
 
-        <BackgroundBeams />
+        {!isMobile && <BackgroundBeams />}
       </div>
     </ShineBorder>
   );
