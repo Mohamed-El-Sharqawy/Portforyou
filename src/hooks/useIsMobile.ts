@@ -17,14 +17,13 @@ function debounce<F extends (...args: any[]) => any>(func: F, delay: number) {
 
 export const useIsMobile = (breakpoint: number = 768) => {
   const [isMobile, setIsMobile] = useState<boolean>(false);
-  console.log("test")
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleResize = useCallback(
-    () =>
-      debounce(() => {
-        setIsMobile(window.innerWidth < breakpoint);
-      }, 250),
-    [breakpoint]
+    debounce(() => {
+      setIsMobile(window.innerWidth < breakpoint);
+    }, 250),
+    []
   );
 
   useEffect(() => {
