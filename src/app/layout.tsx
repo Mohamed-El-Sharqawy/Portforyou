@@ -2,7 +2,7 @@ import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import ScrollToTopButton from "@/components/ui/ScrollToTopButton/ScrollToTopButton";
 
-import { ClerkProvider } from "@clerk/nextjs";
+import { ClerkLoaded, ClerkLoading, ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import type { Metadata } from "next";
 
@@ -44,10 +44,17 @@ export default function RootLayout({
     >
       <html lang="en">
         <body className={`overflow-x-hidden font-serif antialiased dark`}>
-          <Header />
-          <main className="min-h-screen">{children}</main>
-          <Footer />
-          <ScrollToTopButton />
+          <ClerkLoading>
+            <div className="flex justify-center items-center min-h-screen">
+              <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500"></div>
+            </div>
+          </ClerkLoading>
+          <ClerkLoaded>
+            <Header />
+            <main className="min-h-screen">{children}</main>
+            <Footer />
+            <ScrollToTopButton />
+          </ClerkLoaded>
         </body>
       </html>
     </ClerkProvider>
