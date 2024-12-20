@@ -78,4 +78,3 @@ describe("Testing Authentication and Protected Route (Survey)", () => {
     cy.url().should("include", "/survey");
   });
 });
-

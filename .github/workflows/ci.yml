@@ -23,10 +23,14 @@ jobs:
       - name: Install Dependencies
         run: npm install --legacy-peer-deps
 
+      - name: Run Formatter
+        run: npm run format
+
       - name: Run Linter
         run: npm run lint
-      
+
       - name: Build
         env:
-          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.CLERK_PUBLISHABLE_KEY }}
+          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
+            ${{ secrets.CLERK_PUBLISHABLE_KEY }}
         run: npm run build

@@ -11,7 +11,9 @@ interface MeteorsProps {
 const Meteors = ({ number = 10 }: MeteorsProps) => {
   const isMobile = useIsMobile();
 
-  const [meteorStyles, setMeteorStyles] = useState<Array<React.CSSProperties>>([]);
+  const [meteorStyles, setMeteorStyles] = useState<Array<React.CSSProperties>>(
+    []
+  );
 
   useEffect(() => {
     const styles = [...new Array(isMobile ? 5 : number)].map(() => ({

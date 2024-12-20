@@ -13,7 +13,7 @@ export default function TestimonialsContent() {
       className="relative flex w-full flex-col items-center justify-center overflow-hidden border rounded-lg md:shadow-xl py-20"
     >
       <AnimatedTestimonials />
-      
+
       {!isMobile && <RetroGrid />}
     </div>
   );

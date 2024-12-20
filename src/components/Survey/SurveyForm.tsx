@@ -197,7 +197,10 @@ export default function SurveyForm() {
         {/* Modal */}
         <Portal selector="body">
           {showModal && (
-            <div data-cy="survey-thankyou-modal" className="fixed inset-0 bg-black/50 backdrop-blur-md flex items-center justify-center z-[1000]">
+            <div
+              data-cy="survey-thankyou-modal"
+              className="fixed inset-0 bg-black/50 backdrop-blur-md flex items-center justify-center z-[1000]"
+            >
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}

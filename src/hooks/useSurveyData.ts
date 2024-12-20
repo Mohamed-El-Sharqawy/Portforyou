@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 export interface SurveyData {
   colors: string[];
@@ -18,18 +18,18 @@ interface UseSurveyDataReturn {
 export function useSurveyData(): UseSurveyDataReturn {
   const [surveyData, setSurveyData] = useState<SurveyData>({
     colors: [],
-    profession: '',
+    profession: "",
   });
 
   const [isComplete, setIsComplete] = useState(false);
   const [progress, setProgress] = useState(0);
 
   const updateColors = (colors: string[]) => {
-    setSurveyData(prev => ({ ...prev, colors }));
+    setSurveyData((prev) => ({ ...prev, colors }));
   };
 
   const updateProfession = (profession: string) => {
-    setSurveyData(prev => ({ ...prev, profession }));
+    setSurveyData((prev) => ({ ...prev, profession }));
   };
 
   useEffect(() => {
@@ -37,7 +37,7 @@ export function useSurveyData(): UseSurveyDataReturn {
     let completedSteps = 0;
     if (surveyData.colors.length > 0) completedSteps++;
     if (surveyData.profession) completedSteps++;
-    
+
     const totalSteps = 2; // Total number of steps in the survey
     const newProgress = (completedSteps / totalSteps) * 100;
     setProgress(newProgress);
@@ -51,6 +51,6 @@ export function useSurveyData(): UseSurveyDataReturn {
     updateColors,
     updateProfession,
     isComplete,
-    progress
+    progress,
   };
 }
