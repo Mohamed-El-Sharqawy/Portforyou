@@ -41,26 +41,20 @@ jobs:
             ${{ secrets.CLERK_PUBLISHABLE_KEY }}
         run: npm run build
 
-      # Step 7: Start the application in the background
-      - name: Start Application
-        run: npm run start &
-        env:
-          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
-            ${{ secrets.CLERK_PUBLISHABLE_KEY }}
+      # Step 7: Install XVFB
+      - name: Install XVFB
+        run: sudo apt-get install -y xvfb
 
-      # Step 8: Wait for the application to be ready
-      - name: Wait for Application to Start
-        run: npx wait-on http://localhost:3000
+      # Step 8: Start XVFB
+      - name: Start XVFB
+        run: Xvfb :99 -screen 0 1280x1024x24 &
 
       # Step 9: Run Cypress End-to-End Tests
       - name: Run Cypress Tests
-        run: npx cypress run
         env:
           NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
             ${{ secrets.CLERK_PUBLISHABLE_KEY }}
           CYPRESS_BASE_URL: http://localhost:3000
-
-      # Step 10: Stop the application
-      - name: Stop Application
         run: |
-          kill $(lsof -t -i:3000)
+          export DISPLAY=:99
+          npx cypress run
