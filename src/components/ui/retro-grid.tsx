@@ -24,7 +24,7 @@ export function RetroGrid({
             "[background-repeat:repeat] [background-size:60px_60px] [height:300vh] [inset:0%_0px] [margin-left:-50%] [transform-origin:100%_0_0] [width:600vw]",
 
             // Dark styles
-            "dark:[background-image:linear-gradient(to_right,rgba(59,130,246,0.5)_1px,transparent_0),linear-gradient(to_bottom,rgba(59,130,246,0.2)_1px,transparent_0)]"
+            "dark:[background-image:linear-gradient(to_right,rgba(59,130,246,0.5)_2px,transparent_0),linear-gradient(to_bottom,rgba(59,130,246,0.2)_2px,transparent_0)]"
           )}
         />
       </div>

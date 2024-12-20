@@ -1,26 +1,29 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 
 import { cn } from "@/lib/utils";
+import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface MeteorsProps {
   number?: number;
 }
-export const Meteors = ({ number = 20 }: MeteorsProps) => {
+const Meteors = ({ number = 10 }: MeteorsProps) => {
+  const isMobile = useIsMobile();
+
   const [meteorStyles, setMeteorStyles] = useState<Array<React.CSSProperties>>(
-    [],
+    []
   );
 
   useEffect(() => {
-    const styles = [...new Array(number)].map(() => ({
+    const styles = [...new Array(isMobile ? 5 : number)].map(() => ({
       top: -5,
       left: Math.floor(Math.random() * window.innerWidth) + "px",
       animationDelay: Math.random() * 1 + 0.2 + "s",
       animationDuration: Math.floor(Math.random() * 8 + 2) + "s",
     }));
     setMeteorStyles(styles);
-  }, [number]);
+  }, [number, isMobile]);
 
   return (
     <>
@@ -29,7 +32,7 @@ export const Meteors = ({ number = 20 }: MeteorsProps) => {
         <span
           key={idx}
           className={cn(
-            "pointer-events-none absolute left-0 top-1/2 size-0.5 rotate-[215deg] animate-meteor rounded-full bg-slate-500 shadow-[0_0_0_1px_#ffffff10]",
+            "pointer-events-none absolute left-0 top-1/2 size-0.5 rotate-[215deg] animate-meteor rounded-full bg-slate-500 shadow-[0_0_0_1px_#ffffff10]"
           )}
           style={style}
         >
@@ -41,4 +44,4 @@ export const Meteors = ({ number = 20 }: MeteorsProps) => {
   );
 };
 
-export default Meteors;
+export default memo(Meteors);

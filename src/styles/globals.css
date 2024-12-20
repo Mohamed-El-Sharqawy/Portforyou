@@ -63,10 +63,6 @@ body {
   }
 }
 
-.marketing-section {
-  @apply container py-20 max-[400px]:px-4;
-}
-
 @layer base {
   * {
     @apply border-border;
@@ -74,4 +70,8 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.section {
+  @apply container py-20 max-[400px]:px-4;
 }

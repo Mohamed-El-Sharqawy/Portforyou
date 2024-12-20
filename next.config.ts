@@ -13,9 +13,6 @@ const nextConfig: NextConfig = {
         hostname: "res.cloudinary.com",
       },
     ],
-    domains: [
-      "api.microlink.io", // Microlink Image Preview
-    ],
   },
 };
 

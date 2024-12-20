@@ -1,39 +1,56 @@
 "use client";
 
+import Lenis from "lenis";
 import Contact from "@/features/marketing/components/Contact/Contact";
 import Hero from "@/features/marketing/components/Hero/Hero";
 import Pricings from "@/features/marketing/components/Pricings/Pricings";
 import Services from "@/features/marketing/components/Services/Services";
 import Testimonials from "@/features/marketing/components/Testimonials/Testimonials";
-import Lenis from "lenis";
 
-import { useEffect } from "react";
+import { useIsMobile } from "@/hooks/useIsMobile";
+import { useAuth } from "@clerk/nextjs";
+
+import { useRouter } from "next/navigation";
+
+import { useEffect, useLayoutEffect } from "react";
 
 export default function Home() {
+  const isMobile = useIsMobile(1024);
+  const { isSignedIn } = useAuth();
+  const router = useRouter();
+
   useEffect(() => {
     // Initialize Lenis
     const lenis = new Lenis();
 
-    // Use requestAnimationFrame to continuously update the scroll
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+    if (!isMobile) {
+      // Use requestAnimationFrame to continuously update the scroll
+      function raf(time: number) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
 
-    requestAnimationFrame(raf);
+      requestAnimationFrame(raf);
+    } else {
+      return lenis.destroy();
+    }
 
     return () => {
       lenis.destroy();
     };
-  }, []);
+  }, [isMobile]);
+
+  useLayoutEffect(() => {
+    if (isSignedIn) return router.replace("/survey");
+  }, [router, isSignedIn]);
 
   return (
-    <main>
+    <>
       <Hero />
       <Services />
       <Pricings />
       <Testimonials />
       <Contact />
-    </main>
+    </>
   );
 }

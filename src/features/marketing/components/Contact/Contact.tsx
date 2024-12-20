@@ -3,8 +3,8 @@ import ContactForm from "./ContactForm";
 
 export default function Contact() {
   return (
-    <section id="contact" className="marketing-section space-y-20">
-      <SectionsHeading text="Contact Us" />
+    <section id="newsletter" className="section space-y-20">
+      <SectionsHeading text="Newsletter" />
 
       <ContactForm />
     </section>

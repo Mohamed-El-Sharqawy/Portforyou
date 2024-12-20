@@ -1,33 +1,43 @@
-import React from "react";
-
-import { links } from "@/constants/navLinks";
-import { LinkPreview } from "../ui/link-preview";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import LoginButton from "./LoginButton";
 
+import { links } from "@/constants/navLinks";
+
 export default function HeaderNavLinks() {
+  const handleClick = (e: React.MouseEvent, link: { href: string }) => {
+    e.preventDefault();
+
+    // the href is the id of the section
+    const value = document.getElementById(link.href)?.offsetTop;
+
+    if (value) {
+      window.scrollTo({
+        top: value - 75,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
-    <nav className="items-center gap-x-4 hidden lg:flex">
+    <nav className="hidden gap-x-4 items-center lg:flex">
       {links.map((link) => (
         <button
-          className="text-xl hover:underline underline-offset-4 relative cursor-pointer"
+          className="relative text-xl cursor-pointer hover:underline underline-offset-4"
           key={link.href}
           role="link"
           tabIndex={0}
-          onClick={(e) => {
-            e.preventDefault();
-
-            // the href is the id of the section
-            window.scrollTo({
-              top: document.getElementById(link.href)?.offsetTop,
-              behavior: "smooth",
-            });
-          }}
+          onClick={(e) => handleClick(e, link)}
         >
-          {<LinkPreview url={link.src}>{link.label}</LinkPreview>}
+          {link.label}
         </button>
       ))}
 
-      <LoginButton />
+      <SignedIn>
+        <UserButton />
+      </SignedIn>
+      <SignedOut>
+        <LoginButton />
+      </SignedOut>
     </nav>
   );
 }

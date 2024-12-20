@@ -12,7 +12,7 @@ export default function ScrollToTopButton() {
         document.body.scrollTop > screenHeight ||
         document.documentElement.scrollTop > screenHeight;
 
-      const button = document.getElementById("scrollToTopButton");
+      const button = document.querySelector(".scrollToTopButton");
 
       if (isEqualToScreenHeight) {
         button?.classList.add("show");
@@ -30,11 +30,11 @@ export default function ScrollToTopButton() {
 
   return (
     <button
-      id="scrollToTopButton"
-      className="button"
+      className="scrollToTopButton"
       onClick={() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }}
+      aria-label="Scroll to top"
     >
       <svg viewBox="0 0 384 512" className="svgIcon">
         <path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2V448c0 17.7 14.3 32 32 32s32-14.3 32-32V141.2L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"></path>

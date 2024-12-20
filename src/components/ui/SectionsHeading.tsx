@@ -3,7 +3,7 @@ import AnimatedGradientText from "./animated-gradient-text";
 import { cn } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
 
-export default function SectionsHeading({text}: {text: string}) {
+export default function SectionsHeading({ text }: { text: string }) {
   return (
     <AnimatedGradientText>
       <span
