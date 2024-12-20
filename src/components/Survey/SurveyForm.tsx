@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Portal from "../Portal";
 
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 import { useAuth } from "@clerk/nextjs";
@@ -72,9 +72,9 @@ export default function SurveyForm() {
     setShowModal(true);
   };
 
-  if (!isSignedIn) {
-    router.replace("/");
-  }
+  useLayoutEffect(() => {
+    if (isSignedIn) return router.replace("/survey");
+  }, [router, isSignedIn]);
 
   return (
     <>
@@ -118,6 +118,7 @@ export default function SurveyForm() {
             <div className="flex flex-wrap gap-4">
               {colorOptions.map((option) => (
                 <button
+                  name={option.id}
                   key={option.id}
                   onClick={() => handleColorSelect(option.id)}
                   className={`w-12 h-12 rounded-lg transition-all duration-200 transform hover:scale-110
@@ -138,6 +139,7 @@ export default function SurveyForm() {
               {professions.map((prof) => (
                 <button
                   key={prof}
+                  name={prof}
                   onClick={() => handleProfessionSelect(prof)}
                   className={`p-2.5 text-sm text-center rounded-lg transition-all duration-200
                     ${
@@ -179,6 +181,7 @@ export default function SurveyForm() {
             <button
               onClick={handleSubmit}
               disabled={!isComplete}
+              name="submit-survey-btn"
               className={`px-8 py-3 rounded-lg transition-all duration-200 font-medium
                 ${
                   isComplete
@@ -194,7 +197,7 @@ export default function SurveyForm() {
         {/* Modal */}
         <Portal selector="body">
           {showModal && (
-            <div className="fixed inset-0 bg-black/50 backdrop-blur-md flex items-center justify-center z-[1000]">
+            <div data-cy="survey-thankyou-modal" className="fixed inset-0 bg-black/50 backdrop-blur-md flex items-center justify-center z-[1000]">
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -209,6 +212,7 @@ export default function SurveyForm() {
                 <div className="flex justify-center mt-6">
                   <Link
                     href="/templates"
+                    data-cy="continue-to-templates-btn"
                     className="px-8 py-3 font-medium text-white bg-blue-600 rounded-lg transition-colors duration-200 hover:bg-blue-700"
                   >
                     Continue to Templates

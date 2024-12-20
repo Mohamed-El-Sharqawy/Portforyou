@@ -12,7 +12,7 @@ import { useAuth } from "@clerk/nextjs";
 
 import { useRouter } from "next/navigation";
 
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 
 export default function Home() {
   const isMobile = useIsMobile(1024);
@@ -32,7 +32,7 @@ export default function Home() {
 
       requestAnimationFrame(raf);
     } else {
-      lenis.destroy();
+      return lenis.destroy();
     }
 
     return () => {
@@ -40,7 +40,9 @@ export default function Home() {
     };
   }, [isMobile]);
 
-  if (isSignedIn) return router.replace("/survey");
+  useLayoutEffect(() => {
+    if (isSignedIn) return router.replace("/survey");
+  }, [router, isSignedIn]);
 
   return (
     <>
