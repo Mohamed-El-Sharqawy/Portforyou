@@ -23,34 +23,20 @@ jobs:
           cache: "npm"
 
       # Step 3: Install dependencies
-      - name: Clean Install
+      - name: Install Dependencies
         run: npm install --legacy-peer-deps
 
       # Step 4: Run Linter
       - name: Run Linter
         run: npm run lint
 
-      # Step 5: Build the application
-      - name: Build
-        env:
-          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
-            ${{ secrets.CLERK_PUBLISHABLE_KEY }}
-        run: npm run build
-
-      # Step 6: Install XVFB
-      - name: Install XVFB
-        run: sudo apt-get install -y xvfb
-
-      # Step 7: Start XVFB
-      - name: Start XVFB
-        run: Xvfb :99 -screen 0 1280x1024x24 &
-
-      # Step 8: Run Cypress End-to-End Tests
-      - name: Run Cypress Tests
+      # Step 5: Build the application and test it
+      - name: Build and Run Cypress Tests
+        uses: cypress-io/github-action@v5
+        with:
+          build: npm run build
+          start: npm run start
         env:
           NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
             ${{ secrets.CLERK_PUBLISHABLE_KEY }}
           CYPRESS_BASE_URL: http://localhost:3000
-        run: |
-          export DISPLAY=:99
-          npx cypress run
