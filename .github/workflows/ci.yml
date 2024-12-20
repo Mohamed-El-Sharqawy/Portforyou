@@ -28,7 +28,7 @@ jobs:
 
       # Step 4: Run Linter
       - name: Run Linter
-        run: npm run lint=
+        run: npm run lint
 
       # Step 5: Build the application
       - name: Build
