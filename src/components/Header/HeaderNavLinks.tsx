@@ -20,17 +20,19 @@ export default function HeaderNavLinks() {
 
   return (
     <nav className="hidden gap-x-4 items-center lg:flex">
-      {links.map((link) => (
-        <button
-          className="relative text-xl cursor-pointer hover:underline underline-offset-4"
-          key={link.href}
-          role="link"
-          tabIndex={0}
-          onClick={(e) => handleClick(e, link)}
-        >
-          {link.label}
-        </button>
-      ))}
+      <SignedOut>
+        {links.map((link) => (
+          <button
+            className="relative text-xl cursor-pointer hover:underline underline-offset-4"
+            key={link.href}
+            role="link"
+            tabIndex={0}
+            onClick={(e) => handleClick(e, link)}
+          >
+            {link.label}
+          </button>
+        ))}
+      </SignedOut>
 
       <SignedIn>
         <UserButton />
