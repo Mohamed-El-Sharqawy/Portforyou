@@ -1,7 +1,7 @@
 "use client";
 
 import Lenis from "lenis";
-import Contact from "@/features/marketing/components/Contact/Contact";
+import Newsletter from "@/features/marketing/components/Newsletter/Newsletter";
 import Hero from "@/features/marketing/components/Hero/Hero";
 import Pricings from "@/features/marketing/components/Pricings/Pricings";
 import Services from "@/features/marketing/components/Services/Services";
@@ -32,12 +32,10 @@ export default function Home() {
 
       requestAnimationFrame(raf);
     } else {
-      return lenis.destroy();
+      lenis.destroy();
     }
 
-    return () => {
-      lenis.destroy();
-    };
+    return () => lenis.destroy();
   }, [isMobile]);
 
   useLayoutEffect(() => {
@@ -50,7 +48,7 @@ export default function Home() {
       <Services />
       <Pricings />
       <Testimonials />
-      <Contact />
+      <Newsletter />
     </>
   );
 }

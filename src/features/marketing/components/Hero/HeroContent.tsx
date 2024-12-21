@@ -14,7 +14,7 @@ export default function HeroContent() {
         duration: 0.8,
         ease: "easeInOut",
       }}
-      viewport={{ once: true }}
+      viewport={{ once: true, amount: 0 }}
       className="relative z-10 will-change-[opacity]"
     >
       <h1 className="relative px-4 mb-8 w-full max-w-7xl text-xl font-bold text-center sm:px-0 sm:text-3xl md:text-5xl xl:text-7xl dark:text-white">

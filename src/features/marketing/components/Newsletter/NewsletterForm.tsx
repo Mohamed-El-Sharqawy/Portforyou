@@ -5,7 +5,7 @@ import ShineBorder from "@/components/ui/shine-border";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
-export default function ContactForm() {
+export default function NewsletterForm() {
   const isMobile = useIsMobile();
 
   return (

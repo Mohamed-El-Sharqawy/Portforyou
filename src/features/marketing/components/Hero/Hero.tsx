@@ -1,13 +1,20 @@
+import { Vortex } from "@/components/ui/vortex";
 import HeroContent from "./HeroContent";
-
-import { AuroraBackground } from "@/components/ui/aurora-background";
 
 export default function Hero() {
   return (
     <section id="hero" className="hero">
-      <AuroraBackground>
-        <HeroContent />
-      </AuroraBackground>
+      <div className="w-[calc(100%)] mx-auto rounded-md h-screen overflow-hidden">
+        <Vortex
+          backgroundColor="transparent"
+          rangeY={550}
+          particleCount={200}
+          baseHue={160}
+          className="flex items-center justify-center py-4 w-full h-full"
+        >
+          <HeroContent />
+        </Vortex>
+      </div>
     </section>
   );
 }

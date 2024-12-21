@@ -79,7 +79,7 @@ export default {
       },
       animation: {
         rainbow: "rainbow var(--speed, 2s) infinite linear",
-        aurora: "aurora 60s linear infinite",
+        spotlight: "spotlight 2s ease .75s 1 forwards",
         shimmer: "shimmer 2s linear infinite",
         gradient: "gradient 8s linear infinite",
         meteor: "meteor 5s linear infinite",
@@ -109,12 +109,14 @@ export default {
             "background-position": "200%",
           },
         },
-        aurora: {
-          from: {
-            backgroundPosition: "50% 50%, 50% 50%",
+        spotlight: {
+          "0%": {
+            opacity: "0%",
+            transform: "translate(-72%, -62%) scale(0.5)",
           },
-          to: {
-            backgroundPosition: "350% 50%, 350% 50%",
+          "100%": {
+            opacity: "100%",
+            transform: "translate(-50%,-40%) scale(1)",
           },
         },
         gradient: {

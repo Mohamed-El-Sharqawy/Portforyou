@@ -3,11 +3,7 @@
 import Link from "next/link";
 import SparklesText from "./ui/sparkles-text";
 
-type LogoProps = {
-  scrollToTop?: boolean;
-};
-
-export default function Logo({ scrollToTop }: LogoProps) {
+export default function Logo() {
   const scroll = (e: React.MouseEvent) => {
     e.preventDefault();
 
@@ -18,7 +14,16 @@ export default function Logo({ scrollToTop }: LogoProps) {
   };
 
   return (
-    <Link href={"/"} onClick={scrollToTop ? scroll : undefined}>
+    <Link
+      href={"/"}
+      onClick={(e) => {
+        if (window.location.pathname == "/") {
+          scroll(e);
+        } else {
+          e.isPropagationStopped();
+        }
+      }}
+    >
       <SparklesText
         className="italic text-2xl lg:text-4xl xl:text-6xl"
         text="Portforyou"
