@@ -234,8 +234,12 @@ export const Vortex = (props: VortexProps) => {
     });
   }, [resize, setup]);
 
+  console.log("test");
+
   return (
-    <div className={cn("relative h-full w-full", props.containerClassName)}>
+    <motion.div
+      className={cn("relative h-full w-full", props.containerClassName)}
+    >
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -248,6 +252,6 @@ export const Vortex = (props: VortexProps) => {
       <div className={cn("relative z-10", props.className)}>
         {props.children}
       </div>
-    </div>
+    </motion.div>
   );
 };

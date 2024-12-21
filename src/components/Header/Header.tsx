@@ -28,7 +28,7 @@ export default function Header() {
         <Logo />
 
         {/* Links */}
-          <HeaderNavLinks />
+        <HeaderNavLinks />
 
         {/* Mobile Menu */}
         <MobileMenu />

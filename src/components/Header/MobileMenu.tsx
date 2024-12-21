@@ -7,13 +7,20 @@ import { links } from "@/constants/navLinks";
 import { cn } from "@/lib/utils";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Menu, XIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function MobileMenu() {
+  const router = useRouter();
+
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = (e: React.MouseEvent, link: { href: string }) => {
     e.preventDefault();
+
+    if (window.location.pathname !== `/`) {
+      return router.push(`/#${link.href}`);
+    }
 
     setIsOpen(false);
     window.scrollTo({

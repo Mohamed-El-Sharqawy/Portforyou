@@ -30,7 +30,7 @@ export default function ScrollToTopButton() {
 
   return (
     <button
-      className="scrollToTopButton"
+      className="scrollToTopButton z-[1000]"
       onClick={() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }}

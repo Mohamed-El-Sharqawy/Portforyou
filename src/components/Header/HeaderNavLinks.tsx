@@ -1,13 +1,20 @@
+"use client";
+
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import LoginButton from "./LoginButton";
 
 import { links } from "@/constants/navLinks";
+import { useRouter } from "next/navigation";
 
 export default function HeaderNavLinks() {
+  const router = useRouter();
   const handleClick = (e: React.MouseEvent, link: { href: string }) => {
     e.preventDefault();
 
-    // the href is the id of the section
+    if (window.location.pathname !== `/`) {
+      return router.push(`/#${link.href}`);
+    }
+
     const value = document.getElementById(link.href)?.offsetTop;
 
     if (value) {
