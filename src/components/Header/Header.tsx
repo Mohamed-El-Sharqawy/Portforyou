@@ -5,6 +5,7 @@ import MobileMenu from "./MobileMenu";
 import Logo from "../Logo";
 
 import { motion } from "motion/react";
+import { SignedOut } from "@clerk/nextjs";
 
 export default function Header() {
   return (
@@ -28,7 +29,9 @@ export default function Header() {
         <Logo />
 
         {/* Links */}
-        <HeaderNavLinks />
+        <SignedOut>
+          <HeaderNavLinks />
+        </SignedOut>
 
         {/* Mobile Menu */}
         <MobileMenu />
