@@ -1,7 +1,9 @@
-.git
-.results
-scripts
-*Dockerfile*
+Dockerfile
+.dockerignore
 node_modules
-.env
+npm-debug.log
+README.md
+.next
+.git
 cypress.env.json
+.env

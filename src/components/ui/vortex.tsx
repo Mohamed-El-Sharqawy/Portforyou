@@ -23,7 +23,7 @@ export const Vortex = (props: VortexProps) => {
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef(null);
-  const particleCount = isMobile ? 75 : props.particleCount || 700;
+  const particleCount = isMobile ? 30 : props.particleCount || 700;
   const particlePropCount = 9;
   const particlePropsLength = particleCount * particlePropCount;
   const rangeY = props.rangeY || 100;
@@ -186,8 +186,7 @@ export const Vortex = (props: VortexProps) => {
     return x > canvas.width || x < 0 || y > canvas.height || y < 0;
   };
 
-  const resize = (
-    canvas: HTMLCanvasElement  ) => {
+  const resize = (canvas: HTMLCanvasElement) => {
     const { innerWidth, innerHeight } = window;
 
     canvas.width = innerWidth;

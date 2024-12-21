@@ -26,11 +26,17 @@ export default function MobileMenu() {
     <div className="flex lg:hidden">
       {/* Mobile Menu Toggle */}
       <div>
-        <Menu
-          size={28}
-          className="cursor-pointer"
-          onClick={() => setIsOpen(!isOpen)}
-        />
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+
+        <SignedOut>
+          <Menu
+            size={28}
+            className="cursor-pointer"
+            onClick={() => setIsOpen(!isOpen)}
+          />
+        </SignedOut>
       </div>
 
       {/* Navbar */}
@@ -63,14 +69,11 @@ export default function MobileMenu() {
             ))}
           </nav>
 
-          <div className="mx-auto w-fit">
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
-            <SignedOut>
-              <LoginButton />
-            </SignedOut>
-          </div>
+          <SignedOut>
+            <div className="mx-auto w-fit">
+              <LoginButton onClick={() => setIsOpen(false)} />
+            </div>
+          </SignedOut>
         </div>
       </Portal>
 

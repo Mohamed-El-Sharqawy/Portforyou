@@ -1,38 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import Portal from "../Portal";
+import Portal from "../../../components/Portal";
 
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 import { useAuth } from "@clerk/nextjs";
-import { useSurveyData } from "@/hooks/useSurveyData";
+import { useSurveyData } from "@/features/survey/hooks/useSurveyData";
 import { useRouter } from "next/navigation";
-
-const colorOptions = [
-  { id: "pink", color: "#ff9a9e" },
-  { id: "green", color: "#4CAF50" },
-  { id: "blue", color: "#2196F3" },
-  { id: "brown", color: "#795548" },
-  { id: "orange", color: "#FF5722" },
-  { id: "lightPink", color: "#FF4081" },
-  { id: "teal", color: "#009688" },
-  { id: "wheat", color: "#DAC5A7" },
-];
-
-const professions = [
-  "Graphic design",
-  "Medical Field",
-  "Engineering",
-  "Software Engineering",
-  "Content Creator",
-  "Digital Marketing",
-  "Sales",
-  "Law",
-  "UI/UX",
-  "Other",
-];
+import { colorOptions, professions } from "../constants/surveyForm";
 
 export default function SurveyForm() {
   const { isSignedIn } = useAuth();
@@ -72,12 +49,12 @@ export default function SurveyForm() {
     setShowModal(true);
   };
 
-  useLayoutEffect(() => {
-    if (isSignedIn) return router.replace("/survey");
-  }, [router, isSignedIn]);
+  useEffect(() => {
+    if (!isSignedIn) return router.push("/");
+  }, [isSignedIn, router]);
 
   return (
-    <>
+    <div className="container px-4 py-20 mx-auto">
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -226,6 +203,6 @@ export default function SurveyForm() {
           )}
         </Portal>
       </div>
-    </>
+    </div>
   );
 }
