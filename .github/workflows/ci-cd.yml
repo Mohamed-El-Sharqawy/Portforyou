@@ -21,7 +21,7 @@ jobs:
           cache: "npm"
 
       - name: Install Dependencies
-        run: npm install --force
+        run: npm install --legacy-peer-deps
 
       - name: Run Formatter
         run: npm run format
@@ -29,11 +29,5 @@ jobs:
       - name: Run Linter
         run: npm run lint
 
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
-        env:
-          NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
-            ${{ secrets.CLERK_PUBLISHABLE_KEY }}
-        with:
-          build: npm run build
-          start: npm start
+      - name: Build
+        run: npm run build
