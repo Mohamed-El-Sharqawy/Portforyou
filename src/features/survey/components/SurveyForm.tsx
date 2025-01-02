@@ -98,6 +98,8 @@ export default function SurveyForm() {
                   name={option.id}
                   key={option.id}
                   onClick={() => handleColorSelect(option.id)}
+                  data-no-blobity
+                  data-blobity-invert={false}
                   className={`w-12 h-12 rounded-lg transition-all duration-200 transform hover:scale-110
               ${
                 surveyData.colors.includes(option.id) ? "ring-4 ring-white" : ""

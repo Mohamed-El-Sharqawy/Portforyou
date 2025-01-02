@@ -1,0 +1,74 @@
+.services-section {
+  @apply py-[90px] flex flex-wrap items-center justify-center gap-8;
+}
+
+@media screen and (max-width: 1470px) {
+  .services-section {
+    @apply px-10;
+  }
+
+  .services-section div {
+    @apply p-6;
+  }
+}
+
+@media screen and (max-width: 1240px) {
+  .services-section {
+    @apply py-[90px] grid grid-cols-2 gap-8 place-items-center;
+  }
+
+  .services-section div:nth-child(3) {
+    @apply col-span-2;
+  }
+}
+
+
+@media screen and (max-width: 1240px) {
+  .services-section {
+    @apply py-[90px] grid grid-cols-2 gap-8 place-items-center;
+  }
+
+  .services-section div:nth-child(3) {
+    @apply col-span-2;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .services-section.container {
+    @apply max-w-[1024px];
+  }
+
+  .services-section div:nth-child(3) {
+    @apply col-span-2;
+  }
+}
+
+@media screen and (max-width: 970px) {
+  .services-section {
+    @apply py-[90px] grid grid-cols-1 gap-8 place-items-center;
+  }
+
+  .services-section.container {
+    @apply max-w-[740px];
+  }
+
+  .services-section div:nth-child(3) {
+    @apply col-span-1;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .services-section div {
+    @apply w-full;
+  }
+}
+
+@media screen and (max-width: 390px) {
+  .services-section div {
+    @apply p-4;
+  }
+
+  .services-section div h2 {
+    @apply mt-3;
+  }
+}

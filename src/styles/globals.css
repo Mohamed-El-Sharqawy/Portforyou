@@ -75,3 +75,7 @@ body {
 .section {
   @apply container py-20 max-[400px]:px-4;
 }
+
+.editable {
+  @apply rounded-md cursor-pointer px-4 hover:bg-white/10;
+}

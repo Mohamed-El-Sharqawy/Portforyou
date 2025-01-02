@@ -1,0 +1,36 @@
+header {
+  @apply text-sm fixed h-[65px] w-[712.5px] top-[48px] bg-wheat/5 backdrop-blur-md py-[22.5px] pl-[24px] px-3 flex items-center gap-x-8 uppercase text-wheat rounded-sm border border-wheat/15 left-1/2 !-translate-x-1/2 z-50;
+}
+
+.mobile-menu-content {
+  clip-path: circle(0px at top right);
+  @apply transition-all duration-1000;
+}
+
+.mobile-menu-content.active {
+  clip-path: circle(2200px at top right);
+}
+
+@media screen and (max-width: 800px) {
+  header {
+    @apply text-xs w-[645px];
+  }
+}
+
+@media screen and (max-width: 768px) {
+  header {
+    @apply w-[95%];
+  }
+
+  header .desktop-menu {
+    @apply hidden;
+  }
+
+  header .mobile-menu {
+    @apply block;
+  }
+
+  header > a {
+    @apply flex-1;
+  }
+}

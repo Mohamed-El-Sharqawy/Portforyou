@@ -1,0 +1,46 @@
+.work-experience-section .work-experience-projects-container {
+  @apply grid grid-cols-2 flex-wrap gap-8;
+}
+
+.work-experience-section .work-experience-projects-container .project:hover .project-link-icon {
+  @apply opacity-100;
+}
+
+@media screen and (max-width: 1024px) {
+  .work-experience-section .work-experience-section-title {
+    @apply px-0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .work-experience-section .work-experience-projects-container {
+    @apply grid-cols-1 px-4 gap-y-4;
+  }
+
+  .work-experience-section .work-experience-section-title {
+    @apply px-4;
+  }
+
+  .work-experience-section .work-experience-section-title h1 {
+    @apply text-3xl;
+  }
+}
+
+
+@media screen and (max-width: 319px) {
+  .work-experience-section .work-experience-section-title {
+    @apply px-4;
+  }
+
+  .work-experience-section .work-experience-section-title h1 {
+    @apply text-[27px];
+  }
+
+  .work-experience-section .work-experience-section-title a svg {
+    @apply size-[8px];
+  }
+
+  .work-experience-section .work-experience-section-title a {
+    @apply size-8;
+  }
+}

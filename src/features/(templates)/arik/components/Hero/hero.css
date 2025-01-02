@@ -1,0 +1,43 @@
+@media screen and (max-width: 1180px) {
+  .hero-section div > h1 {
+    @apply text-[60px];
+  }
+
+  .hero-section div > p {
+    @apply text-xl leading-relaxed;
+  }
+
+  .hero-section .hero-content {
+    @apply bottom-[96px];
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hero-section div > h1 {
+    @apply text-[40px];
+  }
+
+  .hero-section div > p {
+    @apply text-lg leading-relaxed max-w-[350px];
+  }
+
+  .hero-section .hero-content {
+    @apply bottom-[20px];
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .hero-section .hero-image-container  {
+    @apply w-[680px] h-[570px];
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .hero-section div > h1 {
+    @apply text-[30px];
+  }
+
+  .hero-section div > p {
+    @apply text-base leading-relaxed max-w-[280px] px-1;
+  }
+}

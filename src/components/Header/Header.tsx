@@ -1,7 +1,7 @@
 "use client";
 
-import HeaderNavLinks from "./HeaderNavLinks";
-import MobileMenu from "./MobileMenu";
+import HeaderNavLinks from "./header-nav-links";
+import MobileMenu from "./mobile-menu";
 import Logo from "../Logo";
 
 import { motion } from "motion/react";

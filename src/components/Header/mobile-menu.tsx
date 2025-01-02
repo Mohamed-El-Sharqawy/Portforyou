@@ -1,7 +1,7 @@
 "use client";
 
 import Portal from "../Portal";
-import LoginButton from "./LoginButton";
+import LoginButton from "./login-button";
 
 import { links } from "@/constants/navLinks";
 import { cn } from "@/lib/utils";

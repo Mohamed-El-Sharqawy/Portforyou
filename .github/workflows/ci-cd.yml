@@ -29,8 +29,11 @@ jobs:
       - name: Run Linter
         run: npm run lint
 
-      - name: Build
+      - name: Cypress run
+        uses: cypress-io/github-action@v2
         env:
           NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
             ${{ secrets.CLERK_PUBLISHABLE_KEY }}
-        run: npm run build
+        with:
+          build: npm run build
+          start: npm start

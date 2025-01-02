@@ -21,11 +21,16 @@ export default {
           sm: "640px",
           md: "768px",
           lg: "1024px",
-          xl: "1280px",
+          xl: "1400px",
           "2xl": "1400px",
         },
       },
+      fontFamily: {
+        arial: ["Arial", "sans-serif"],
+      },
       colors: {
+        wheat: "#DAC5A7",
+        black: "#0E0E0E",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -71,6 +76,9 @@ export default {
         "color-3": "hsl(var(--color-3))",
         "color-4": "hsl(var(--color-4))",
         "color-5": "hsl(var(--color-5))",
+      },
+      backgroundImage: {
+        noise: "url('/arik/noise.webp')",
       },
       borderRadius: {
         lg: "var(--radius)",

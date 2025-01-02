@@ -1,11 +1,9 @@
-import Header from "@/components/Header/Header";
-import Footer from "@/components/Footer/Footer";
-import ScrollToTopButton from "@/components/ui/ScrollToTopButton/ScrollToTopButton";
-
 import { ClerkLoaded, ClerkLoading, ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import type { Metadata } from "next";
 
+import Header from "@/components/header/header";
+import Footer from "@/components/footer/footer";
 import "@/styles/globals.css";
 
 export const metadata: Metadata = {
@@ -54,7 +52,6 @@ export default function RootLayout({
             <Header />
             <main className="min-h-screen">{children}</main>
             <Footer />
-            <ScrollToTopButton />
           </ClerkLoaded>
         </body>
       </html>

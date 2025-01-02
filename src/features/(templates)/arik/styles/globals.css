@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  @apply font-arial;
+}
+
+html {
+  @apply scroll-smooth;
+}
+
+body {
+  @apply bg-black overflow-x-hidden text-wheat;
+}
+
+main {
+  @apply overflow-x-hidden;
+}
