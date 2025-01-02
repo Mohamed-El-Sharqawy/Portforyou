@@ -4,6 +4,7 @@ const isProtectedRoute = createRouteMatcher([
   "/survey",
   "/templates",
   "/templates/[id]",
+  "/templates/[id]/[slug]",
 ]);
 
 export default clerkMiddleware(async (auth, request) => {
