@@ -2,7 +2,10 @@
   @apply grid grid-cols-2 flex-wrap gap-8;
 }
 
-.work-experience-section .work-experience-projects-container .project:hover .project-link-icon {
+.work-experience-section
+  .work-experience-projects-container
+  .project:hover
+  .project-link-icon {
   @apply opacity-100;
 }
 
@@ -25,7 +28,6 @@
     @apply text-3xl;
   }
 }
-
 
 @media screen and (max-width: 319px) {
   .work-experience-section .work-experience-section-title {

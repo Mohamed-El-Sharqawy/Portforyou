@@ -39,33 +39,32 @@ export default function SectionTitle() {
       opacity: 1,
     });
 
-    gsap
-      .to(".work-experience-section-title h1 span", {
-        opacity: 1,
-        top: 0,
-        rotate: 0,
-        duration: 0.25,
-        stagger: 0.05,
-        scrollTrigger: {
-          trigger: ".work-experience-section",
-          start: "-25% 25%",
-          end: "25% 65%",
-          toggleActions: "play none none none"
-        },
-      })
+    gsap.to(".work-experience-section-title h1 span", {
+      opacity: 1,
+      top: 0,
+      rotate: 0,
+      duration: 0.25,
+      stagger: 0.05,
+      scrollTrigger: {
+        trigger: ".work-experience-section",
+        start: "-25% 25%",
+        end: "25% 65%",
+        toggleActions: "play none none none",
+      },
+    });
 
-      gsap.from(".work-experience-section-title a", {
-        opacity: 0,
-        y: 50,
-        duration: 1,
-        ease: "power3",
-        scrollTrigger: {
-          trigger: ".work-experience-section",
-          start: "-25% 25%",
-          end: "25% 65%",
-          toggleActions: "play none none none"
-        },
-      });
+    gsap.from(".work-experience-section-title a", {
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      ease: "power3",
+      scrollTrigger: {
+        trigger: ".work-experience-section",
+        start: "-25% 25%",
+        end: "25% 65%",
+        toggleActions: "play none none none",
+      },
+    });
   });
 
   return (

@@ -27,7 +27,7 @@
 }
 
 @media screen and (max-width: 550px) {
-  .hero-section .hero-image-container  {
+  .hero-section .hero-image-container {
     @apply w-[680px] h-[570px];
   }
 }
