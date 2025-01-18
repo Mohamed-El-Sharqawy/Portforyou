@@ -1,5 +1,3 @@
-"use server";
-
 export const createUser = async (user: {
   email: string;
   username: string | null;
