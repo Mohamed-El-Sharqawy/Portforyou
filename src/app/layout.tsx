@@ -2,8 +2,8 @@ import { ClerkLoaded, ClerkLoading, ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 import type { Metadata } from "next";
 
-import Header from "@/components/header/Header";
-import Footer from "@/components/footer/Footer";
+import Header from "@/components/header/header";
+import Footer from "@/components/footer/footer";
 
 import "@/styles/globals.css";
 
