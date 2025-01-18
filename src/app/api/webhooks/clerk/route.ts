@@ -77,8 +77,6 @@ export async function POST(req: Request) {
       });
     }
 
-    console.log("TEST TEST TEST TEST TEST");
-
     return NextResponse.json(
       { message: "User created successfully", user: newUser },
       { status: 201 }

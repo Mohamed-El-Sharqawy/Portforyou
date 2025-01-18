@@ -8,8 +8,8 @@ export const createUser = async (user: {
   const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 
   const mutation = `
-    mutation Register {
-      register(input: {email: "${user.email}", username: "${user.username}"}) {
+    mutation {
+      register(input: {email: "${user.email}", username: "${user.username}", clerkId: "${user.clerkId}"}) {
         token
         user {
           id
