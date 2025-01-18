@@ -26,7 +26,7 @@ export const createUser = async (user: {
         Accept: "application/json",
       },
       body: JSON.stringify({
-        mutation,
+        query: mutation,
       }),
     });
     return response.json();

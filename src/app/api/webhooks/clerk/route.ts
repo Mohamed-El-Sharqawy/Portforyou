@@ -58,7 +58,7 @@ export async function POST(req: Request) {
   console.log("Webhook payload:", body);
 
   // Create user in our database
-  if (eventType === "user.created" || eventType === "user.updated") {
+  if (eventType === "user.created") {
     const { id, email_addresses, username } = evt.data;
 
     const user = {

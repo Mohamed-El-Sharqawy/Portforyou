@@ -15,6 +15,17 @@ export default function Hero() {
           <HeroContent />
         </Vortex>
       </div>
+      {/* <button
+        onClick={() =>
+          createUser({
+            email: "dev.elbehery@gmail.com",
+            username: "Test",
+            clerkId: "Test",
+          })
+        }
+      >
+        Test
+      </button> */}
     </section>
   );
 }
