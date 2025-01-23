@@ -2,7 +2,7 @@
 
 import { testimonials } from "@/features/marketing/constants/testimonials";
 import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 

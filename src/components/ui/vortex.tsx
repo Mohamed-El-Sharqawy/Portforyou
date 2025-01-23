@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import React, { useEffect, useRef } from "react";
 import { createNoise3D } from "simplex-noise";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { useIsMobile } from "@/hooks/useIsMobile";
 
 interface VortexProps {
@@ -233,8 +233,6 @@ export const Vortex = (props: VortexProps) => {
       }
     });
   }, [resize, setup]);
-
-  console.log("test");
 
   return (
     <motion.div

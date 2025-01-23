@@ -1,11 +1,10 @@
-import { ClerkLoaded, ClerkLoading, ClerkProvider } from "@clerk/nextjs";
-import { dark } from "@clerk/themes";
 import type { Metadata } from "next";
 
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 
 import "@/styles/globals.css";
+import QueryProvider from "@/providers/QueryProvider";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://portforyou-xi.vercel.app"),
@@ -26,35 +25,20 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider
-      appearance={{
-        baseTheme: dark,
-        variables: {
-          colorPrimary: "#3b82f6",
-          colorBackground: "#020817",
-        },
-      }}
-    >
-      <html lang="en">
-        <body className={`overflow-x-hidden font-serif antialiased dark`}>
-          <ClerkLoading>
-            <div className="flex justify-center items-center min-h-screen">
-              <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-blue-500"></div>
-            </div>
-          </ClerkLoading>
-          <ClerkLoaded>
-            <Header />
-            <main className="min-h-screen">{children}</main>
-            <Footer />
-          </ClerkLoaded>
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en">
+      <body className={`overflow-x-hidden font-serif antialiased dark`}>
+        <Header />
+        <main className="min-h-screen">
+          <QueryProvider>{children}</QueryProvider>
+        </main>
+        <Footer />
+      </body>
+    </html>
   );
 }

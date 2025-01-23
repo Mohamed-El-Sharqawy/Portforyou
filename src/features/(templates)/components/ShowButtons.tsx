@@ -1,34 +1,23 @@
 interface Props<T> {
   templates: T[];
-  setShuffledTemplates: React.Dispatch<React.SetStateAction<T[]>>;
   setShowAll: React.Dispatch<React.SetStateAction<boolean>>;
   showAll: boolean;
+  setTemplates: React.Dispatch<React.SetStateAction<T[]>>;
 }
 
 export default function ShowButtons<T>({
   templates,
-  setShuffledTemplates,
   setShowAll,
   showAll,
+  setTemplates,
 }: Props<T>) {
-  const shuffleArray = <T,>(array: T[]): T[] => {
-    const newArray = [...array];
-
-    for (let i = newArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
-    }
-
-    return newArray;
-  };
-
   const showAllTemplates = () => {
-    setShuffledTemplates(shuffleArray(templates));
+    setTemplates(templates);
     setShowAll(true);
   };
 
   const showLessTemplates = () => {
-    setShuffledTemplates(shuffleArray(templates));
+    setTemplates(templates.slice(0, 3));
     setShowAll(false);
   };
 

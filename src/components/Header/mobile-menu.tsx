@@ -5,15 +5,17 @@ import LoginButton from "./login-button";
 
 import { links } from "@/constants/navLinks";
 import { cn } from "@/lib/utils";
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { Menu, XIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import cookie from "js-cookie";
+import LogoutButton from "./logout-button";
 
 export default function MobileMenu() {
-  const router = useRouter();
-
   const [isOpen, setIsOpen] = useState(false);
+  const token = cookie.get("token");
+
+  const router = useRouter();
 
   const handleClick = (e: React.MouseEvent, link: { href: string }) => {
     e.preventDefault();
@@ -33,17 +35,11 @@ export default function MobileMenu() {
     <div className="flex lg:hidden">
       {/* Mobile Menu Toggle */}
       <div>
-        <SignedIn>
-          <UserButton />
-        </SignedIn>
-
-        <SignedOut>
-          <Menu
-            size={28}
-            className="cursor-pointer"
-            onClick={() => setIsOpen(!isOpen)}
-          />
-        </SignedOut>
+        <Menu
+          size={28}
+          className="cursor-pointer"
+          onClick={() => setIsOpen(!isOpen)}
+        />
       </div>
 
       {/* Navbar */}
@@ -76,11 +72,15 @@ export default function MobileMenu() {
             ))}
           </nav>
 
-          <SignedOut>
+          {token ? (
+            <div className="mx-auto w-fit">
+              <LogoutButton />
+            </div>
+          ) : (
             <div className="mx-auto w-fit">
               <LoginButton onClick={() => setIsOpen(false)} />
             </div>
-          </SignedOut>
+          )}
         </div>
       </Portal>
 

@@ -1,13 +1,17 @@
 "use client";
 
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import LoginButton from "./login-button";
+import LogoutButton from "./logout-button";
+import cookie from "js-cookie";
 
+import { jwtDecode } from "jwt-decode";
 import { links } from "@/constants/navLinks";
 import { useRouter } from "next/navigation";
 
 export default function HeaderNavLinks() {
   const router = useRouter();
+  const token = cookie.get("token");
+
   const handleClick = (e: React.MouseEvent, link: { href: string }) => {
     e.preventDefault();
 
@@ -24,11 +28,10 @@ export default function HeaderNavLinks() {
       });
     }
   };
-
   return (
     <nav className="hidden gap-x-4 items-center lg:flex">
-      <SignedOut>
-        {links.map((link) => (
+      {!token &&
+        links.map((link) => (
           <button
             className="relative text-xl cursor-pointer hover:underline underline-offset-4"
             key={link.href}
@@ -39,14 +42,20 @@ export default function HeaderNavLinks() {
             {link.label}
           </button>
         ))}
-      </SignedOut>
 
-      <SignedIn>
-        <UserButton />
-      </SignedIn>
-      <SignedOut>
+      {token ? (
+        <>
+          <p>
+            Welcome,{" "}
+            <span className="text-primary">
+              {(jwtDecode(token!) as { email: string }).email}
+            </span>
+          </p>
+          <LogoutButton />
+        </>
+      ) : (
         <LoginButton />
-      </SignedOut>
+      )}
     </nav>
   );
 }

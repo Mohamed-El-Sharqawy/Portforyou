@@ -2,7 +2,7 @@ import { Check, X } from "lucide-react";
 import { Plan } from "../../constants/pricings";
 import { cn } from "@/lib/utils";
 import ShineBorder from "@/components/ui/shine-border";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import Link from "next/link";
 
 export default function PricingCard({

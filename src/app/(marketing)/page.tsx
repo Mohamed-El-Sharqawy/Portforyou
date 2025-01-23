@@ -8,17 +8,11 @@ import Services from "@/features/marketing/components/Services/Services";
 import Testimonials from "@/features/marketing/components/Testimonials/Testimonials";
 
 import { useIsMobile } from "@/hooks/useIsMobile";
-import { useAuth } from "@clerk/nextjs";
 
-import { useRouter } from "next/navigation";
-
-import { useEffect, useLayoutEffect } from "react";
+import { useEffect } from "react";
 
 export default function Home() {
   const isMobile = useIsMobile(1024);
-  const { isSignedIn } = useAuth();
-  const router = useRouter();
-
   useEffect(() => {
     // Initialize Lenis
     const lenis = new Lenis();
@@ -37,10 +31,6 @@ export default function Home() {
 
     return () => lenis.destroy();
   }, [isMobile]);
-
-  useLayoutEffect(() => {
-    if (isSignedIn) return router.replace("/survey");
-  }, [router, isSignedIn]);
 
   return (
     <>

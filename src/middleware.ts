@@ -1,22 +1,28 @@
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
+import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-const isProtectedRoute = createRouteMatcher([
-  "/survey",
-  "/templates(.*)",
-  "/api/webhooks(.*)",
-]);
+// This function can be marked `async` if using `await` inside
+export async function middleware(request: NextRequest) {
+  const token = (await cookies()).get("token")?.value;
 
-export default clerkMiddleware(async (auth, request) => {
-  if (isProtectedRoute(request)) {
-    await auth.protect();
+  if (
+    !token &&
+    request.nextUrl.pathname !== "/sign-in" &&
+    request.nextUrl.pathname !== "/sign-up"
+  )
+    return NextResponse.redirect(new URL("/sign-in", request.url));
+
+  if (
+    token &&
+    (request.nextUrl.pathname === "/sign-in" ||
+      request.nextUrl.pathname === "/sign-up")
+  ) {
+    return NextResponse.redirect(new URL("/templates", request.url));
   }
-});
+}
 
+// See "Matching Paths" below to learn more
 export const config = {
-  matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
-    "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    // Always run for API routes
-    "/(api|trpc)(.*)",
-  ],
+  matcher: ["/survey/:path*", "/templates/:path*", "/sign-in", "/sign-up"],
 };

@@ -1,7 +1,6 @@
 import Button from "@/components/ui/Button";
 import Image from "next/image";
 
-import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { Template } from "../types/template";
 
 interface Props {
@@ -9,13 +8,8 @@ interface Props {
 }
 
 export default function TemplatesGrid({ templates }: Props) {
-  const [parent] = useAutoAnimate();
-
   return (
-    <div
-      className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-      ref={parent}
-    >
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {templates.map((template) => (
         <div
           key={template.id}
