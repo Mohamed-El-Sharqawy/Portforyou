@@ -3,7 +3,9 @@ import fetcher from "@/services/api";
 
 // Queries
 export const getUserPreferences = async () => {
-  const {decodedToken: {userId} } = getToken();
+  const {
+    decodedToken: { userId },
+  } = getToken();
 
   const query = `
     query UserPreferences {

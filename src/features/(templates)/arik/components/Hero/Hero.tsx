@@ -10,7 +10,6 @@ import { useGSAP } from "@gsap/react";
 import { scrollToElement } from "@/features/(templates)/arik/utils/scrollToElement";
 import { useHeroSectionData } from "../../services/queries";
 
-
 gsap.registerPlugin(useGSAP);
 
 import "./hero.css";

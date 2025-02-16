@@ -10,7 +10,7 @@ import { usePathname } from "next/navigation";
 export default function Header() {
   const pathname = usePathname();
 
-  if(pathname.includes("/templates/arik")) return null;
+  if (pathname.includes("/templates/arik")) return null;
 
   return (
     <motion.header

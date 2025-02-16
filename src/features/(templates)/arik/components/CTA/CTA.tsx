@@ -4,7 +4,11 @@ import Marquee from "react-fast-marquee";
 export default function CTA() {
   return (
     <section className="relative min-h-screen bg-wheat/5 flex items-center justify-center flex-col">
-      <Marquee autoFill speed={150} className="bg-wheat/10 h-14 !absolute inset-x-0 top-0">
+      <Marquee
+        autoFill
+        speed={150}
+        className="bg-wheat/10 h-14 !absolute inset-x-0 top-0"
+      >
         <div className="flex items-center gap-x-8 mr-8 text-sm">
           <span className="text-wheat uppercase">Let’s talk</span>
           <span className="text-wheat uppercase">+++</span>

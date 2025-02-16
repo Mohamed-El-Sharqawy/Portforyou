@@ -44,5 +44,5 @@ export const useWorkStepsSectionData = () => {
     queryKey: ["work-steps-section-data"],
     queryFn: () => getWorkStepsSectionData(),
     refetchOnWindowFocus: false,
-  })
-}
+  });
+};

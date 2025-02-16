@@ -106,7 +106,8 @@ export default function Step({ step, position, process }: Props) {
                         const newValue = e.target.textContent!;
 
                         const newProcess = process;
-                        newProcess.steps[index].step_points[pointIndex] = newValue;
+                        newProcess.steps[index].step_points[pointIndex] =
+                          newValue;
                         mutate(newProcess!);
                       }
                     }}
