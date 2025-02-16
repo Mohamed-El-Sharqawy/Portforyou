@@ -54,6 +54,7 @@ export default function Header() {
                 className="hover:underline underline-offset-4 tracking-widest"
                 href={link.toLowerCase()}
                 key={link}
+                prefetch={false}
               >
                 {link}
               </Link>

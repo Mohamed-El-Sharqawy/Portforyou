@@ -77,5 +77,5 @@ body {
 }
 
 .editable {
-  @apply rounded-md cursor-pointer px-4 hover:bg-white/10;
+  @apply rounded-md cursor-pointer hover:bg-white/10;
 }

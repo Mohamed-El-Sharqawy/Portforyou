@@ -35,8 +35,6 @@ export default function HeaderNavLinks() {
           <button
             className="relative text-xl cursor-pointer hover:underline underline-offset-4"
             key={link.href}
-            role="link"
-            tabIndex={0}
             onClick={(e) => handleClick(e, link)}
           >
             {link.label}
@@ -51,6 +49,7 @@ export default function HeaderNavLinks() {
               {(jwtDecode(token!) as { email: string }).email}
             </span>
           </p>
+
           <LogoutButton />
         </>
       ) : (

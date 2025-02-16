@@ -1,4 +1,4 @@
-export const services = [
+export const fakeServices = [
   {
     title: "Web design",
     description:

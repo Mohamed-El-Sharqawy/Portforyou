@@ -15,6 +15,9 @@ const nextConfig: NextConfig = {
       {
         hostname: "getnextjsthemes.com",
       },
+      {
+        hostname: "ik.imagekit.io",
+      },
     ],
   },
 };

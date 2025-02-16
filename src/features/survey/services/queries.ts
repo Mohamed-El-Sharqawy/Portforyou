@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { getUserPreferences } from "./api";
 
-export const useUserPreferences = (id: string) => {
+export const useUserPreferences = () => {
   return useQuery({
     queryKey: ["userPreferences"],
-    queryFn: () => getUserPreferences(id),
+    queryFn: getUserPreferences,
     refetchOnWindowFocus: false,
   });
 };

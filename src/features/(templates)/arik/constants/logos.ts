@@ -1,4 +1,4 @@
-export const logos = [
+export const fakeLogos = [
   {
     src: "/arik/logos section/logo-1.svg",
     alt: "Partner Logo 1",

@@ -1,7 +1,14 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+
 import Link from "next/link";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const pathname = usePathname();
+
+  if (pathname.includes("/templates/arik")) return null;
 
   return (
     <footer className="border-t py-12 font-sans mx-auto px-4 space-y-4 text-center">

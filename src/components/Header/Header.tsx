@@ -5,8 +5,13 @@ import MobileMenu from "./mobile-menu";
 import Logo from "../Logo";
 
 import { motion } from "motion/react";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
+  const pathname = usePathname();
+
+  if(pathname.includes("/templates/arik")) return null;
+
   return (
     <motion.header
       whileInView={{

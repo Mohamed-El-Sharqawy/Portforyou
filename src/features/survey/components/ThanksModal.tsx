@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Portal from "@/components/Portal";
 import Link from "next/link";

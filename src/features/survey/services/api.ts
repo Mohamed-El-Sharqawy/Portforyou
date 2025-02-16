@@ -1,9 +1,13 @@
+import { getToken } from "@/lib/utils";
 import fetcher from "@/services/api";
 
-export const getUserPreferences = async (id: string) => {
+// Queries
+export const getUserPreferences = async () => {
+  const {decodedToken: {userId} } = getToken();
+
   const query = `
     query UserPreferences {
-      user(id: "${id}") {
+      user(id: "${userId}") {
         preferences {
           colors
           profession
@@ -15,6 +19,7 @@ export const getUserPreferences = async (id: string) => {
   return await fetcher(query);
 };
 
+// Mutations
 export const updatePreferences = async (user: {
   userId: string;
   colors: string[];

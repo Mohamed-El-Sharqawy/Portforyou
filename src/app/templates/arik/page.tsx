@@ -1,4 +1,6 @@
+import Fallback from "@/components/Fallback";
 import CTA from "@/features/(templates)/arik/components/CTA/CTA";
+import Header from "@/features/(templates)/arik/components/Header/Header";
 import Hero from "@/features/(templates)/arik/components/Hero/Hero";
 import Logos from "@/features/(templates)/arik/components/Logos/Logos";
 import Services from "@/features/(templates)/arik/components/Services/Services";
@@ -6,13 +8,13 @@ import Testimonials from "@/features/(templates)/arik/components/Testimonials/Te
 import WorkExperience from "@/features/(templates)/arik/components/WorkExperience/WorkExperience";
 import WorkSteps from "@/features/(templates)/arik/components/WorkSteps/WorkSteps";
 
+import { QueryClient } from "@tanstack/react-query";
+
 import type { Viewport } from "next";
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
 };
 
 export const metadata = {
@@ -39,8 +41,13 @@ export const metadata = {
 };
 
 export default function Home() {
+  const queryClient = new QueryClient();
+
+  if (queryClient.isFetching()) return <Fallback />;
+
   return (
-    <>
+    <div className="arik-template overflow-x-hidden bg-black text-wheat font-arial">
+      <Header />
       <Hero />
       <Logos />
       <Services />
@@ -48,6 +55,6 @@ export default function Home() {
       <WorkSteps />
       <Testimonials />
       <CTA />
-    </>
+    </div>
   );
 }
