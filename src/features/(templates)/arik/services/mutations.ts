@@ -7,11 +7,15 @@ import {
   changeServices,
   changeWorkExperience,
   changeProcessSection,
+  changeTestimonialsSection,
+  changeTestimonialsSectionHeading,
+  changeTestimonialsSectionParagraph,
 } from "./api";
 import { Logo } from "../types/logos";
 import { Service } from "../types/services";
 import { Work } from "../types/work";
 import { WorkSteps } from "../types/work-steps";
+import { Testimonial } from "../types/testimonials";
 
 const queryClient = new QueryClient();
 
@@ -19,18 +23,27 @@ const queryClient = new QueryClient();
 export const useChangeHeroHeading = () => {
   return useMutation({
     mutationFn: (textContent: string) => changeHeroHeading(textContent),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["hero-section-data"] });
+    },
   });
 };
 
 export const useChangeHeroSubheading = () => {
   return useMutation({
     mutationFn: (textContent: string) => changeHeroSubheading(textContent),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["hero-section-data"] });
+    },
   });
 };
 
 export const useChangeHeroParagraph = () => {
   return useMutation({
     mutationFn: (textContent: string) => changeHeroParagraph(textContent),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["hero-section-data"] });
+    },
   });
 };
 
@@ -73,6 +86,43 @@ export const useChangeProcess = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["work-steps-section-data"],
+      });
+    },
+  });
+};
+
+// Testimonials
+export const useChangeTestimonialsHeading = () => {
+  return useMutation({
+    mutationFn: (testimonials_heading: string) =>
+      changeTestimonialsSectionHeading(testimonials_heading),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["testimonials-section-data"],
+      });
+    },
+  });
+};
+
+export const useChangeTestimonialsParagraph = () => {
+  return useMutation({
+    mutationFn: (testimonials_paragraph: string) =>
+      changeTestimonialsSectionParagraph(testimonials_paragraph),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["testimonials-section-data"],
+      });
+    },
+  });
+};
+
+export const useChangeTestimonials = () => {
+  return useMutation({
+    mutationFn: (testimonials: Testimonial[]) =>
+      changeTestimonialsSection(testimonials),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["testimonials-section-data"],
       });
     },
   });

@@ -106,6 +106,7 @@ export default function Hero() {
             onBlur={handleHeadingChange}
             className="editable"
             contentEditable
+            suppressContentEditableWarning
           >
             {!isFetching && (hero?.hero_heading || "Web Designer")}
           </span>
@@ -114,6 +115,7 @@ export default function Hero() {
             onBlur={handleSubheadingChange}
             className="editable italic"
             contentEditable
+            suppressContentEditableWarning
           >
             {!isFetching && (hero?.hero_subheading || "& Developer")}
           </span>
@@ -124,6 +126,7 @@ export default function Hero() {
           ref={paragraphRef}
           className="text-wheat/60 max-w-[520px] leading-10 mx-auto text-2xl font-light editable"
           contentEditable
+          suppressContentEditableWarning
         >
           {!isFetching &&
             (hero?.hero_paragraph ||

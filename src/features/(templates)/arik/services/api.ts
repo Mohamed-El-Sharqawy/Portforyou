@@ -5,6 +5,7 @@ import { Logo } from "../types/logos";
 import { Service } from "../types/services";
 import { Work } from "../types/work";
 import { WorkSteps } from "../types/work-steps";
+import { Testimonial } from "../types/testimonials";
 
 type HeroData = Promise<{
   data: {
@@ -55,6 +56,20 @@ type WorkStepsData = Promise<{
     user: {
       arikTemplate: {
         process: WorkSteps;
+      };
+    };
+  };
+}>;
+
+type TestimonialData = Promise<{
+  data: {
+    user: {
+      arikTemplate: {
+        testimonials: {
+          testimonials: Testimonial[];
+          testimonials_heading: string;
+          testimonials_paragraph: string;
+        };
       };
     };
   };
@@ -159,6 +174,35 @@ export const getWorkStepsSectionData = async (): WorkStepsData => {
           step_subheading
           step_paragraph
           step_points
+        }
+      }
+    }
+  }
+}`;
+
+  return await fetcher(query);
+};
+
+export const getTestimonialSectionData = async (): TestimonialData => {
+  const {
+    decodedToken: { userId },
+  } = getToken();
+
+  const query = `query GetTestimonialsData {
+  user(id: "${userId}") {
+    arikTemplate {
+      testimonials {
+        testimonials_heading
+        testimonials_paragraph
+        testimonials {
+          testimonial_client {
+            client_name
+            client_company
+            client_img_url
+            client_img_id
+          }
+          testimonial_heading
+          testimonial_paragraph
         }
       }
     }
@@ -407,6 +451,89 @@ export const changeProcessSection = async (
       }
     }
   }`;
+
+  return await fetcher(mutation);
+};
+
+export const changeTestimonialsSectionHeading = async (
+  testimonials_heading: string
+): TestimonialData => {
+  const {
+    decodedToken: { userId },
+  } = getToken();
+
+  const mutation = `mutation ChangeTestimonialsData {
+  updateUserTemplate(id: "${userId}", template: {
+    testimonials:  {
+      testimonials_heading: "${testimonials_heading}"
+    }
+  }) {
+    arikTemplate {
+      testimonials {
+        __typename
+      }
+    }
+  }
+}`;
+
+  return await fetcher(mutation);
+};
+
+export const changeTestimonialsSectionParagraph = async (
+  testimonials_paragraph: string
+): TestimonialData => {
+  const {
+    decodedToken: { userId },
+  } = getToken();
+
+  const mutation = `mutation ChangeTestimonialsData {
+  updateUserTemplate(id: "${userId}", template: {
+    testimonials:  {
+      testimonials_paragraph: "${testimonials_paragraph}"
+    }
+  }) {
+    arikTemplate {
+      testimonials {
+        __typename
+      }
+    }
+  }
+}`;
+
+  return await fetcher(mutation);
+};
+
+export const changeTestimonialsSection = async (
+  testimonials: Testimonial[]
+): TestimonialData => {
+  const {
+    decodedToken: { userId },
+  } = getToken();
+
+  const mutation = `mutation ChangeTestimonialsData {
+  updateUserTemplate(id: "${userId}", template: {
+    testimonials:  {
+      testimonials: [
+      ${testimonials
+        .map(
+          ({
+            testimonial_heading,
+            testimonial_paragraph,
+            testimonial_client,
+          }) =>
+            `{ testimonial_heading: "${testimonial_heading}", testimonial_paragraph: "${testimonial_paragraph}", testimonial_client: { client_name: "${testimonial_client.client_name}", client_company: "${testimonial_client.client_company}", client_img_url: "${testimonial_client.client_img_url}", client_img_id: "${testimonial_client.client_img_id}" } }`
+        )
+        .join(",\n        ")}
+      ]
+    }
+  }) {
+    arikTemplate {
+      testimonials {
+        __typename
+      }
+    }
+  }
+}`;
 
   return await fetcher(mutation);
 };

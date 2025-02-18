@@ -1,4 +1,4 @@
-import Fallback from "@/components/Fallback";
+import FetchingLoader from "@/components/FetchingLoader";
 import CTA from "@/features/(templates)/arik/components/CTA/CTA";
 import Header from "@/features/(templates)/arik/components/Header/Header";
 import Hero from "@/features/(templates)/arik/components/Hero/Hero";
@@ -7,8 +7,6 @@ import Services from "@/features/(templates)/arik/components/Services/Services";
 import Testimonials from "@/features/(templates)/arik/components/Testimonials/Testimonials";
 import WorkExperience from "@/features/(templates)/arik/components/WorkExperience/WorkExperience";
 import WorkSteps from "@/features/(templates)/arik/components/WorkSteps/WorkSteps";
-
-import { QueryClient } from "@tanstack/react-query";
 
 import type { Viewport } from "next";
 
@@ -41,12 +39,11 @@ export const metadata = {
 };
 
 export default function Home() {
-  const queryClient = new QueryClient();
-
-  if (queryClient.isFetching()) return <Fallback />;
-
   return (
     <div className="arik-template overflow-x-hidden bg-black text-wheat font-arial">
+      {/* If Fetching display the loader */}
+      <FetchingLoader />
+
       <Header />
       <Hero />
       <Logos />

@@ -31,6 +31,7 @@ export default function SingleService({
         ref={titleRef}
         className="text-wheat mt-3 mb-2 text-2xl font-light editable px-0"
         contentEditable
+        suppressContentEditableWarning
         onBlur={(e) => {
           services[index] = {
             title: e.target.textContent!,
@@ -46,6 +47,7 @@ export default function SingleService({
         ref={descriptionRef}
         className="mb-8 text-wheat/60 max-w-[350px] leading-7 editable px-0"
         contentEditable
+        suppressContentEditableWarning
         onBlur={(e) => {
           services[index] = {
             title: titleRef.current?.textContent ?? "",

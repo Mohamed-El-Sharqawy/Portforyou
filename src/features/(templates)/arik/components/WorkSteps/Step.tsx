@@ -52,6 +52,7 @@ export default function Step({ step, position, process }: Props) {
                   }
                 }}
                 contentEditable
+                suppressContentEditableWarning
                 className="text-xs text-wheat/60 editable"
               >
                 {step.step_subheading ||
@@ -69,6 +70,7 @@ export default function Step({ step, position, process }: Props) {
                   }
                 }}
                 contentEditable
+                suppressContentEditableWarning
                 className="text-wheat text-lg md:text-xl font-semibold mt-1 editable"
               >
                 {step.step_heading || fakeSteps[position - 1].step_heading}
@@ -87,6 +89,7 @@ export default function Step({ step, position, process }: Props) {
                 }
               }}
               contentEditable
+              suppressContentEditableWarning
               className="text-sm text-wheat/60 editable"
             >
               {step.step_paragraph || fakeSteps[position - 1].step_paragraph}
@@ -112,6 +115,7 @@ export default function Step({ step, position, process }: Props) {
                       }
                     }}
                     contentEditable
+                    suppressContentEditableWarning
                     className="editable"
                   >
                     {item || fakeSteps[position - 1].step_points[pointIndex]}

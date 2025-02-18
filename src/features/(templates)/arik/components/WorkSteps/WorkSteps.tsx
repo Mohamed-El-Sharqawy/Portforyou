@@ -26,6 +26,7 @@ export default function WorkSteps() {
             }
           }}
           contentEditable
+          suppressContentEditableWarning
           className="text-wheat text-center text-5xl leading-tight md:text-8xl md:leading-tight font-medium text-balance max-w-[700px] mx-auto editable"
         >
           {process?.process_heading || `Your Website in 5 steps`}
@@ -41,6 +42,7 @@ export default function WorkSteps() {
             }
           }}
           contentEditable
+          suppressContentEditableWarning
           className="text-center text-wheat/60 md:w-full max-w-[95%] mx-auto editable"
         >
           {process?.process_paragraph ||

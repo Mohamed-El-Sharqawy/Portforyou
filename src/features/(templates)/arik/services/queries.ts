@@ -3,6 +3,7 @@ import {
   getHeroSectionData,
   getLogosSectionData,
   getServicesSectionData,
+  getTestimonialSectionData,
   getWorkExperienceSectionData,
   getWorkStepsSectionData,
 } from "./api";
@@ -43,6 +44,14 @@ export const useWorkStepsSectionData = () => {
   return useQuery({
     queryKey: ["work-steps-section-data"],
     queryFn: () => getWorkStepsSectionData(),
+    refetchOnWindowFocus: false,
+  });
+};
+
+export const useTestimonialSectionData = () => {
+  return useQuery({
+    queryKey: ["testimonials-section-data"],
+    queryFn: () => getTestimonialSectionData(),
     refetchOnWindowFocus: false,
   });
 };

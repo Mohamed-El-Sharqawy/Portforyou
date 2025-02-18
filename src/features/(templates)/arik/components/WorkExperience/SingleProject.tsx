@@ -73,6 +73,7 @@ export default function SingleProject({
               ref={titleRef}
               className="text-wheat text-xl font-light editable"
               contentEditable
+              suppressContentEditableWarning
               onBlur={(e) => {
                 workExperience[index] = {
                   ...workExperience[index],
@@ -89,6 +90,7 @@ export default function SingleProject({
               ref={categoryRef}
               className="text-wheat text-base font-normal text-[13px] uppercase editable"
               contentEditable
+              suppressContentEditableWarning
               onBlur={(e) => {
                 workExperience[index] = {
                   ...workExperience[index],
@@ -180,7 +182,7 @@ export default function SingleProject({
                         order === index && isUploading && "opacity-15",
                         isUploading && order !== index && "cursor-not-allowed"
                       )}
-                      alt={`Logo ${index + 1}`}
+                      alt={`Client Picture - ${index + 1}`}
                       onClick={() => {
                         if (isUploading) return;
 
@@ -198,6 +200,7 @@ export default function SingleProject({
                     ref={projectLinkRef}
                     className="editable border-2 border-zinc-700 !p-2 mt-2"
                     contentEditable
+                    suppressContentEditableWarning
                     onBlur={(e) => {
                       workExperience[index] = {
                         ...workExperience[index],
