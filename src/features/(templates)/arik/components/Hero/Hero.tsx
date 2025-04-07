@@ -35,7 +35,7 @@ export default function Hero() {
   const paragraphRef = useRef<HTMLParagraphElement>(null);
   const searchParams = useSearchParams();
   const userId = searchParams.get("userId");
-  const { decodedToken} = getToken();
+  const { decodedToken } = getToken();
 
   const span1Ref = useRef<HTMLSpanElement>(null);
   const span2Ref = useRef<HTMLSpanElement>(null);

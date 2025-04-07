@@ -17,7 +17,9 @@ export default function CustomTooltip({
   return (
     <TooltipProvider delayDuration={0}>
       <Tooltip>
-        <TooltipTrigger className="absolute -top-2 right-0">{children}</TooltipTrigger>
+        <TooltipTrigger className="absolute -top-2 right-0">
+          {children}
+        </TooltipTrigger>
         <TooltipContent>
           <p>{content}</p>
         </TooltipContent>

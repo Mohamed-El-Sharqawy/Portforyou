@@ -17,7 +17,7 @@ import { getToken } from "@/lib/utils";
 export default function Services() {
   const searchParams = useSearchParams();
   const userId = searchParams.get("userId");
-  const { decodedToken} = getToken();
+  const { decodedToken } = getToken();
 
   const { data, isFetching, refetch } = useServicesSectionData(userId!);
   const services = data?.data.user.arikTemplate.services || [];

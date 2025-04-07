@@ -7,7 +7,6 @@ import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { toast } from "sonner";
 
-
 export default function Contact() {
   const searchParams = useSearchParams();
   const userId = searchParams.get("userId");

@@ -55,10 +55,10 @@ export default function SingleProject({
     <Dialog
       open={open}
       onOpenChange={(opened) => {
-        if(!isOwner) return
+        if (!isOwner) return;
         else {
           setOpen(opened);
-          
+
           if (!opened) {
             refetch();
           }
@@ -114,14 +114,25 @@ export default function SingleProject({
             </p>
           </div>
 
-          <Link href={project.project_link.includes("https://") ? project.project_link : project.project_link ? `https://${project.project_link}` : "#"} target="_blank" onClick={(e) => {
-            if(!isOwner) return;
+          <Link
+            href={
+              project.project_link.includes("https://")
+                ? project.project_link
+                : project.project_link
+                  ? `https://${project.project_link}`
+                  : "#"
+            }
+            target="_blank"
+            onClick={(e) => {
+              if (!isOwner) return;
 
-            if(isOwner) {
-              e.preventDefault();
-              setOpen(true);
-            };
-          }} className={`absolute inset-0 flex items-center justify-center z-10 ${!isOwner && "cursor-pointer"}`}>
+              if (isOwner) {
+                e.preventDefault();
+                setOpen(true);
+              }
+            }}
+            className={`absolute inset-0 flex items-center justify-center z-10 ${!isOwner && "cursor-pointer"}`}
+          >
             <TopRightArrow
               asDiv
               className="project-link-icon backdrop-blur-md opacity-0 transition-all duration-300"

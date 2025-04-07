@@ -18,7 +18,9 @@ import { getToken } from "@/lib/utils";
 gsap.registerPlugin(useGSAP);
 
 export default function Header() {
-  const { decodedToken: {userId} } = getToken();
+  const {
+    decodedToken: { userId },
+  } = getToken();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const mobileMenuContent = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLElement>(null);

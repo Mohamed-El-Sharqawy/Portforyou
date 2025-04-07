@@ -21,7 +21,9 @@ export default function FetchingLoader() {
   const { isLoading: isServicesLoading } = useServicesSectionData(userId!);
   const { isLoading: isWorkExpLoading } = useWorkExperienceSectionData(userId!);
   const { isLoading: isWorkStepsLoading } = useWorkStepsSectionData(userId!);
-  const { isLoading: isTestimonialsLoading } = useTestimonialSectionData(userId!);
+  const { isLoading: isTestimonialsLoading } = useTestimonialSectionData(
+    userId!
+  );
   const { isLoading: isFooterLoading } = useFooterSectionData(userId!);
 
   const isLoading =

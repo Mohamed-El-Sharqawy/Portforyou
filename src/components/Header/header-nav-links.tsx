@@ -16,21 +16,21 @@ export default function HeaderNavLinks() {
   useEffect(() => {
     // Only access cookies on the client side
     const cookieToken = document.cookie
-      .split('; ')
-      .find(row => row.startsWith('token='))
-      ?.split('=')[1];
-    
+      .split("; ")
+      .find((row) => row.startsWith("token="))
+      ?.split("=")[1];
+
     setToken(cookieToken || null);
-    
+
     if (cookieToken) {
       try {
         // Dynamic import to avoid server-side execution
-        import('jwt-decode').then(({ jwtDecode }) => {
+        import("jwt-decode").then(({ jwtDecode }) => {
           const decoded = jwtDecode(cookieToken) as { username: string };
           setUsername(decoded.username);
         });
       } catch (error) {
-        console.error('Error decoding token:', error);
+        console.error("Error decoding token:", error);
       }
     }
   }, []);
@@ -58,8 +58,8 @@ export default function HeaderNavLinks() {
       {!token &&
         links.map((link) =>
           link.href === "templates" || link.href === "survey" ? null : (
-            <Link 
-              href={`/#${link.href}`} 
+            <Link
+              href={`/#${link.href}`}
               key={link.href}
               onClick={(e) => handleClick(e, link)}
               className="relative text-xl cursor-pointer hover:underline underline-offset-4"
@@ -89,10 +89,7 @@ export default function HeaderNavLinks() {
       {token ? (
         <>
           <p>
-            Welcome,{" "}
-            <span className="text-primary">
-              {username}
-            </span>
+            Welcome, <span className="text-primary">{username}</span>
           </p>
 
           <LogoutButton />

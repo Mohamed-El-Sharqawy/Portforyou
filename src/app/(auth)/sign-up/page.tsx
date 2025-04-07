@@ -65,7 +65,10 @@ const SignUp = () => {
         </div>
 
         {formError && (
-          <div dat-cy="error-signup" className="bg-red-500/10 border border-red-500/50 rounded-lg p-4">
+          <div
+            dat-cy="error-signup"
+            className="bg-red-500/10 border border-red-500/50 rounded-lg p-4"
+          >
             <p className="text-red-500 text-sm text-center">{formError}</p>
           </div>
         )}

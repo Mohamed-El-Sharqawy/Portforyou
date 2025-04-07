@@ -145,7 +145,9 @@ export const getServicesSectionData = async (userId: string): ServicesData => {
   return await fetcher(query);
 };
 
-export const getWorkExperienceSectionData = async (userId: string): WorkExperienceData => {
+export const getWorkExperienceSectionData = async (
+  userId: string
+): WorkExperienceData => {
   const query = `query GetWorkExperienceSection {
   user(id: "${userId}") {
     id
@@ -165,7 +167,9 @@ export const getWorkExperienceSectionData = async (userId: string): WorkExperien
   return await fetcher(query);
 };
 
-export const getWorkStepsSectionData = async (userId: string): WorkStepsData => {
+export const getWorkStepsSectionData = async (
+  userId: string
+): WorkStepsData => {
   const query = `
   query GetWorkStepsSection {
   user(id: "${userId}") {
@@ -188,7 +192,9 @@ export const getWorkStepsSectionData = async (userId: string): WorkStepsData => 
   return await fetcher(query);
 };
 
-export const getTestimonialSectionData = async (userId: string): TestimonialData => {
+export const getTestimonialSectionData = async (
+  userId: string
+): TestimonialData => {
   const query = `query GetTestimonialsData {
   user(id: "${userId}") {
     id

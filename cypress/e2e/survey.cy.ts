@@ -13,11 +13,11 @@ describe("Survey Page", () => {
     // After login, we should be redirected to either the survey page (if no preferences)
     // or the templates page (if preferences are already set)
     cy.url().should("include", "/");
-    
+
     // If we're redirected to templates, navigate to survey page manually
     cy.url().then((url) => {
-      if (url.includes('/templates')) {
-        cy.visit('/survey');
+      if (url.includes("/templates")) {
+        cy.visit("/survey");
       }
     });
   });

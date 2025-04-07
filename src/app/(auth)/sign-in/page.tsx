@@ -156,7 +156,11 @@ const SignIn = () => {
 
           <p className="text-center text-gray-400">
             Don&apos;t have an account?{" "}
-            <Link data-cy="sign-up-btn" href="/sign-up" className="text-blue-500 hover:text-blue-400">
+            <Link
+              data-cy="sign-up-btn"
+              href="/sign-up"
+              className="text-blue-500 hover:text-blue-400"
+            >
               Sign up
             </Link>
           </p>

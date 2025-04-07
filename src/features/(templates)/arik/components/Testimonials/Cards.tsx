@@ -17,7 +17,7 @@ const Cards = () => {
   const testimonials =
     data?.data.user.arikTemplate.testimonials.testimonials || [];
 
-    const isOwner = decodedToken.userId === userId;
+  const isOwner = decodedToken.userId === userId;
 
   return (
     <div className="grid md:grid-cols-2 gap-8">

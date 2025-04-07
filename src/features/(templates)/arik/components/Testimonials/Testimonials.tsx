@@ -23,10 +23,13 @@ export default function Testimonials() {
   const { testimonials_heading, testimonials_paragraph } =
     data?.data.user.arikTemplate.testimonials || {};
 
-    const isOwner = decodedToken.userId === userId;
+  const isOwner = decodedToken.userId === userId;
 
   return (
-    <section className="w-full min-h-screen bg-black text-wheat px-4 py-16" id="testimonials-section">
+    <section
+      className="w-full min-h-screen bg-black text-wheat px-4 py-16"
+      id="testimonials-section"
+    >
       <div className="max-w-7xl mx-auto">
         {/* Section Headings */}
         <div className="text-center mb-16">

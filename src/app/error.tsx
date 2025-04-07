@@ -1,6 +1,6 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
+import { useEffect } from "react";
 import cookie from "js-cookie";
 
 export default function Error({
@@ -12,7 +12,7 @@ export default function Error({
 }) {
   useEffect(() => {
     // Log the error to an error reporting service
-    console.error('App Error:', error);
+    console.error("App Error:", error);
   }, [error]);
 
   return (

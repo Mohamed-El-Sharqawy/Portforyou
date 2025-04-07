@@ -26,7 +26,7 @@ export default function SingleService({
   index,
   services,
   refetch,
-  isOwner
+  isOwner,
 }: ServiceProps) {
   const titleRef = useRef<HTMLHeadingElement>(null);
   const descriptionRef = useRef<HTMLParagraphElement>(null);
@@ -60,34 +60,36 @@ export default function SingleService({
       >
         {isServiceTitlePending && <EnhancingLoader />}
         {title || fakeServices[index].title}
-        {isOwner && <CustomTooltip>
-          <EnhanceContentButton
-            onClick={async () => {
-              setIsLastClicked("serviceTitle");
-              const elementContent = titleRef.current?.textContent;
-              if (elementContent) {
-                enhanceContent(elementContent, {
-                  onSuccess: (data) => {
-                    if (data == title)
-                      return toast.success("Content is already perfect 📈");
-                    services[index] = {
-                      title: data,
-                      description: descriptionRef.current?.textContent ?? "",
-                    };
-                    mutate(services, {
-                      onSuccess: () => {
-                        if (data) {
-                          toast.success("Content enhanced successfully!");
-                          refetch();
-                        }
-                      },
-                    });
-                  },
-                });
-              }
-            }}
-          />
-        </CustomTooltip>}
+        {isOwner && (
+          <CustomTooltip>
+            <EnhanceContentButton
+              onClick={async () => {
+                setIsLastClicked("serviceTitle");
+                const elementContent = titleRef.current?.textContent;
+                if (elementContent) {
+                  enhanceContent(elementContent, {
+                    onSuccess: (data) => {
+                      if (data == title)
+                        return toast.success("Content is already perfect 📈");
+                      services[index] = {
+                        title: data,
+                        description: descriptionRef.current?.textContent ?? "",
+                      };
+                      mutate(services, {
+                        onSuccess: () => {
+                          if (data) {
+                            toast.success("Content enhanced successfully!");
+                            refetch();
+                          }
+                        },
+                      });
+                    },
+                  });
+                }
+              }}
+            />
+          </CustomTooltip>
+        )}
       </h2>
       <p
         ref={descriptionRef}
@@ -105,35 +107,36 @@ export default function SingleService({
       >
         {isServiceDescriptionPending && <EnhancingLoader />}
         {description || fakeServices[index].description}
-        {isOwner && <CustomTooltip>
-          <EnhanceContentButton
-            onClick={async () => {
-              setIsLastClicked("serviceDescription");
-              const elementContent = titleRef.current?.textContent;
-              if (elementContent) {
-                enhanceContent(elementContent, {
-                  onSuccess: (data) => {
-                    if (data == description)
-                      return toast.success("Content is already perfect 📈");
-                    services[index] = {
-                      title: titleRef.current?.textContent ?? "",
-                      description: data,
-                    };
-                    mutate(services, {
-                      onSuccess: () => {
-                        if (data) {
-                          toast.success("Content enhanced successfully!");
-                          refetch();
-                        }
-                      },
-                    });
-                  },
-                });
-              }
-            }}
-          />
-        </CustomTooltip>
-        }
+        {isOwner && (
+          <CustomTooltip>
+            <EnhanceContentButton
+              onClick={async () => {
+                setIsLastClicked("serviceDescription");
+                const elementContent = titleRef.current?.textContent;
+                if (elementContent) {
+                  enhanceContent(elementContent, {
+                    onSuccess: (data) => {
+                      if (data == description)
+                        return toast.success("Content is already perfect 📈");
+                      services[index] = {
+                        title: titleRef.current?.textContent ?? "",
+                        description: data,
+                      };
+                      mutate(services, {
+                        onSuccess: () => {
+                          if (data) {
+                            toast.success("Content enhanced successfully!");
+                            refetch();
+                          }
+                        },
+                      });
+                    },
+                  });
+                }
+              }}
+            />
+          </CustomTooltip>
+        )}
       </p>
       <TopRightArrow />
     </div>

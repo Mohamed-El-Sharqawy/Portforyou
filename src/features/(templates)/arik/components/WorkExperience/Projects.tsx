@@ -14,11 +14,11 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Projects() {
   const searchParams = useSearchParams();
   const userId = searchParams.get("userId");
-  const { decodedToken} = getToken();
+  const { decodedToken } = getToken();
 
   const { data, refetch } = useWorkExperienceSectionData(userId!);
   const workExperience = data?.data.user.arikTemplate.work || [];
-  
+
   const isOwner = decodedToken.userId === userId;
 
   useGSAP(

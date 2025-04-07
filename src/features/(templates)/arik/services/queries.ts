@@ -13,7 +13,7 @@ import {
 export const useHeroSectionData = (userId: string) => {
   return useQuery({
     queryKey: ["hero-section-data"],
-    queryFn: () => userId ? getHeroSectionData(userId): null,
+    queryFn: () => (userId ? getHeroSectionData(userId) : null),
     refetchOnWindowFocus: false,
     enabled: !!userId,
   });
@@ -24,8 +24,8 @@ export const useLogosSectionData = (userId: string) => {
   return useQuery({
     queryKey: ["logos-section-data"],
     queryFn: () => {
-      console.log(userId)
-      return userId ? getLogosSectionData(userId) : null
+      console.log(userId);
+      return userId ? getLogosSectionData(userId) : null;
     },
     refetchOnWindowFocus: false,
     enabled: !!userId,
@@ -36,7 +36,7 @@ export const useLogosSectionData = (userId: string) => {
 export const useServicesSectionData = (userId: string) => {
   return useQuery({
     queryKey: ["services-section-data"],
-    queryFn: () => userId ? getServicesSectionData(userId) : null,
+    queryFn: () => (userId ? getServicesSectionData(userId) : null),
     refetchOnWindowFocus: false,
     enabled: !!userId,
   });
@@ -46,7 +46,7 @@ export const useServicesSectionData = (userId: string) => {
 export const useWorkExperienceSectionData = (userId: string) => {
   return useQuery({
     queryKey: ["work-experience-section-data"],
-    queryFn: () => userId ? getWorkExperienceSectionData(userId) : null,
+    queryFn: () => (userId ? getWorkExperienceSectionData(userId) : null),
     refetchOnWindowFocus: false,
     enabled: !!userId,
   });
@@ -56,7 +56,7 @@ export const useWorkExperienceSectionData = (userId: string) => {
 export const useWorkStepsSectionData = (userId: string) => {
   return useQuery({
     queryKey: ["work-steps-section-data"],
-    queryFn: () => userId ? getWorkStepsSectionData(userId) : null,
+    queryFn: () => (userId ? getWorkStepsSectionData(userId) : null),
     refetchOnWindowFocus: false,
     enabled: !!userId,
   });
@@ -66,7 +66,7 @@ export const useWorkStepsSectionData = (userId: string) => {
 export const useTestimonialSectionData = (userId: string) => {
   return useQuery({
     queryKey: ["testimonials-section-data"],
-    queryFn: () => userId ? getTestimonialSectionData(userId) : null,
+    queryFn: () => (userId ? getTestimonialSectionData(userId) : null),
     refetchOnWindowFocus: false,
     enabled: !!userId,
   });
@@ -76,7 +76,7 @@ export const useTestimonialSectionData = (userId: string) => {
 export const useFooterSectionData = (userId: string) => {
   return useQuery({
     queryKey: ["footer-section-data"],
-    queryFn: () => userId ? getFooterSectionData(userId) : null,
+    queryFn: () => (userId ? getFooterSectionData(userId) : null),
     refetchOnWindowFocus: false,
     enabled: !!userId,
   });

@@ -1,6 +1,7 @@
 # Cypress E2E Testing for Portforyou
 
-This directory contains end-to-end tests for the Portforyou application using Cypress.
+This directory contains end-to-end tests for the Portforyou application using
+Cypress.
 
 ## Test Structure
 
@@ -15,6 +16,7 @@ This directory contains end-to-end tests for the Portforyou application using Cy
 ### Authentication Tests
 
 - Sign In
+
   - Display of sign-in form
   - Form validation
   - Failed login attempt
@@ -31,8 +33,10 @@ This directory contains end-to-end tests for the Portforyou application using Cy
 
 The following custom commands are available for use in tests:
 
-- `cy.login(email, password)` - Simulates a user login with the provided credentials
-- `cy.register(username, email, password)` - Simulates user registration with the provided information
+- `cy.login(email, password)` - Simulates a user login with the provided
+  credentials
+- `cy.register(username, email, password)` - Simulates user registration with
+  the provided information
 
 ## Running Tests
 
@@ -57,4 +61,5 @@ npm run test:e2e
 ## Notes
 
 - Tests use mocked API responses to avoid actual network requests
-- The tests are designed to work with the existing data-cy attributes in the application
+- The tests are designed to work with the existing data-cy attributes in the
+  application

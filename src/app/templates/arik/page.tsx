@@ -57,8 +57,11 @@ export default function Home() {
       <CTA />
 
       <CopyButton />
-      
-      <Link href={"/templates"} className="fixed top-14 left-10 max-[1140px]:top-32 flex items-center gap-x-2">
+
+      <Link
+        href={"/templates"}
+        className="fixed top-14 left-10 max-[1140px]:top-32 flex items-center gap-x-2"
+      >
         <ArrowLeftCircle size={28} className="cursor-pointer" />
         <p className="text-sm">Back to Templates</p>
       </Link>
