@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  useFooterSectionData,
   useHeroSectionData,
   useLogosSectionData,
   useServicesSectionData,
@@ -9,14 +10,19 @@ import {
   useWorkStepsSectionData,
 } from "@/features/(templates)/arik/services/queries";
 import Fallback from "./Fallback";
+import { useSearchParams } from "next/navigation";
 
 export default function FetchingLoader() {
-  const { isLoading: isHeroLoading } = useHeroSectionData();
-  const { isLoading: isLogosLoading } = useLogosSectionData();
-  const { isLoading: isServicesLoading } = useServicesSectionData();
-  const { isLoading: isWorkExpLoading } = useWorkExperienceSectionData();
-  const { isLoading: isWorkStepsLoading } = useWorkStepsSectionData();
-  const { isLoading: isTestimonialsLoading } = useTestimonialSectionData();
+  const searchParams = useSearchParams();
+  const userId = searchParams.get("userId");
+
+  const { isLoading: isHeroLoading } = useHeroSectionData(userId!);
+  const { isLoading: isLogosLoading } = useLogosSectionData(userId!);
+  const { isLoading: isServicesLoading } = useServicesSectionData(userId!);
+  const { isLoading: isWorkExpLoading } = useWorkExperienceSectionData(userId!);
+  const { isLoading: isWorkStepsLoading } = useWorkStepsSectionData(userId!);
+  const { isLoading: isTestimonialsLoading } = useTestimonialSectionData(userId!);
+  const { isLoading: isFooterLoading } = useFooterSectionData(userId!);
 
   const isLoading =
     isHeroLoading ||
@@ -24,7 +30,8 @@ export default function FetchingLoader() {
     isServicesLoading ||
     isWorkExpLoading ||
     isWorkStepsLoading ||
-    isTestimonialsLoading;
+    isTestimonialsLoading ||
+    isFooterLoading;
 
   return (
     <div

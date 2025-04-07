@@ -4,8 +4,9 @@ import gsap from "gsap";
 import Link from "next/link";
 import DownArrow from "@/features/(templates)/arik/assets/icons/down-arrow";
 import PersonImage from "@/features/(templates)/arik/components/PersonImage";
+import { toast } from "sonner";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import { scrollToElement } from "@/features/(templates)/arik/utils/scrollToElement";
 import { useHeroSectionData } from "../../services/queries";
@@ -18,36 +19,85 @@ import {
   useChangeHeroSubheading,
   useChangeHeroParagraph,
 } from "../../services/mutations";
+import { useOpenAIMutation } from "@/services/mutations";
+import CustomTooltip from "@/components/CustomTooltip";
+import EnhanceContentButton from "../EnhanceContentButton";
+import EnhancingLoader from "../EnhancingLoader";
+import { useSearchParams } from "next/navigation";
+import { getToken } from "@/lib/utils";
 
 export default function Hero() {
+  const [lastClicked, setLastClicked] = useState<
+    "heading" | "subheading" | "paragraph" | null
+  >(null);
+
   const headingRef = useRef<HTMLHeadingElement>(null);
   const paragraphRef = useRef<HTMLParagraphElement>(null);
+  const searchParams = useSearchParams();
+  const userId = searchParams.get("userId");
+  const { decodedToken} = getToken();
 
-  const { data, isFetching } = useHeroSectionData();
+  const span1Ref = useRef<HTMLSpanElement>(null);
+  const span2Ref = useRef<HTMLSpanElement>(null);
 
-  const hero = data?.data.user.arikTemplate.hero;
+  const { data, isFetching, refetch } = useHeroSectionData(userId!);
+  const { mutate: enhanceContent, isPending } = useOpenAIMutation();
+
+  const isOwner = userId === decodedToken.userId;
+
+  const isHeroHeadingPending = isPending && lastClicked == "heading";
+  const isHeroSubheadingPending = isPending && lastClicked == "subheading";
+  const isHeroParagraphPending = isPending && lastClicked == "paragraph";
+
+  const hero = data?.data.user?.arikTemplate?.hero;
 
   const changeHeroHeading = useChangeHeroHeading();
   const changeHeroSubheading = useChangeHeroSubheading();
   const changeHeroParagraph = useChangeHeroParagraph();
 
-  const handleHeadingChange = (event: React.ChangeEvent<HTMLSpanElement>) => {
+  const handleHeadingChange = (
+    event: React.ChangeEvent<HTMLSpanElement>,
+    enhancedContent?: string | undefined
+  ) => {
+    if (hero?.hero_heading === event.target.textContent) return;
     const newValue = event.target.textContent;
-    changeHeroHeading.mutate(newValue!);
+    changeHeroHeading.mutate(newValue!, {
+      onSuccess: () => {
+        if (enhancedContent) {
+          refetch();
+        }
+      },
+    });
   };
 
   const handleSubheadingChange = (
-    event: React.ChangeEvent<HTMLSpanElement>
+    event: React.ChangeEvent<HTMLSpanElement>,
+    enhancedContent?: string | undefined
   ) => {
+    if (hero?.hero_subheading === event.target.textContent) return;
     const newValue = event.target.textContent;
-    changeHeroSubheading.mutate(newValue!);
+    changeHeroSubheading.mutate(newValue!, {
+      onSuccess: () => {
+        if (enhancedContent) {
+          refetch();
+        }
+      },
+    });
   };
 
   const handleParagraphChange = (
-    event: React.ChangeEvent<HTMLParagraphElement>
+    event: React.ChangeEvent<HTMLParagraphElement>,
+    enhancedContent?: string | undefined
   ) => {
+    if (hero?.hero_paragraph === event.target.textContent) return;
     const newValue = event.target.textContent;
-    changeHeroParagraph.mutate(newValue!);
+    changeHeroParagraph.mutate(newValue!, {
+      onSuccess: () => {
+        if (enhancedContent) {
+          refetch();
+        }
+      },
+    });
   };
 
   useGSAP(
@@ -102,36 +152,123 @@ export default function Hero() {
           ref={headingRef}
           className="relative text-wheat text-[96px] leading-tight w-fit mx-auto"
         >
-          <span
-            onBlur={handleHeadingChange}
-            className="editable"
-            contentEditable
-            suppressContentEditableWarning
-          >
-            {!isFetching && (hero?.hero_heading || "Web Designer")}
-          </span>
+          <div className="relative inline-block group">
+            <span
+              onBlur={handleHeadingChange}
+              className={`${isHeroHeadingPending ? "opacity-50" : ""} ${isOwner && "editable cursor-pointer"}`}
+              contentEditable={!isHeroHeadingPending && isOwner}
+              suppressContentEditableWarning
+              ref={span1Ref}
+            >
+              {!isFetching && (hero?.hero_heading || "Web Designer")}
+            </span>
+            {isHeroHeadingPending && <EnhancingLoader />}
+            {isOwner && (
+              <CustomTooltip content="Enhance Content">
+                <EnhanceContentButton
+                  onClick={() => {
+                    setLastClicked("heading");
+                    const elementContent = span1Ref.current?.textContent;
+                    if (elementContent)
+                      enhanceContent(elementContent, {
+                        onSuccess(data) {
+                          const event = {
+                            target: {
+                              textContent: data,
+                            },
+                          };
+                          if (data === hero?.hero_heading)
+                            return toast.success(
+                              "Content is already perfect 📈"
+                            );
+                          handleHeadingChange(event as any, data);
+                          toast.success("Content enhanced successfully!");
+                        },
+                      });
+                  }}
+                />
+              </CustomTooltip>
+            )}
+          </div>
           <br />
-          <span
-            onBlur={handleSubheadingChange}
-            className="editable italic"
-            contentEditable
-            suppressContentEditableWarning
-          >
-            {!isFetching && (hero?.hero_subheading || "& Developer")}
-          </span>
+          <div className="relative inline-block group">
+            <span
+              onBlur={handleSubheadingChange}
+              className={`${isHeroSubheadingPending ? "opacity-50" : ""} ${isOwner && "editable cursor-pointer"}`}
+              contentEditable={!isHeroSubheadingPending && isOwner}
+              suppressContentEditableWarning
+              ref={span2Ref}
+            >
+              {!isFetching && (hero?.hero_subheading || "& Developer")}
+            </span>
+            {isHeroSubheadingPending && <EnhancingLoader />}
+            {isOwner && (
+              <CustomTooltip content="Enhance Content">
+                <EnhanceContentButton
+                  onClick={() => {
+                    setLastClicked("subheading");
+                    const elementContent = span2Ref.current?.textContent;
+                    if (elementContent)
+                      enhanceContent(elementContent, {
+                        onSuccess(data) {
+                          const event = {
+                            target: {
+                              textContent: data,
+                            },
+                          };
+                          if (data === hero?.hero_subheading)
+                            return toast.success(
+                              "Content is already perfect 📈"
+                            );
+                          handleSubheadingChange(event as any, data);
+                          toast.success("Content enhanced successfully!");
+                        },
+                      });
+                  }}
+                />
+              </CustomTooltip>
+            )}
+          </div>
         </h1>
 
-        <p
-          onBlur={handleParagraphChange}
-          ref={paragraphRef}
-          className="text-wheat/60 max-w-[520px] leading-10 mx-auto text-2xl font-light editable"
-          contentEditable
-          suppressContentEditableWarning
-        >
-          {!isFetching &&
-            (hero?.hero_paragraph ||
-              "Premium web design, development, and SEO services to help your business stand out.")}
-        </p>
+        <div className="relative inline-block group">
+          <p
+            onBlur={handleParagraphChange}
+            ref={paragraphRef}
+            className={`text-wheat/60 max-w-[520px] leading-10 mx-auto text-2xl font-light ${isOwner && "editable cursor-pointer"} ${isHeroParagraphPending ? "!opacity-50" : ""}`}
+            contentEditable={!isHeroParagraphPending && isOwner}
+            suppressContentEditableWarning
+          >
+            {!isFetching &&
+              (hero?.hero_paragraph ||
+                "Premium web design, development, and SEO services to help your business stand out.")}
+          </p>
+          {isHeroParagraphPending && <EnhancingLoader />}
+          {isOwner && (
+            <CustomTooltip content="Enhance Content">
+              <EnhanceContentButton
+                onClick={() => {
+                  setLastClicked("paragraph");
+                  const elementContent = paragraphRef.current?.textContent;
+                  if (elementContent)
+                    enhanceContent(elementContent, {
+                      onSuccess(data) {
+                        const event = {
+                          target: {
+                            textContent: data,
+                          },
+                        };
+                        if (data === hero?.hero_paragraph)
+                          return toast.success("Content is already perfect 📈");
+                        handleParagraphChange(event as any, data);
+                        toast.success("Content enhanced successfully!");
+                      },
+                    });
+                }}
+              />
+            </CustomTooltip>
+          )}
+        </div>
 
         <Link
           href={"#logos-section"}

@@ -26,13 +26,14 @@ import Marquee from "react-fast-marquee";
 import Loading from "@/app/loading";
 import gsap from "gsap";
 
-import { cn } from "@/lib/utils";
+import { cn, getToken } from "@/lib/utils";
 import { authenticator } from "@/lib/helpers";
 
 import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useSearchParams } from "next/navigation";
 
 const urlEndpoint = process.env.NEXT_PUBLIC_URL_ENDPOINT;
 const publicKey = process.env.NEXT_PUBLIC_PUBLIC_KEY;
@@ -40,11 +41,18 @@ const publicKey = process.env.NEXT_PUBLIC_PUBLIC_KEY;
 export default function Logos() {
   const [order, setOrder] = useState<number | null>(null);
   const [isUploading, setIsUploading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const searchParams = useSearchParams();
+  const userId = searchParams.get("userId");
+  const { decodedToken } = getToken();
 
   const ref = useRef(null);
 
-  const { data, isFetching } = useLogosSectionData();
+  const { data, isFetching } = useLogosSectionData(userId!);
+
   const logos = data?.data.user.arikTemplate.logos;
+
+  const isOwner = decodedToken.userId === userId;
 
   const { mutate } = useChangeLogos();
 
@@ -68,7 +76,13 @@ export default function Logos() {
 
   return (
     <section id="logos-section" className="flex items-center justify-center">
-      <Dialog>
+      <Dialog
+        open={open}
+        onOpenChange={(o) => {
+          if (!isOwner) return;
+          setOpen(o);
+        }}
+      >
         <DialogTrigger>
           {/* Mobile Logos */}
           <Marquee

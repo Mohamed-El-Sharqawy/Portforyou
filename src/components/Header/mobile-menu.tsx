@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import cookie from "js-cookie";
 import LogoutButton from "./logout-button";
+import Link from "next/link";
 
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -59,17 +60,39 @@ export default function MobileMenu() {
           </div>
 
           <nav className="flex flex-col gap-y-8 justify-center items-center">
-            {links.map((link) => (
-              <button
-                className="relative text-xl cursor-pointer hover:underline underline-offset-4"
-                key={link.href}
-                role="link"
-                tabIndex={0}
-                onClick={(e) => handleClick(e, link)}
-              >
-                {link.label}
-              </button>
-            ))}
+            {links.map((link) =>
+              link.href == "templates" || link.href == "survey" ? null : (
+                <button
+                  className="relative text-xl cursor-pointer hover:underline underline-offset-4"
+                  key={link.href}
+                  role="link"
+                  tabIndex={0}
+                  onClick={(e) => handleClick(e, link)}
+                >
+                  {link.label}
+                </button>
+              )
+            )}
+            {token && (
+              <>
+                <Link
+                  className="relative text-xl cursor-pointer hover:underline underline-offset-4"
+                  href="/survey"
+                  tabIndex={0}
+                  onClick={() => setIsOpen(false)}
+                >
+                  Survey
+                </Link>
+                <Link
+                  className="relative text-xl cursor-pointer hover:underline underline-offset-4"
+                  href="/templates"
+                  tabIndex={0}
+                  onClick={() => setIsOpen(false)}
+                >
+                  Templates
+                </Link>
+              </>
+            )}
           </nav>
 
           {token ? (

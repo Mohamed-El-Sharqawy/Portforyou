@@ -3,7 +3,21 @@ import { colorOptions, professions } from "../constants/surveyForm";
 import { useSurveyData } from "../hooks/useSurveyData";
 
 import ThanksModal from "./ThanksModal";
+import { Files } from "lucide-react";
 
+/**
+ * Renders the survey form content.
+ *
+ * The form content includes the following sections:
+ * 1. A progress bar that indicates the user's progress.
+ * 2. A section to select favorite colors.
+ * 3. A section to select a profession.
+ * 4. A section to input an email address.
+ * 5. A submit button to submit the survey.
+ * 6. An optional section to upload a resume.
+ *
+ * @returns The survey form content.
+ */
 export default function SurveyFormContent() {
   const {
     showModal,
@@ -15,6 +29,9 @@ export default function SurveyFormContent() {
     surveyData,
     isComplete,
     progress,
+    resume,
+    handleResumeUpload,
+    handleEmailChange,
   } = useSurveyData();
 
   return (
@@ -107,16 +124,30 @@ export default function SurveyFormContent() {
             )}
           </div>
 
+          <div>
+            <h2 className="mb-6 font-serif text-xl text-white sm:text-2xl">
+              What&apos;s your Email?
+            </h2>
+            <input
+              type="email"
+              value={surveyData.email}
+              onChange={handleEmailChange}
+              placeholder="Enter your email"
+              className="w-full p-2.5 text-sm rounded-lg bg-gray-800/50 text-white border border-gray-700 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all"
+              autoFocus
+            />
+          </div>
+
           {/* Submit Button */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="flex justify-center mt-8"
+            className="flex justify-between mt-8 flex-wrap gap-6"
           >
             <button
               onClick={handleSubmit}
               disabled={!isComplete}
-              name="submit-survey-btn"
+              data-cy="submit-survey-btn"
               className={`px-8 py-3 rounded-lg transition-all duration-200 font-medium
                 ${
                   isComplete
@@ -126,6 +157,26 @@ export default function SurveyFormContent() {
             >
               Submit Survey
             </button>
+            <input
+              onChange={handleResumeUpload}
+              type="file"
+              id="upload-resume"
+              className="hidden"
+              accept=".pdf,.docx,.pptx"
+              key={+!!resume}
+            />
+            <label
+              htmlFor="upload-resume"
+              className={`flex items-center gap-x-3 px-8 py-3 rounded-lg transition-all duration-200 font-medium text-white bg-blue-600 hover:bg-blue-700 cursor-pointer`}
+            >
+              {!resume ? (
+                <>
+                  Upload Your Resume <Files />
+                </>
+              ) : (
+                <div className="animate-spin rounded-full h-6 w-6 border-t-4 border-white"></div>
+              )}
+            </label>
           </motion.div>
         </motion.div>
       </div>

@@ -4,11 +4,20 @@ import { useTestimonialSectionData } from "../../services/queries";
 import { fakeTestimonials } from "../../constants/testimonials";
 
 import SingleTestimonial from "./SingleTestimonial";
+import { useSearchParams } from "next/navigation";
+import { getToken } from "@/lib/utils";
 
 const Cards = () => {
-  const { data, refetch } = useTestimonialSectionData();
+  const { decodedToken } = getToken();
+
+  const searchParams = useSearchParams();
+  const userId = searchParams.get("userId");
+
+  const { data, refetch } = useTestimonialSectionData(userId!);
   const testimonials =
     data?.data.user.arikTemplate.testimonials.testimonials || [];
+
+    const isOwner = decodedToken.userId === userId;
 
   return (
     <div className="grid md:grid-cols-2 gap-8">
@@ -19,6 +28,7 @@ const Cards = () => {
           testimonial={testimonial}
           testimonials={testimonials}
           refetch={refetch}
+          isOwner={isOwner}
         />
       ))}
 
@@ -32,6 +42,7 @@ const Cards = () => {
               testimonial={testimonial}
               testimonials={testimonials}
               refetch={refetch}
+              isOwner={isOwner}
             />
           ))}
     </div>

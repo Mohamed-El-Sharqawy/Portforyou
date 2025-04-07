@@ -13,6 +13,7 @@ import { useEffect } from "react";
 
 export default function Home() {
   const isMobile = useIsMobile(1024);
+
   useEffect(() => {
     // Initialize Lenis
     const lenis = new Lenis();

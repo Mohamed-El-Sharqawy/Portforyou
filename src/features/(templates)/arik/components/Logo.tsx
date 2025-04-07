@@ -1,18 +1,23 @@
 "use client";
 
+import { getToken } from "@/lib/utils";
+
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Logo() {
+  const { decodedToken } = getToken();
+
   return (
     <Link
       onClick={(e) => {
-        e.preventDefault();
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        if (window.location.pathname == "/templates/arik") {
+          e.preventDefault();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }
       }}
-      href="/templates/arik"
+      href={`/templates/arik?userId=${decodedToken?.userId}`}
       className="inline-block w-fit cursor-pointer"
-      data-no-blobity
     >
       <Image
         className="w-[52px] h-[20px]"

@@ -13,6 +13,11 @@ import { IKUpload, ImageKitProvider } from "imagekitio-next";
 import { authenticator } from "@/lib/helpers";
 import { useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useOpenAIMutation } from "@/services/mutations";
+import EnhanceContentButton from "../EnhanceContentButton";
+import CustomTooltip from "@/components/CustomTooltip";
+import { toast } from "sonner";
+import EnhancingLoader from "../EnhancingLoader";
 
 import Loading from "@/app/loading";
 import Image from "next/image";
@@ -22,7 +27,15 @@ type Props = {
   testimonial: Testimonial;
   refetch: () => void;
   index: number;
+  isOwner: boolean;
 };
+
+type LastClickedField =
+  | "heading"
+  | "paragraph"
+  | "clientName"
+  | "clientCompany"
+  | null;
 
 const urlEndpoint = process.env.NEXT_PUBLIC_URL_ENDPOINT;
 const publicKey = process.env.NEXT_PUBLIC_PUBLIC_KEY;
@@ -32,13 +45,26 @@ export default function SingleTestimonial({
   testimonial,
   refetch,
   index,
+  isOwner,
 }: Props) {
   const [isUploading, setIsUploading] = useState(false);
   const [order, setOrder] = useState<number | null>(null);
+  const [open, setOpen] = useState(false);
+  const [lastClicked, setLastClicked] = useState<LastClickedField>(null);
 
-  const ref = useRef(null);
+  const headingRef = useRef<HTMLHeadingElement>(null);
+  const paragraphRef = useRef<HTMLParagraphElement>(null);
+  const clientNameRef = useRef<HTMLHeadingElement>(null);
+  const clientCompanyRef = useRef<HTMLHeadingElement>(null);
+  const uploadRef = useRef(null);
 
   const { mutate } = useChangeTestimonials();
+  const { mutate: enhanceContent, isPending } = useOpenAIMutation();
+
+  const isHeadingPending = isPending && lastClicked === "heading";
+  const isParagraphPending = isPending && lastClicked === "paragraph";
+  const isClientNamePending = isPending && lastClicked === "clientName";
+  const isClientCompanyPending = isPending && lastClicked === "clientCompany";
 
   return (
     <article
@@ -47,12 +73,17 @@ export default function SingleTestimonial({
       }
     >
       <h2
-        className="text-xl font-medium mb-4 text-wheat editable"
-        contentEditable
+        ref={headingRef}
+        className={cn(
+          "text-xl font-medium mb-4 text-wheat group relative",
+          isHeadingPending && "opacity-50",
+          isOwner && "editable cursor-pointer"
+        )}
+        contentEditable={isOwner}
         suppressContentEditableWarning
         onBlur={(e) => {
           const newValue = e.target.textContent;
-          const newTestimonials = testimonials;
+          const newTestimonials = [...testimonials];
 
           if (newValue == testimonial?.testimonial_heading) return;
 
@@ -60,17 +91,51 @@ export default function SingleTestimonial({
           mutate(newTestimonials);
         }}
       >
+        {isHeadingPending && <EnhancingLoader />}
         {testimonial?.testimonial_heading ||
           fakeTestimonials[index!].testimonial_heading}
+        {isOwner && (
+          <CustomTooltip>
+            <EnhanceContentButton
+              onClick={() => {
+                setLastClicked("heading");
+                const elementContent = headingRef.current?.textContent?.replace(
+                  "Enhance ContentEnhance Content",
+                  ""
+                );
+                if (elementContent) {
+                  enhanceContent(elementContent, {
+                    onSuccess: (data: string) => {
+                      const newTestimonials = [...testimonials];
+                      if (data === elementContent) {
+                        return toast.success("Content is already perfect 📈");
+                      }
+                      if (data == newTestimonials[index!].testimonial_heading)
+                        return toast.success("Content is already perfect 📈");
+                      newTestimonials[index!].testimonial_heading = data;
+                      mutate(newTestimonials);
+                      toast.success("Content enhanced successfully!");
+                    },
+                  });
+                }
+              }}
+            />
+          </CustomTooltip>
+        )}
       </h2>
 
       <p
-        className="text-wheat/60 mb-8 leading-relaxed max-w-[490px] editable"
-        contentEditable
+        ref={paragraphRef}
+        className={cn(
+          "text-wheat/60 mb-8 leading-relaxed max-w-[490px] group relative",
+          isParagraphPending && "opacity-50",
+          isOwner && "editable cursor-pointer"
+        )}
+        contentEditable={isOwner}
         suppressContentEditableWarning
         onBlur={(e) => {
           const newValue = e.target.textContent;
-          const newTestimonials = testimonials;
+          const newTestimonials = [...testimonials];
 
           if (newValue == testimonial?.testimonial_paragraph) return;
 
@@ -78,16 +143,52 @@ export default function SingleTestimonial({
           mutate(newTestimonials);
         }}
       >
+        {isParagraphPending && <EnhancingLoader />}
         {testimonial?.testimonial_paragraph ||
           fakeTestimonials[index!].testimonial_paragraph}
+        {isOwner && (
+          <CustomTooltip>
+            <EnhanceContentButton
+              onClick={() => {
+                setLastClicked("paragraph");
+                const elementContent =
+                  paragraphRef.current?.textContent?.replace(
+                    "Enhance ContentEnhance Content",
+                    ""
+                  );
+                if (elementContent) {
+                  enhanceContent(elementContent, {
+                    onSuccess: (data: string) => {
+                      const newTestimonials = [...testimonials];
+                      if (data === elementContent) {
+                        return toast.success("Content is already perfect 📈");
+                      }
+                      if (data == newTestimonials[index!].testimonial_paragraph)
+                        return toast.success("Content is already perfect 📈");
+                      newTestimonials[index!].testimonial_paragraph = data;
+                      mutate(newTestimonials);
+                      toast.success("Content enhanced successfully!");
+                    },
+                  });
+                }
+              }}
+            />
+          </CustomTooltip>
+        )}
       </p>
 
       <div className="flex items-center gap-3">
         <div className="rounded-full overflow-hidden size-[60px] cursor-pointer">
           <Dialog
+            open={open}
             onOpenChange={(opened) => {
-              if (!opened) {
-                refetch();
+              if (!isOwner) return;
+              else {
+                setOpen(opened);
+
+                if (!opened) {
+                  refetch();
+                }
               }
             }}
           >
@@ -123,7 +224,7 @@ export default function SingleTestimonial({
                     onClick={() => {
                       if (isUploading) return;
 
-                      (ref.current! as { click: () => void })?.click();
+                      (uploadRef.current! as { click: () => void })?.click();
                       setOrder(index);
                     }}
                   >
@@ -159,20 +260,21 @@ export default function SingleTestimonial({
                         onSuccess={async (e) => {
                           setIsUploading(false);
 
-                          testimonials[
+                          const newTestimonials = [...testimonials];
+                          newTestimonials[
                             order!
                           ].testimonial_client.client_img_url = e.url;
-                          testimonials[
+                          newTestimonials[
                             order!
                           ].testimonial_client.client_img_id = e.fileId;
 
-                          mutate(testimonials);
+                          mutate(newTestimonials);
                           setOrder(() => null);
                         }}
                         onBlur={() => {
                           setIsUploading(false);
                         }}
-                        ref={ref}
+                        ref={uploadRef}
                       />
                     </ImageKitProvider>
 
@@ -206,12 +308,17 @@ export default function SingleTestimonial({
 
         <div>
           <h3
-            className="font-medium text-wheat editable"
-            contentEditable
+            ref={clientNameRef}
+            className={cn(
+              "font-medium text-wheat group relative",
+              isClientNamePending && "opacity-50",
+              isOwner && "editable cursor-pointer"
+            )}
+            contentEditable={isOwner}
             suppressContentEditableWarning
             onBlur={(e) => {
               const newValue = e.target.textContent;
-              const newTestimonials = testimonials;
+              const newTestimonials = [...testimonials];
 
               if (newValue == testimonial?.testimonial_client.client_name)
                 return;
@@ -221,16 +328,53 @@ export default function SingleTestimonial({
               mutate(newTestimonials);
             }}
           >
+            {isClientNamePending && <EnhancingLoader />}
             {testimonial?.testimonial_client.client_name ||
               fakeTestimonials[index!].testimonial_client.client_name}
+            {isOwner && (
+              <CustomTooltip>
+                <EnhanceContentButton
+                  onClick={() => {
+                    setLastClicked("clientName");
+                    const elementContent =
+                      clientNameRef.current?.textContent?.replace(
+                        "Enhance ContentEnhance Content",
+                        ""
+                      );
+                    if (elementContent) {
+                      enhanceContent(elementContent, {
+                        onSuccess: (data: string) => {
+                          const newTestimonials = [...testimonials];
+                          if (data === elementContent) {
+                            return toast.success(
+                              "Content is already perfect 📈"
+                            );
+                          }
+                          newTestimonials[
+                            index!
+                          ].testimonial_client.client_name = data;
+                          mutate(newTestimonials);
+                          toast.success("Content enhanced successfully!");
+                        },
+                      });
+                    }
+                  }}
+                />
+              </CustomTooltip>
+            )}
           </h3>
           <h5
-            className="text-sm text-wheat/60 editable"
-            contentEditable
+            ref={clientCompanyRef}
+            className={cn(
+              "text-sm text-wheat/60 group relative",
+              isClientCompanyPending && "opacity-50",
+              isOwner && "editable cursor-pointer"
+            )}
+            contentEditable={isOwner}
             suppressContentEditableWarning
             onBlur={(e) => {
               const newValue = e.target.textContent;
-              const newTestimonials = testimonials;
+              const newTestimonials = [...testimonials];
 
               if (newValue == testimonial?.testimonial_client.client_company)
                 return;
@@ -240,8 +384,40 @@ export default function SingleTestimonial({
               mutate(newTestimonials);
             }}
           >
+            {isClientCompanyPending && <EnhancingLoader />}
             {testimonial?.testimonial_client.client_company ||
               fakeTestimonials[index!].testimonial_client.client_company}
+            {isOwner && (
+              <CustomTooltip>
+                <EnhanceContentButton
+                  onClick={() => {
+                    setLastClicked("clientCompany");
+                    const elementContent =
+                      clientCompanyRef.current?.textContent?.replace(
+                        "Enhance ContentEnhance Content",
+                        ""
+                      );
+                    if (elementContent) {
+                      enhanceContent(elementContent, {
+                        onSuccess: (data: string) => {
+                          const newTestimonials = [...testimonials];
+                          if (data === elementContent) {
+                            return toast.success(
+                              "Content is already perfect 📈"
+                            );
+                          }
+                          newTestimonials[
+                            index!
+                          ].testimonial_client.client_company = data;
+                          mutate(newTestimonials);
+                          toast.success("Content enhanced successfully!");
+                        },
+                      });
+                    }
+                  }}
+                />
+              </CustomTooltip>
+            )}
           </h5>
         </div>
       </div>

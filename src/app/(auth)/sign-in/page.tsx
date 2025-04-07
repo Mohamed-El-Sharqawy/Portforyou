@@ -26,7 +26,7 @@ const SignIn = () => {
       if (res.errors?.length > 0) {
         // For login errors, we can directly use the message
         setFormError(res.errors[0].message);
-      } else if (res.data?.login) {
+      } else if (res?.data?.login) {
         // Store Token in Cookies
         cookie.set("token", res.data.login.token, {
           expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
@@ -43,7 +43,7 @@ const SignIn = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-[rgb(2,8,23)] px-4">
+    <section className="py-[120px] min-h-screen flex items-center justify-center bg-[rgb(2,8,23)] px-4">
       <div className="w-full max-w-md space-y-8 bg-[rgb(2,8,30)] border border-primary/25 p-6 rounded-lg">
         <div className="text-center">
           <div className="flex justify-center mb-4">
@@ -83,6 +83,7 @@ const SignIn = () => {
                 name="email"
                 type="email"
                 autoComplete="email"
+                aria-label="Enter your email address"
                 required
                 disabled={isLoading}
                 value={formData.email}
@@ -90,7 +91,8 @@ const SignIn = () => {
                   setFormData({ ...formData, email: e.target.value })
                 }
                 className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
-                placeholder="Enter your email"
+                placeholder="Enter your email address"
+                data-cy="email-signin"
               />
             </div>
             <div>
@@ -112,6 +114,7 @@ const SignIn = () => {
                 }
                 className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
                 placeholder="Enter your password"
+                data-cy="password-signin"
               />
             </div>
           </div>
@@ -119,6 +122,7 @@ const SignIn = () => {
           <button
             type="submit"
             disabled={isLoading}
+            data-cy="submit-signin-btn"
             className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
           >
             {isLoading ? (
@@ -152,7 +156,7 @@ const SignIn = () => {
 
           <p className="text-center text-gray-400">
             Don&apos;t have an account?{" "}
-            <Link href="/sign-up" className="text-blue-500 hover:text-blue-400">
+            <Link data-cy="sign-up-btn" href="/sign-up" className="text-blue-500 hover:text-blue-400">
               Sign up
             </Link>
           </p>

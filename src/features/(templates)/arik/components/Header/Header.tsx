@@ -11,10 +11,14 @@ import { links } from "@/features/(templates)/arik/constants/header";
 import { useGSAP } from "@gsap/react";
 
 import "./header.css";
+import { scrollToElement } from "../../utils/scrollToElement";
+import { redirect } from "next/navigation";
+import { getToken } from "@/lib/utils";
 
 gsap.registerPlugin(useGSAP);
 
 export default function Header() {
+  const { decodedToken: {userId} } = getToken();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const mobileMenuContent = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLElement>(null);
@@ -31,38 +35,56 @@ export default function Header() {
     }
   }, [isMobileMenuOpen]);
 
-  useGSAP(() => {
-    if (!headerRef.current) return;
+  useGSAP(
+    () => {
+      if (!headerRef.current) return;
 
-    gsap.to(headerRef.current, {
-      top: 48,
-      duration: 0.75,
-      delay: 0.35,
-      ease: "power1.out",
-    });
-  });
+      gsap.fromTo(
+        headerRef.current,
+        {
+          top: -80,
+        },
+        {
+          top: 48,
+          duration: 0.75,
+          delay: 0.35,
+          ease: "power2.out",
+        }
+      );
+    },
+    {
+      dependencies: [],
+    }
+  );
 
   return (
     <>
       <header className="-top-[80px]" ref={headerRef}>
         <Logo />
 
-        <div className="desktop-menu flex items-center gap-x-4">
+        <div className="desktop-menu flex items-center gap-x-16 ml-auto">
           <nav className="space-x-5">
             {links.map((link) => (
               <Link
                 className="hover:underline underline-offset-4 tracking-widest"
-                href={link.toLowerCase()}
-                key={link}
+                href={link.href}
+                key={link.href}
                 prefetch={false}
+                onClick={(e) => {
+                  if (window.location.pathname == "/templates/arik") {
+                    scrollToElement(e, link.href);
+                  } else {
+                    redirect("/templates/arik");
+                  }
+                }}
               >
-                {link}
+                {link.label}
               </Link>
             ))}
           </nav>
 
           <Link
-            href={"calendly-schedule"}
+            href={`/templates/arik/contact?userId=${userId}`}
             className="text-black bg-wheat py-2.5 px-4 rounded-sm hover:bg-wheat/80 active:bg-wheat uppercase"
           >
             Let&apos;s Talk
@@ -85,16 +107,16 @@ export default function Header() {
             <Link
               onClick={closeMobileMenu}
               className="hover:underline underline-offset-4 tracking-widest hover:filter hover:drop-shadow-[0_0_8px_#DAC5A7] transition"
-              href={link.toLowerCase()}
-              key={link}
+              href={link.href}
+              key={link.href}
             >
-              {link}
+              {link.label}
             </Link>
           ))}
         </nav>
 
         <Link
-          href={"calendly-schedule"}
+          href={`/templates/arik/contact?userId=${userId}`}
           onClick={closeMobileMenu}
           className="absolute top-7 left-8 text-black bg-wheat py-2.5 px-4 rounded-sm hover:bg-wheat/80 active:bg-wheat uppercase block mx-auto"
           data-no-blobity

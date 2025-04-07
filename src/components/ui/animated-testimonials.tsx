@@ -6,12 +6,21 @@ import { motion, AnimatePresence } from "motion/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
+// Predefined rotation values to ensure consistency between server and client
+const ROTATION_VALUES = [-8, -3, 1, 6, 9];
+
 export const AnimatedTestimonials = ({
   autoplay = false,
 }: {
   autoplay?: boolean;
 }) => {
   const [active, setActive] = useState(0);
+  const [isClient, setIsClient] = useState(false);
+
+  // Set isClient to true once component mounts on client
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleNext = () => {
     setActive((prev) => (prev + 1) % testimonials.length);
@@ -32,9 +41,11 @@ export const AnimatedTestimonials = ({
     }
   }, [autoplay]);
 
-  const randomRotateY = () => {
-    return Math.floor(Math.random() * 21) - 10;
+  // Use deterministic rotation based on index instead of random
+  const getRotation = (index: number) => {
+    return ROTATION_VALUES[index % ROTATION_VALUES.length];
   };
+
   return (
     <div className="max-w-sm md:max-w-4xl mx-auto antialiased font-sans px-4 md:px-8 lg:px-12">
       <div className="relative grid grid-cols-1 md:grid-cols-2  gap-20">
@@ -48,23 +59,23 @@ export const AnimatedTestimonials = ({
                     opacity: 0,
                     scale: 0.9,
                     z: -100,
-                    rotate: randomRotateY(),
+                    rotate: getRotation(index),
                   }}
                   animate={{
                     opacity: isActive(index) ? 1 : 0.7,
                     scale: isActive(index) ? 1 : 0.95,
                     z: isActive(index) ? 0 : -100,
-                    rotate: isActive(index) ? 0 : randomRotateY(),
+                    rotate: isActive(index) ? 0 : getRotation(index),
                     zIndex: isActive(index)
                       ? 999
                       : testimonials.length + 2 - index,
-                    y: isActive(index) ? [0, -80, 0] : 0,
+                    y: isActive(index) && isClient ? [0, -80, 0] : 0,
                   }}
                   exit={{
                     opacity: 0,
                     scale: 0.9,
                     z: 100,
-                    rotate: randomRotateY(),
+                    rotate: getRotation(index),
                   }}
                   transition={{
                     duration: 0.4,
@@ -128,7 +139,7 @@ export const AnimatedTestimonials = ({
                   transition={{
                     duration: 0.2,
                     ease: "easeInOut",
-                    delay: 0.02 * index,
+                    delay: isClient ? 0.02 * index : 0,
                   }}
                   className="inline-block"
                 >

@@ -4,15 +4,23 @@ import DownArrow from "@/features/(templates)/arik/assets/icons/down-arrow";
 import Cards from "./Cards";
 import { useChangeProcess } from "../../services/mutations";
 import { useWorkStepsSectionData } from "../../services/queries";
+import { useSearchParams } from "next/navigation";
+import { getToken } from "@/lib/utils";
 
 export default function WorkSteps() {
   const { mutate } = useChangeProcess();
+  const { decodedToken } = getToken();
 
-  const { data } = useWorkStepsSectionData();
+  const searchParams = useSearchParams();
+  const userId = searchParams.get("userId");
+
+  const { data } = useWorkStepsSectionData(userId!);
   const process = data?.data.user.arikTemplate.process;
 
+  const isOwner = decodedToken.userId === userId;
+
   return (
-    <section className="container relative">
+    <section className="container relative" id="work-steps-section">
       <div className="space-y-6 md:mb-28 mb-16">
         <h2 className="text-wheat text-center">THE PROCESS</h2>
 
@@ -25,9 +33,9 @@ export default function WorkSteps() {
               mutate(newProcess!);
             }
           }}
-          contentEditable
+          contentEditable={isOwner}
           suppressContentEditableWarning
-          className="text-wheat text-center text-5xl leading-tight md:text-8xl md:leading-tight font-medium text-balance max-w-[700px] mx-auto editable"
+          className={`text-wheat text-center text-5xl leading-tight md:text-8xl md:leading-tight font-medium text-balance max-w-[700px] mx-auto ${isOwner && "editable cursor-pointer"}`}
         >
           {process?.process_heading || `Your Website in 5 steps`}
         </h1>
@@ -41,9 +49,9 @@ export default function WorkSteps() {
               mutate(newProcess!);
             }
           }}
-          contentEditable
+          contentEditable={isOwner}
           suppressContentEditableWarning
-          className="text-center text-wheat/60 md:w-full max-w-[95%] mx-auto editable"
+          className={`text-center text-wheat/60 md:w-full max-w-[95%] mx-auto ${isOwner && "editable cursor-pointer"}`}
         >
           {process?.process_paragraph ||
             "Our process ensures that we create a website tailored to your business needs."}

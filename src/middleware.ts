@@ -18,7 +18,7 @@ export async function middleware(request: NextRequest) {
     (request.nextUrl.pathname === "/sign-in" ||
       request.nextUrl.pathname === "/sign-up")
   ) {
-    return NextResponse.redirect(new URL("/templates", request.url));
+    return NextResponse.redirect(new URL("/survey", request.url));
   }
 }
 

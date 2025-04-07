@@ -20,6 +20,7 @@ import { fakeWorkExperience } from "../../constants/work-experience";
 import { authenticator } from "@/lib/helpers";
 import Loading from "@/app/loading";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 const urlEndpoint = process.env.NEXT_PUBLIC_URL_ENDPOINT;
 const publicKey = process.env.NEXT_PUBLIC_PUBLIC_KEY;
@@ -29,6 +30,7 @@ type ProjectProps = {
   workExperience: Work[];
   index: number;
   refetch: () => void;
+  isOwner: boolean;
 };
 
 export default function SingleProject({
@@ -36,9 +38,11 @@ export default function SingleProject({
   workExperience,
   index,
   refetch,
+  isOwner,
 }: ProjectProps) {
   const [isUploading, setIsUploading] = useState(false);
   const [order, setOrder] = useState<number | null>(null);
+  const [open, setOpen] = useState(false);
   const { mutate } = useChangeWorkExperience();
 
   const ref = useRef(null);
@@ -49,9 +53,15 @@ export default function SingleProject({
 
   return (
     <Dialog
+      open={open}
       onOpenChange={(opened) => {
-        if (!opened) {
-          refetch();
+        if(!isOwner) return
+        else {
+          setOpen(opened);
+          
+          if (!opened) {
+            refetch();
+          }
         }
       }}
     >
@@ -71,8 +81,8 @@ export default function SingleProject({
           >
             <h4
               ref={titleRef}
-              className="text-wheat text-xl font-light editable"
-              contentEditable
+              className={`text-wheat text-xl font-light ${isOwner && "editable cursor-pointer"}`}
+              contentEditable={isOwner}
               suppressContentEditableWarning
               onBlur={(e) => {
                 workExperience[index] = {
@@ -88,8 +98,8 @@ export default function SingleProject({
 
             <p
               ref={categoryRef}
-              className="text-wheat text-base font-normal text-[13px] uppercase editable"
-              contentEditable
+              className={`text-wheat text-base font-normal text-[13px] uppercase ${isOwner && "editable cursor-pointer"}`}
+              contentEditable={isOwner}
               suppressContentEditableWarning
               onBlur={(e) => {
                 workExperience[index] = {
@@ -104,12 +114,19 @@ export default function SingleProject({
             </p>
           </div>
 
-          <div className="absolute inset-0 flex items-center justify-center z-10">
+          <Link href={project.project_link.includes("https://") ? project.project_link : project.project_link ? `https://${project.project_link}` : "#"} target="_blank" onClick={(e) => {
+            if(!isOwner) return;
+
+            if(isOwner) {
+              e.preventDefault();
+              setOpen(true);
+            };
+          }} className={`absolute inset-0 flex items-center justify-center z-10 ${!isOwner && "cursor-pointer"}`}>
             <TopRightArrow
               asDiv
               className="project-link-icon backdrop-blur-md opacity-0 transition-all duration-300"
             />
-          </div>
+          </Link>
         </Noise>
       </DialogTrigger>
       <DialogContent className="sm:max-w-4xl bg-black text-wheat border-zinc-700 pt-8">
@@ -198,7 +215,7 @@ export default function SingleProject({
                   <Label>Project Link</Label>
                   <p
                     ref={projectLinkRef}
-                    className="editable border-2 border-zinc-700 !p-2 mt-2"
+                    className={`${isOwner && "editable cursor-pointer"} border-2 border-zinc-700 !p-2 mt-2`}
                     contentEditable
                     suppressContentEditableWarning
                     onBlur={(e) => {

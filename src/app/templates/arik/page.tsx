@@ -1,4 +1,5 @@
 import FetchingLoader from "@/components/FetchingLoader";
+import CopyButton from "@/features/(templates)/arik/components/CopyButton";
 import CTA from "@/features/(templates)/arik/components/CTA/CTA";
 import Header from "@/features/(templates)/arik/components/Header/Header";
 import Hero from "@/features/(templates)/arik/components/Hero/Hero";
@@ -7,8 +8,10 @@ import Services from "@/features/(templates)/arik/components/Services/Services";
 import Testimonials from "@/features/(templates)/arik/components/Testimonials/Testimonials";
 import WorkExperience from "@/features/(templates)/arik/components/WorkExperience/WorkExperience";
 import WorkSteps from "@/features/(templates)/arik/components/WorkSteps/WorkSteps";
+import { ArrowLeftCircle } from "lucide-react";
 
 import type { Viewport } from "next";
+import Link from "next/link";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -52,6 +55,13 @@ export default function Home() {
       <WorkSteps />
       <Testimonials />
       <CTA />
+
+      <CopyButton />
+      
+      <Link href={"/templates"} className="fixed top-14 left-10 max-[1140px]:top-32 flex items-center gap-x-2">
+        <ArrowLeftCircle size={28} className="cursor-pointer" />
+        <p className="text-sm">Back to Templates</p>
+      </Link>
     </div>
   );
 }

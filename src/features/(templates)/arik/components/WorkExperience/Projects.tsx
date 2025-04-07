@@ -6,12 +6,20 @@ import SingleProject from "./SingleProject";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/all";
 import { useWorkExperienceSectionData } from "../../services/queries";
+import { useSearchParams } from "next/navigation";
+import { getToken } from "@/lib/utils";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Projects() {
-  const { data, refetch } = useWorkExperienceSectionData();
+  const searchParams = useSearchParams();
+  const userId = searchParams.get("userId");
+  const { decodedToken} = getToken();
+
+  const { data, refetch } = useWorkExperienceSectionData(userId!);
   const workExperience = data?.data.user.arikTemplate.work || [];
+  
+  const isOwner = decodedToken.userId === userId;
 
   useGSAP(
     () => {
@@ -43,6 +51,7 @@ export default function Projects() {
             project={project}
             workExperience={workExperience}
             refetch={refetch}
+            isOwner={isOwner}
           />
         )
       )}
@@ -58,6 +67,7 @@ export default function Projects() {
               project={project}
               workExperience={workExperience}
               refetch={refetch}
+              isOwner={isOwner}
             />
           ))}
     </div>

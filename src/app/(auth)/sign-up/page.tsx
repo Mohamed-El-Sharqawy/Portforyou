@@ -44,7 +44,7 @@ const SignUp = () => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-[rgb(2,8,23)] px-4">
+    <section className="min-h-screen py-[120px] flex items-center justify-center bg-[rgb(2,8,23)] px-4">
       <div className="w-full max-w-md space-y-8 bg-[rgb(2,8,30)] border border-primary/25 p-6 rounded-lg">
         <div className="text-center">
           <div className="flex justify-center mb-4">
@@ -65,7 +65,7 @@ const SignUp = () => {
         </div>
 
         {formError && (
-          <div className="bg-red-500/10 border border-red-500/50 rounded-lg p-4">
+          <div dat-cy="error-signup" className="bg-red-500/10 border border-red-500/50 rounded-lg p-4">
             <p className="text-red-500 text-sm text-center">{formError}</p>
           </div>
         )}
@@ -92,6 +92,7 @@ const SignUp = () => {
                 autoComplete="username"
                 className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
                 placeholder="Enter your username"
+                data-cy="username-signup"
               />
             </div>
             <div>
@@ -114,6 +115,7 @@ const SignUp = () => {
                 }
                 className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
                 placeholder="Enter your email"
+                data-cy="email-signup"
               />
             </div>
             <div>
@@ -135,6 +137,7 @@ const SignUp = () => {
                 }
                 className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
                 placeholder="Enter your password"
+                data-cy="password-signup"
               />
             </div>
           </div>
@@ -143,6 +146,7 @@ const SignUp = () => {
             type="submit"
             disabled={isLoading}
             className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+            data-cy="submit-signup-btn"
           >
             {isLoading ? (
               <>

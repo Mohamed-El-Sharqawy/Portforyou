@@ -4,21 +4,14 @@ import Fallback from "@/components/Fallback";
 import SurveyFormContent from "@/features/survey/components/SurveyFormContent";
 
 import { useUserPreferences } from "@/features/survey/services/queries";
-import { redirect } from "next/navigation";
 import { motion } from "motion/react";
 
 export default function Survey() {
-  const { data, isPending } = useUserPreferences();
-
-  const hasPreferences =
-    data?.data?.user?.preferences?.colors.length > 0 &&
-    data?.data?.user?.preferences?.profession;
+  const { isPending } = useUserPreferences();
 
   if (isPending) {
     return <Fallback />;
   }
-
-  if (!isPending && hasPreferences) return redirect("/templates");
 
   return (
     <section className="flex justify-center items-center pt-12 min-h-screen bg-gradient-to-br">

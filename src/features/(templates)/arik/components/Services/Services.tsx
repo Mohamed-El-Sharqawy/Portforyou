@@ -11,10 +11,18 @@ gsap.registerPlugin(useGSAP, ScrollTrigger);
 import "./services.css";
 import { useServicesSectionData } from "../../services/queries";
 import { fakeServices } from "../../constants/services";
+import { useSearchParams } from "next/navigation";
+import { getToken } from "@/lib/utils";
 
 export default function Services() {
-  const { data, isFetching } = useServicesSectionData();
+  const searchParams = useSearchParams();
+  const userId = searchParams.get("userId");
+  const { decodedToken} = getToken();
+
+  const { data, isFetching, refetch } = useServicesSectionData(userId!);
   const services = data?.data.user.arikTemplate.services || [];
+
+  const isOwner = userId === decodedToken.userId;
 
   useGSAP(
     () => {
@@ -37,7 +45,7 @@ export default function Services() {
   );
 
   return (
-    <section className="services-section container px-0">
+    <section className="services-section container px-0" id="services-section">
       {(services.length > 0 ? services : fakeServices)?.map((service, idx) => (
         <SingleService
           key={`R ${idx}`}
@@ -45,6 +53,8 @@ export default function Services() {
           description={service.description}
           services={services}
           index={idx}
+          refetch={refetch}
+          isOwner={isOwner}
         />
       ))}
 
@@ -59,6 +69,8 @@ export default function Services() {
               description={fakeServices[idx].description}
               services={services}
               index={idx + services.length}
+              refetch={refetch}
+              isOwner={isOwner}
             />
           ))}
     </section>

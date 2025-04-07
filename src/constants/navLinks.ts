@@ -15,4 +15,12 @@ export const links = [
     label: "Newsletter",
     href: "newsletter",
   },
+  {
+    label: "Survey",
+    href: "survey",
+  },
+  {
+    label: "Templates",
+    href: "templates",
+  },
 ];

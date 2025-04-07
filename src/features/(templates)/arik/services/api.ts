@@ -10,6 +10,7 @@ import { Testimonial } from "../types/testimonials";
 type HeroData = Promise<{
   data: {
     user: {
+      id: string;
       arikTemplate: {
         hero: {
           hero_heading: string;
@@ -24,6 +25,7 @@ type HeroData = Promise<{
 type LogosData = Promise<{
   data: {
     user: {
+      id: string;
       arikTemplate: {
         logos: Logo[];
       };
@@ -34,6 +36,7 @@ type LogosData = Promise<{
 type ServicesData = Promise<{
   data: {
     user: {
+      id: string;
       arikTemplate: {
         services: Service[];
       };
@@ -44,6 +47,7 @@ type ServicesData = Promise<{
 export type WorkExperienceData = Promise<{
   data: {
     user: {
+      id: string;
       arikTemplate: {
         work: Work[];
       };
@@ -54,6 +58,7 @@ export type WorkExperienceData = Promise<{
 type WorkStepsData = Promise<{
   data: {
     user: {
+      id: string;
       arikTemplate: {
         process: WorkSteps;
       };
@@ -64,6 +69,7 @@ type WorkStepsData = Promise<{
 type TestimonialData = Promise<{
   data: {
     user: {
+      id: string;
       arikTemplate: {
         testimonials: {
           testimonials: Testimonial[];
@@ -75,14 +81,25 @@ type TestimonialData = Promise<{
   };
 }>;
 
-// Queries
-export const getHeroSectionData = async (): HeroData => {
-  const {
-    decodedToken: { userId },
-  } = getToken();
+type FooterData = Promise<{
+  data: {
+    user: {
+      id: string;
+      arikTemplate: {
+        footer: {
+          footer_heading: string;
+          footer_paragraph: string;
+        };
+      };
+    };
+  };
+}>;
 
+// Queries
+export const getHeroSectionData = async (userId: string): HeroData => {
   const query = `query GetHeroSection {
   user(id: "${userId}") {
+  id
     arikTemplate {
       hero {
         hero_heading
@@ -96,13 +113,10 @@ export const getHeroSectionData = async (): HeroData => {
   return await fetcher(query);
 };
 
-export const getLogosSectionData = async (): LogosData => {
-  const {
-    decodedToken: { userId },
-  } = getToken();
-
+export const getLogosSectionData = async (userId: string): LogosData => {
   const query = `query GetLogosSection {
   user(id: "${userId}") {
+    id
     arikTemplate {
       logos {
         img_url
@@ -115,13 +129,10 @@ export const getLogosSectionData = async (): LogosData => {
   return await fetcher(query);
 };
 
-export const getServicesSectionData = async (): ServicesData => {
-  const {
-    decodedToken: { userId },
-  } = getToken();
-
+export const getServicesSectionData = async (userId: string): ServicesData => {
   const query = `query GetServicesData {
   user(id: "${userId}") {
+    id
     arikTemplate {
       services {
         title
@@ -134,13 +145,10 @@ export const getServicesSectionData = async (): ServicesData => {
   return await fetcher(query);
 };
 
-export const getWorkExperienceSectionData = async (): WorkExperienceData => {
-  const {
-    decodedToken: { userId },
-  } = getToken();
-
+export const getWorkExperienceSectionData = async (userId: string): WorkExperienceData => {
   const query = `query GetWorkExperienceSection {
   user(id: "${userId}") {
+    id
     arikTemplate {
       work {
         id
@@ -157,14 +165,11 @@ export const getWorkExperienceSectionData = async (): WorkExperienceData => {
   return await fetcher(query);
 };
 
-export const getWorkStepsSectionData = async (): WorkStepsData => {
-  const {
-    decodedToken: { userId },
-  } = getToken();
-
+export const getWorkStepsSectionData = async (userId: string): WorkStepsData => {
   const query = `
   query GetWorkStepsSection {
   user(id: "${userId}") {
+    id
     arikTemplate {
       process {
         process_heading
@@ -183,13 +188,10 @@ export const getWorkStepsSectionData = async (): WorkStepsData => {
   return await fetcher(query);
 };
 
-export const getTestimonialSectionData = async (): TestimonialData => {
-  const {
-    decodedToken: { userId },
-  } = getToken();
-
+export const getTestimonialSectionData = async (userId: string): TestimonialData => {
   const query = `query GetTestimonialsData {
   user(id: "${userId}") {
+    id
     arikTemplate {
       testimonials {
         testimonials_heading
@@ -210,6 +212,22 @@ export const getTestimonialSectionData = async (): TestimonialData => {
 }`;
 
   return await fetcher(query);
+};
+
+export const getFooterSectionData = async (userId: string): FooterData => {
+  const query = `query GetCTASectionData {
+  user(id: "${userId}") {
+    id
+    arikTemplate {
+      footer {
+        footer_heading
+        footer_paragraph
+      }
+    }
+  }
+}`;
+
+  return fetcher(query);
 };
 
 // Mutations
@@ -536,4 +554,52 @@ export const changeTestimonialsSection = async (
 }`;
 
   return await fetcher(mutation);
+};
+
+export const changeFooterHeading = async (
+  footer_heading: string
+): TestimonialData => {
+  const {
+    decodedToken: { userId },
+  } = getToken();
+
+  const mutation = `mutation ChangeFooterHeading {
+  updateUserTemplate(id: "${userId}", template: {
+    footer:  {
+      footer_heading: "${footer_heading}"
+    }
+  }) {
+    arikTemplate {
+      footer {
+        __typename
+      }
+    }
+  }
+}`;
+
+  return fetcher(mutation);
+};
+
+export const changeFooterParagraph = async (
+  footer_paragraph: string
+): TestimonialData => {
+  const {
+    decodedToken: { userId },
+  } = getToken();
+
+  const mutation = `mutation ChangeFooterParagraph {
+  updateUserTemplate(id: "${userId}", template: {
+    footer:  {
+      footer_paragraph: "${footer_paragraph}"
+    }
+  }) {
+    arikTemplate {
+      footer {
+        __typename
+      }
+    }
+  }
+}`;
+
+  return fetcher(mutation);
 };

@@ -1,4 +1,4 @@
-"use client";
+import Link from "next/link";
 
 export default function NotFound() {
   return (
@@ -10,12 +10,12 @@ export default function NotFound() {
         have been moved or doesn&apos;t exist.
       </p>
 
-      <button
-        onClick={() => window.history.back()}
+      <Link
+        href="/"
         className="text-white mt-4 inline-flex h-10 items-center justify-center rounded-md bg-primary px-8 text-sm font-medium text-primary-foreground ring-offset-background transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
       >
         Return Home
-      </button>
+      </Link>
     </section>
   );
 }

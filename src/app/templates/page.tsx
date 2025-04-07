@@ -2,10 +2,10 @@
 
 import ShowButtons from "@/features/(templates)/components/ShowButtons";
 import TemplatesHeadings from "@/features/(templates)/components/TemplatesHeadings";
-import TemplatesGrid from "@/features/(templates)/components/TemplatesGrid";
 
 import { useState } from "react";
 import { templates } from "@/features/(templates)/constants/templates";
+import TemplatesGrid from "@/features/(templates)/components/TemplatesGrid";
 
 export default function Templates() {
   const [displayedTemplates, setDisplayedTemplates] = useState(

@@ -13,6 +13,7 @@ export const getUserPreferences = async () => {
         preferences {
           colors
           profession
+          email
         }
       }
     }
@@ -26,16 +27,22 @@ export const updatePreferences = async (user: {
   userId: string;
   colors: string[];
   profession: string;
+  email: string;
 }) => {
   const query = `
     mutation UserPreferences {
       updateUserPreferences(id: "${user.userId}", preferences: {
         colors: [${user.colors.map((color) => `"${color}"`)}]
         profession: "${user.profession}"
+        email: "${user.email}"
       }) {
         id
         email
         username
+        preferences {
+          colors
+          profession
+        }
       }
     }
   `;

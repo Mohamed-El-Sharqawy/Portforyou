@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
+import ErrorBoundary from "@/components/ErrorBoundary";
+import { Toaster } from "sonner";
 
 import "@/styles/globals.css";
 import QueryProvider from "@/providers/QueryProvider";
@@ -33,11 +35,14 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`overflow-x-hidden font-serif antialiased dark`}>
-        <Header />
-        <main className="min-h-screen">
-          <QueryProvider>{children}</QueryProvider>
-        </main>
-        <Footer />
+        <ErrorBoundary>
+          <Header />
+          <main className="min-h-screen">
+            <QueryProvider>{children}</QueryProvider>
+          </main>
+          <Footer />
+          <Toaster position="top-center" theme="dark" />
+        </ErrorBoundary>
       </body>
     </html>
   );

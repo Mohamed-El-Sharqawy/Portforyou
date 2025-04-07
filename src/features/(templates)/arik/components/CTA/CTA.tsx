@@ -1,5 +1,6 @@
 import Button from "@/features/(templates)/arik/components/Button";
 import Marquee from "react-fast-marquee";
+import Content from "./Content";
 
 export default function CTA() {
   return (
@@ -18,16 +19,13 @@ export default function CTA() {
       <div className="flex flex-col items-center justify-center text-wheat text-center">
         <span className="uppercase text-sm sm:text-base">Project in mind?</span>
 
-        <h1 className="uppercase xl:text-[128px] max-w-[1200px] my-2 leading-tight text-balance md:text-[80px] sm:text-[60px] text-[32px]">
-          Let’s make your <span className="font-serif">Website Shine</span>
-        </h1>
+        <Content />
 
-        <p className="text-base sm:text-xl text-wheat/60 w-full px-3 sm:max-w-[500px] sm:px-0">
-          Premium web design, webflow, and SEO services to help your business
-          stand out.
-        </p>
-
-        <Button href="contact" className="mt-5 sm:mt-10" text="Get in touch" />
+        <Button
+          href={"/templates/arik/contact"}
+          className="mt-5 sm:mt-10"
+          text="Get in touch"
+        />
       </div>
     </section>
   );

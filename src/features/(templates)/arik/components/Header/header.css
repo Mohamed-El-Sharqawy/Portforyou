@@ -1,5 +1,5 @@
 .arik-template header {
-  @apply text-sm fixed h-[65px] w-[712.5px] top-[48px] bg-wheat/5 backdrop-blur-md py-[22.5px] pl-[24px] px-3 flex items-center gap-x-8 uppercase text-wheat rounded-sm border border-wheat/15 left-1/2 !-translate-x-1/2 z-50;
+  @apply text-sm fixed h-[65px] w-[712.5px] bg-wheat/5 backdrop-blur-md py-[22.5px] pl-[24px] px-3 flex items-center gap-x-8 uppercase text-wheat rounded-sm border border-wheat/15 left-1/2 !-translate-x-1/2 z-50;
 }
 
 .arik-template .mobile-menu-content {

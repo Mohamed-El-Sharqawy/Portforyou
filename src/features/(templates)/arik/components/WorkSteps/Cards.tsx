@@ -4,11 +4,20 @@ import { fakeSteps } from "@/features/(templates)/arik/constants/work-steps";
 import { useWorkStepsSectionData } from "../../services/queries";
 
 import Step from "./Step";
+import { useSearchParams } from "next/navigation";
+import { getToken } from "@/lib/utils";
 
 export default function Cards() {
-  const { data } = useWorkStepsSectionData();
+  const { decodedToken } = getToken();
+
+  const searchParams = useSearchParams();
+  const userId = searchParams.get("userId");
+
+  const { data } = useWorkStepsSectionData(userId!);
   const process = data?.data.user.arikTemplate.process;
   const steps = process?.steps || [];
+
+  const isOwner = decodedToken.userId === userId;
 
   return (
     <div className="min-h-screen text-white p-6 md:p-12">
@@ -23,6 +32,7 @@ export default function Cards() {
               step={step}
               position={index + 1}
               process={process}
+              isOwner={isOwner}
             />
           ))}
 
@@ -36,6 +46,7 @@ export default function Cards() {
                   step={step}
                   position={steps.length + index + 1}
                   process={process}
+                  isOwner={isOwner}
                 />
               ))}
         </div>

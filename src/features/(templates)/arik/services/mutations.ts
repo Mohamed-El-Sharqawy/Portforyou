@@ -10,6 +10,8 @@ import {
   changeTestimonialsSection,
   changeTestimonialsSectionHeading,
   changeTestimonialsSectionParagraph,
+  changeFooterHeading,
+  changeFooterParagraph,
 } from "./api";
 import { Logo } from "../types/logos";
 import { Service } from "../types/services";
@@ -123,6 +125,30 @@ export const useChangeTestimonials = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["testimonials-section-data"],
+      });
+    },
+  });
+};
+
+// Footer
+export const useChangeFooterHeading = () => {
+  return useMutation({
+    mutationFn: (footer_heading: string) => changeFooterHeading(footer_heading),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["footer-section-data"],
+      });
+    },
+  });
+};
+
+export const useChangeFooterParagraph = () => {
+  return useMutation({
+    mutationFn: (footer_paragraph: string) =>
+      changeFooterParagraph(footer_paragraph),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["footer-section-data"],
       });
     },
   });

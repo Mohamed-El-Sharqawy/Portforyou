@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import {
+  getFooterSectionData,
   getHeroSectionData,
   getLogosSectionData,
   getServicesSectionData,
@@ -8,50 +9,75 @@ import {
   getWorkStepsSectionData,
 } from "./api";
 
-export const useHeroSectionData = () => {
+// Hero
+export const useHeroSectionData = (userId: string) => {
   return useQuery({
     queryKey: ["hero-section-data"],
-    queryFn: () => getHeroSectionData(),
+    queryFn: () => userId ? getHeroSectionData(userId): null,
     refetchOnWindowFocus: false,
+    enabled: !!userId,
   });
 };
 
-export const useLogosSectionData = () => {
+// Logos
+export const useLogosSectionData = (userId: string) => {
   return useQuery({
     queryKey: ["logos-section-data"],
-    queryFn: () => getLogosSectionData(),
+    queryFn: () => {
+      console.log(userId)
+      return userId ? getLogosSectionData(userId) : null
+    },
     refetchOnWindowFocus: false,
+    enabled: !!userId,
   });
 };
 
-export const useServicesSectionData = () => {
+// Services
+export const useServicesSectionData = (userId: string) => {
   return useQuery({
     queryKey: ["services-section-data"],
-    queryFn: () => getServicesSectionData(),
+    queryFn: () => userId ? getServicesSectionData(userId) : null,
     refetchOnWindowFocus: false,
+    enabled: !!userId,
   });
 };
 
-export const useWorkExperienceSectionData = () => {
+// WorkExperience
+export const useWorkExperienceSectionData = (userId: string) => {
   return useQuery({
     queryKey: ["work-experience-section-data"],
-    queryFn: () => getWorkExperienceSectionData(),
+    queryFn: () => userId ? getWorkExperienceSectionData(userId) : null,
     refetchOnWindowFocus: false,
+    enabled: !!userId,
   });
 };
 
-export const useWorkStepsSectionData = () => {
+// WorkSteps
+export const useWorkStepsSectionData = (userId: string) => {
   return useQuery({
     queryKey: ["work-steps-section-data"],
-    queryFn: () => getWorkStepsSectionData(),
+    queryFn: () => userId ? getWorkStepsSectionData(userId) : null,
     refetchOnWindowFocus: false,
+    enabled: !!userId,
   });
 };
 
-export const useTestimonialSectionData = () => {
+// Testimonials
+export const useTestimonialSectionData = (userId: string) => {
   return useQuery({
     queryKey: ["testimonials-section-data"],
-    queryFn: () => getTestimonialSectionData(),
+    queryFn: () => userId ? getTestimonialSectionData(userId) : null,
     refetchOnWindowFocus: false,
+    enabled: !!userId,
+  });
+};
+
+// Footer
+export const useFooterSectionData = (userId: string) => {
+  return useQuery({
+    queryKey: ["footer-section-data"],
+    queryFn: () => userId ? getFooterSectionData(userId) : null,
+    refetchOnWindowFocus: false,
+    enabled: !!userId,
   });
 };

@@ -1,18 +1,21 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { ReactNode } from "react";
 
 type ButtonProps = React.ComponentPropsWithoutRef<"a">;
 
 type LoginButtonProps = ButtonProps & {
-  text: string;
+  text?: string;
   className?: string;
   href?: string;
+  children?: ReactNode;
 };
 
 export default function Button({
   text,
   className,
   href,
+  children,
   ...props
 }: LoginButtonProps) {
   return (
@@ -29,6 +32,7 @@ export default function Button({
       <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#3b82f6_0%,#1518a3_10%,#3b82f6_100%)]" />
       <span className="inline-flex justify-center items-center px-3 py-1 w-full h-full font-medium text-white rounded-full backdrop-blur-3xl cursor-pointer bg-slate-950">
         {text}
+        {children}
       </span>
     </Link>
   );
