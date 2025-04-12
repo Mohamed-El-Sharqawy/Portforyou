@@ -49,3 +49,7 @@ export const updatePreferences = async (user: {
 
   return await fetcher(query);
 };
+
+export const updateUserArikTemplate = async (query: string) => {
+  return await fetcher(query);
+};

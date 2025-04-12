@@ -10,7 +10,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 // Get Token
-export function getToken() {
+export function getToken() {  
   const token = cookie.get("token");
   const decodedToken = jwtDecode(token!) as { userId: string };
 

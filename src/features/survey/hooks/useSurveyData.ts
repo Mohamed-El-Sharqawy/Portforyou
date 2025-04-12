@@ -12,37 +12,40 @@ export interface SurveyData {
   colors: string[];
   profession: string;
   email: string;
+  resume?: string;
 }
 
 interface UseSurveyDataReturn {
   surveyData: SurveyData;
+  setSurveyData: (surveyData: SurveyData) => void;
   isComplete: boolean;
   progress: number;
   showModal: boolean;
+  setShowModal: (showModal: boolean) => void;
   otherProfession: string;
   handleProfessionSelect: (profession: string) => void;
   handleOtherProfessionChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSubmit: () => void;
-  handleColorSelect: (colorId: string) => void;
-  handleResumeUpload: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  resume: File | null;
+  handleColorSelect: (color: string) => void;
+  handleSubmit: () => Promise<void>;
   handleEmailChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  isUploadingResume: boolean;
+  setIsUploadingResume: (isUploadingResume: boolean) => void;
 }
 
 export function useSurveyData(): UseSurveyDataReturn {
   const { data } = useUserPreferences();
 
   const [surveyData, setSurveyData] = useState<SurveyData>({
-    colors: data.data.user.preferences.colors,
-    profession: data.data.user.preferences.profession,
-    email: data.data.user.preferences.email,
+    colors: data?.data?.user?.preferences?.colors || [],
+    profession: data?.data?.user?.preferences?.profession || "",
+    email: data?.data?.user?.preferences?.email || "",
+    resume: "",
   });
   const [showModal, setShowModal] = useState(false);
   const [otherProfession, setOtherProfession] = useState("");
-
+  const [isUploadingResume, setIsUploadingResume] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
   const [progress, setProgress] = useState(0);
-  const [resume, setResume] = useState<File | null>(null);
 
   const handleOtherProfessionChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,126 +54,10 @@ export function useSurveyData(): UseSurveyDataReturn {
     []
   );
 
+  // Email validation
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSurveyData((prev) => ({ ...prev, email: e.target.value }));
-  };
-
-  const handleResumeUpload = async (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
-    setResume(file);
-
-    // Generate a unique file ID for this upload session
-    const fileId = `file-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
-
-    try {
-      // Read the file as text
-      const fileContent = await readFileAsText(file);
-
-      // Split the content into chunks (max ~12KB per chunk to stay well under token limits)
-      const MAX_CHUNK_SIZE = 1000;
-      const chunks = splitTextIntoChunks(fileContent, MAX_CHUNK_SIZE);
-
-      // let allResponses = "";
-
-      // Upload each chunk sequentially
-      for (let i = 0; i < chunks.length; i++) {
-        const chunk = chunks[i];
-        const isLastChunk = i === chunks.length - 1;
-
-        // Create a blob from the chunk text
-        const chunkBlob = new Blob([chunk], { type: "text/plain" });
-
-        // Create a File object from the blob
-        const chunkFile = new File([chunkBlob], `${file.name}.part${i}`, {
-          type: file.type,
-          lastModified: file.lastModified,
-        });
-
-        const formData = new FormData();
-        formData.set("resume", chunkFile);
-        formData.set("fileId", fileId);
-        formData.set("chunkIndex", i.toString());
-        formData.set("totalChunks", chunks.length.toString());
-        formData.set("isLastChunk", isLastChunk ? "true" : "false");
-
-        const response = await fetch("/api/upload", {
-          method: "POST",
-          body: formData,
-        });
-
-        // For the last chunk, we expect the summary
-        if (isLastChunk) {
-          const text = await response.text();
-          try {
-            const data = JSON.parse(text);
-            console.log("Resume Summary:", data.summary);
-            // allResponses = data.summary;
-          } catch (error) {
-            console.error("Invalid JSON Response:", text, error);
-          }
-        } else {
-          // For intermediate chunks, just log the progress
-          console.log(`Chunk ${i + 1}/${chunks.length} uploaded`);
-        }
-      }
-
-      setResume(null);
-    } catch (error) {
-      console.error("Upload failed", error);
-      setResume(null);
-    }
-  };
-
-  // Helper function to read a file as text
-  const readFileAsText = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        if (event.target?.result) {
-          resolve(event.target.result as string);
-        } else {
-          reject(new Error("Failed to read file"));
-        }
-      };
-      reader.onerror = () => reject(reader.error);
-      reader.readAsText(file);
-    });
-  };
-
-  // Helper function to split text into chunks
-  const splitTextIntoChunks = (
-    text: string,
-    maxChunkSize: number
-  ): string[] => {
-    const chunks: string[] = [];
-    let currentChunk = "";
-
-    // Split by paragraphs to maintain some context
-    const paragraphs = text.split(/\n\s*\n/);
-
-    for (const paragraph of paragraphs) {
-      // If adding this paragraph would exceed the chunk size, start a new chunk
-      if (
-        currentChunk.length + paragraph.length > maxChunkSize &&
-        currentChunk.length > 0
-      ) {
-        chunks.push(currentChunk);
-        currentChunk = paragraph;
-      } else {
-        currentChunk += (currentChunk ? "\n\n" : "") + paragraph;
-      }
-    }
-
-    // Add the last chunk if it's not empty
-    if (currentChunk) {
-      chunks.push(currentChunk);
-    }
-
-    return chunks;
+    const email = e.target.value;
+    setSurveyData((prev) => ({ ...prev, email }));
   };
 
   const handleSubmit = async () => {
@@ -179,11 +66,11 @@ export function useSurveyData(): UseSurveyDataReturn {
       return;
     }
 
-    const token = await cookie.get("token");
-    const decodedToken = await (jwtDecode(token!) as {
+    const token = cookie.get("token");
+    const decodedToken = jwtDecode(token!) as {
       userId: string;
       email: string;
-    });
+    };
 
     const res = await updatePreferences({
       userId: decodedToken.userId,
@@ -231,6 +118,7 @@ export function useSurveyData(): UseSurveyDataReturn {
         colors: data.data.user.preferences.colors,
         profession: data.data.user.preferences.profession,
         email: data.data.user.preferences.email,
+        resume: data.data.user.preferences.resume || "",
       });
     }
   }, [data]);
@@ -248,7 +136,7 @@ export function useSurveyData(): UseSurveyDataReturn {
 
     // Check if survey is complete
     setIsComplete(completedSteps === totalSteps);
-  }, [data, surveyData]);
+  }, [surveyData]);
 
   useEffect(() => {
     if (surveyData.profession && !professions.includes(surveyData.profession)) {
@@ -264,17 +152,19 @@ export function useSurveyData(): UseSurveyDataReturn {
   ]);
 
   return {
-    showModal,
-    otherProfession,
+    surveyData,
+    setSurveyData,
+    handleSubmit,
+    handleEmailChange,
     handleProfessionSelect,
     handleOtherProfessionChange,
-    handleSubmit,
     handleColorSelect,
-    surveyData,
     isComplete,
     progress,
-    handleResumeUpload,
-    resume,
-    handleEmailChange,
+    showModal,
+    setShowModal,
+    otherProfession,
+    isUploadingResume,
+    setIsUploadingResume,
   };
 }

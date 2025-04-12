@@ -42,102 +42,105 @@ export default function SingleService({
     isPending && lastClicked == "serviceDescription";
 
   return (
-    <div className="p-12 bg-wheat/5 border border-wheat/15 w-[445.33px] rounded-sm opacity-0">
-      <span className="text-wheat/60">0{index + 1}</span>
-      <h2
-        ref={titleRef}
-        className={`group relative text-wheat mt-3 mb-2 text-2xl font-light ${isOwner && "editable cursor-pointer"} px-0 ${isServiceTitlePending ? "opacity-50" : ""}`}
-        contentEditable={isOwner}
-        suppressContentEditableWarning
-        onBlur={(e) => {
-          services[index] = {
-            title: e.target.textContent!,
-            description: descriptionRef.current?.textContent ?? "",
-          };
+    <div className="p-12 bg-wheat/5 border border-wheat/15 w-[445.33px] rounded-sm opacity-0 flex flex-col justify-between">
+      <div>
+        <span className="text-wheat/60">0{index + 1}</span>
+        <h2
+          ref={titleRef}
+          className={`group relative text-wheat mt-3 mb-2 text-2xl font-light ${isOwner && "editable cursor-pointer"} px-0 ${isServiceTitlePending ? "opacity-50" : ""}`}
+          contentEditable={isOwner}
+          suppressContentEditableWarning
+          onBlur={(e) => {
+            services[index] = {
+              title: e.target.textContent!,
+              description: descriptionRef.current?.textContent ?? "",
+            };
 
-          mutate(services);
-        }}
-      >
-        {isServiceTitlePending && <EnhancingLoader />}
-        {title || fakeServices[index].title}
-        {isOwner && (
-          <CustomTooltip>
-            <EnhanceContentButton
-              onClick={async () => {
-                setIsLastClicked("serviceTitle");
-                const elementContent = titleRef.current?.textContent;
-                if (elementContent) {
-                  enhanceContent(elementContent, {
-                    onSuccess: (data) => {
-                      if (data == title)
-                        return toast.success("Content is already perfect 📈");
-                      services[index] = {
-                        title: data,
-                        description: descriptionRef.current?.textContent ?? "",
-                      };
-                      mutate(services, {
-                        onSuccess: () => {
-                          if (data) {
-                            toast.success("Content enhanced successfully!");
-                            refetch();
-                          }
-                        },
-                      });
-                    },
-                  });
-                }
-              }}
-            />
-          </CustomTooltip>
-        )}
-      </h2>
-      <p
-        ref={descriptionRef}
-        className={`group relative mb-8 text-wheat/60 max-w-[350px] leading-7 ${isOwner && "editable cursor-pointer"} px-0 ${isServiceDescriptionPending ? "opacity-50" : ""}`}
-        contentEditable={isOwner}
-        suppressContentEditableWarning
-        onBlur={(e) => {
-          services[index] = {
-            title: titleRef.current?.textContent ?? "",
-            description: e.target.textContent!,
-          };
+            mutate(services);
+          }}
+        >
+          {isServiceTitlePending && <EnhancingLoader />}
+          {title || fakeServices[index].title}
+          {isOwner && (
+            <CustomTooltip>
+              <EnhanceContentButton
+                onClick={async () => {
+                  setIsLastClicked("serviceTitle");
+                  const elementContent = titleRef.current?.textContent;
+                  if (elementContent) {
+                    enhanceContent(elementContent, {
+                      onSuccess: (data) => {
+                        if (data == title)
+                          return toast.success("Content is already perfect 📈");
+                        services[index] = {
+                          title: data,
+                          description:
+                            descriptionRef.current?.textContent ?? "",
+                        };
+                        mutate(services, {
+                          onSuccess: () => {
+                            if (data) {
+                              toast.success("Content enhanced successfully!");
+                              refetch();
+                            }
+                          },
+                        });
+                      },
+                    });
+                  }
+                }}
+              />
+            </CustomTooltip>
+          )}
+        </h2>
+        <p
+          ref={descriptionRef}
+          className={`group relative mb-8 text-wheat/60 max-w-[350px] leading-7 ${isOwner && "editable cursor-pointer"} px-0 ${isServiceDescriptionPending ? "opacity-50" : ""}`}
+          contentEditable={isOwner}
+          suppressContentEditableWarning
+          onBlur={(e) => {
+            services[index] = {
+              title: titleRef.current?.textContent ?? "",
+              description: e.target.textContent!,
+            };
 
-          mutate(services);
-        }}
-      >
-        {isServiceDescriptionPending && <EnhancingLoader />}
-        {description || fakeServices[index].description}
-        {isOwner && (
-          <CustomTooltip>
-            <EnhanceContentButton
-              onClick={async () => {
-                setIsLastClicked("serviceDescription");
-                const elementContent = titleRef.current?.textContent;
-                if (elementContent) {
-                  enhanceContent(elementContent, {
-                    onSuccess: (data) => {
-                      if (data == description)
-                        return toast.success("Content is already perfect 📈");
-                      services[index] = {
-                        title: titleRef.current?.textContent ?? "",
-                        description: data,
-                      };
-                      mutate(services, {
-                        onSuccess: () => {
-                          if (data) {
-                            toast.success("Content enhanced successfully!");
-                            refetch();
-                          }
-                        },
-                      });
-                    },
-                  });
-                }
-              }}
-            />
-          </CustomTooltip>
-        )}
-      </p>
+            mutate(services);
+          }}
+        >
+          {isServiceDescriptionPending && <EnhancingLoader />}
+          {description || fakeServices[index].description}
+          {isOwner && (
+            <CustomTooltip>
+              <EnhanceContentButton
+                onClick={async () => {
+                  setIsLastClicked("serviceDescription");
+                  const elementContent = titleRef.current?.textContent;
+                  if (elementContent) {
+                    enhanceContent(elementContent, {
+                      onSuccess: (data) => {
+                        if (data == description)
+                          return toast.success("Content is already perfect 📈");
+                        services[index] = {
+                          title: titleRef.current?.textContent ?? "",
+                          description: data,
+                        };
+                        mutate(services, {
+                          onSuccess: () => {
+                            if (data) {
+                              toast.success("Content enhanced successfully!");
+                              refetch();
+                            }
+                          },
+                        });
+                      },
+                    });
+                  }
+                }}
+              />
+            </CustomTooltip>
+          )}
+        </p>
+      </div>
       <TopRightArrow />
     </div>
   );

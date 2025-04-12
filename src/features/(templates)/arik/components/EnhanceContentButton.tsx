@@ -7,7 +7,7 @@ export default function EnhanceContentButton({
   ...props
 }: React.ButtonHTMLAttributes<HTMLButtonElement> & { className?: string }) {
   return (
-    <button
+    <span
       onClick={onClick}
       {...props}
       className={cn(
@@ -16,6 +16,6 @@ export default function EnhanceContentButton({
       )}
     >
       <Sparkles className="w-6 h-6" />
-    </button>
+    </span>
   );
 }

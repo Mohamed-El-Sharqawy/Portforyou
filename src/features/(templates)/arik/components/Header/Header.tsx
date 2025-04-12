@@ -13,14 +13,10 @@ import { useGSAP } from "@gsap/react";
 import "./header.css";
 import { scrollToElement } from "../../utils/scrollToElement";
 import { redirect } from "next/navigation";
-import { getToken } from "@/lib/utils";
 
 gsap.registerPlugin(useGSAP);
 
 export default function Header() {
-  const {
-    decodedToken: { userId },
-  } = getToken();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const mobileMenuContent = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLElement>(null);
@@ -86,7 +82,7 @@ export default function Header() {
           </nav>
 
           <Link
-            href={`/templates/arik/contact?userId=${userId}`}
+            href={`/templates/arik/contact`}
             className="text-black bg-wheat py-2.5 px-4 rounded-sm hover:bg-wheat/80 active:bg-wheat uppercase"
           >
             Let&apos;s Talk
@@ -118,7 +114,7 @@ export default function Header() {
         </nav>
 
         <Link
-          href={`/templates/arik/contact?userId=${userId}`}
+          href={`/templates/arik/contact`}
           onClick={closeMobileMenu}
           className="absolute top-7 left-8 text-black bg-wheat py-2.5 px-4 rounded-sm hover:bg-wheat/80 active:bg-wheat uppercase block mx-auto"
           data-no-blobity

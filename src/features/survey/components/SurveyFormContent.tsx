@@ -3,7 +3,11 @@ import { colorOptions, professions } from "../constants/surveyForm";
 import { useSurveyData } from "../hooks/useSurveyData";
 
 import ThanksModal from "./ThanksModal";
+import pdfToText from "react-pdftotext";
 import { Files } from "lucide-react";
+import { getToken } from "@/lib/utils";
+import { useUpdateUserArikTemplate } from "../services/mutations";
+import { toast } from "sonner";
 
 /**
  * Renders the survey form content.
@@ -29,10 +33,78 @@ export default function SurveyFormContent() {
     surveyData,
     isComplete,
     progress,
-    resume,
-    handleResumeUpload,
     handleEmailChange,
+    isUploadingResume,
+    setIsUploadingResume,
   } = useSurveyData();
+
+  const { mutate: updateUserArikTemplate } = useUpdateUserArikTemplate();
+
+  function extractText(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    const {
+      decodedToken: { userId },
+    } = getToken();
+
+    // Set loading state
+    setIsUploadingResume(true);
+
+    pdfToText(file)
+      .then(async (text) => {
+        try {
+          // Send the extracted text to our API to generate portfolio schema
+          const response = await fetch("/api/generate-portfolio", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ resumeText: text, userId }),
+          });
+
+          if (!response.ok) {
+            throw new Error("Failed to generate portfolio schema");
+          }
+
+          const data = await response.json();
+
+          if (data.success) {
+            updateUserArikTemplate(data.generatedQuery);
+
+            // Show success message to the user
+            toast.success("Portfolio generated successfully from your resume!");
+
+            // Here you could navigate to a preview page or update the UI
+            // to show the generated portfolio content
+          } else {
+            console.error("Error:", data.error);
+            toast.error(
+              "There was an error generating your portfolio. Please try again."
+            );
+          }
+        } catch (error) {
+          console.error("Error generating portfolio schema:", error);
+          toast.error(
+            "There was an error processing your resume. Please try again."
+          );
+        }
+      })
+      .catch((error) => {
+        console.error("Failed to extract text from pdf", error);
+        toast.error(
+          "Could not extract text from your PDF. Please try a different file."
+        );
+      })
+      .finally(() => {
+        setIsUploadingResume(false);
+        // Reset the file input
+        const fileInput = document.getElementById(
+          "upload-resume"
+        ) as HTMLInputElement;
+        if (fileInput) fileInput.value = "";
+      });
+  }
 
   return (
     <>
@@ -158,18 +230,17 @@ export default function SurveyFormContent() {
               Submit Survey
             </button>
             <input
-              onChange={handleResumeUpload}
+              onChange={extractText}
               type="file"
               id="upload-resume"
               className="hidden"
               accept=".pdf,.docx,.pptx"
-              key={+!!resume}
             />
             <label
               htmlFor="upload-resume"
               className={`flex items-center gap-x-3 px-8 py-3 rounded-lg transition-all duration-200 font-medium text-white bg-blue-600 hover:bg-blue-700 cursor-pointer`}
             >
-              {!resume ? (
+              {!isUploadingResume ? (
                 <>
                   Upload Your Resume <Files />
                 </>

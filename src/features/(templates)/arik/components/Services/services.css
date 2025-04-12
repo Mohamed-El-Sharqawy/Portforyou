@@ -1,5 +1,5 @@
 .services-section {
-  @apply py-[90px] flex flex-wrap items-center justify-center gap-8;
+  @apply py-[90px] flex flex-wrap items-stretch justify-center gap-8;
 }
 
 @media screen and (max-width: 1470px) {
