@@ -1,12 +1,12 @@
 "use client";
 
-import { getToken } from "@/lib/utils";
-
 import Image from "next/image";
 import Link from "next/link";
+import {  useSearchParams } from "next/navigation";
 
 export default function Logo() {
-  const { decodedToken } = getToken();
+  const searchParams = useSearchParams();
+  const userId = searchParams.get("userId");
 
   return (
     <Link
@@ -16,7 +16,7 @@ export default function Logo() {
           window.scrollTo({ top: 0, behavior: "smooth" });
         }
       }}
-      href={`/templates/arik?userId=${decodedToken?.userId}`}
+      href={`/templates/arik?userId=${userId}`}
       className="inline-block w-fit cursor-pointer"
     >
       <Image

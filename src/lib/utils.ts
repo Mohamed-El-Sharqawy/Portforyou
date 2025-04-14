@@ -10,9 +10,13 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 // Get Token
-export function getToken() {  
+export function getToken() {
   const token = cookie.get("token");
-  const decodedToken = jwtDecode(token!) as { userId: string };
+  if (token) {
+    const decodedToken = jwtDecode(token!) as { userId: string };
 
-  return { decodedToken, token };
+    return { decodedToken, token };
+  } else {
+    return { userId: "" };
+  }
 }

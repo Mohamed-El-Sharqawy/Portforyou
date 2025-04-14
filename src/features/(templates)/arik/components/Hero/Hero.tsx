@@ -43,7 +43,7 @@ export default function Hero() {
   const { data, isFetching, refetch } = useHeroSectionData(userId!);
   const { mutate: enhanceContent, isPending } = useOpenAIMutation();
 
-  const isOwner = userId === decodedToken.userId;
+  const isOwner = userId === decodedToken?.userId;
 
   const isHeroHeadingPending = isPending && lastClicked == "heading";
   const isHeroSubheadingPending = isPending && lastClicked == "subheading";

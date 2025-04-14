@@ -73,7 +73,7 @@ export function useSurveyData(): UseSurveyDataReturn {
     };
 
     const res = await updatePreferences({
-      userId: decodedToken.userId,
+      userId: decodedToken?.userId,
       colors: surveyData.colors,
       profession:
         surveyData.profession === "Other"

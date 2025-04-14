@@ -251,13 +251,13 @@ export const changeHeroHeading = async (
   };
 }> => {
   const {
-    decodedToken: { userId },
+    decodedToken,
   } = getToken();
 
   const mutation = `
   mutation UpdateHeroSection {
   updateUserTemplate(
-    id: "${userId}"
+    id: "${decodedToken?.userId}"
     template: { hero: { hero_heading: "${textContent}" } }
   ) {
     arikTemplate {
@@ -285,12 +285,12 @@ export const changeHeroSubheading = async (
   };
 }> => {
   const {
-    decodedToken: { userId },
+    decodedToken,
   } = getToken();
 
   const mutation = `mutation UpdateHeroSection {
   updateUserTemplate(
-    id: "${userId}"
+    id: "${decodedToken?.userId}"
     template: { hero: { hero_subheading: "${textContent}" } }
   ) {
     arikTemplate {
@@ -317,13 +317,11 @@ export const changeHeroParagraph = async (
     };
   };
 }> => {
-  const {
-    decodedToken: { userId },
-  } = getToken();
+  const { decodedToken } = getToken();
 
   const mutation = `mutation UpdateHeroSection {
   updateUserTemplate(
-    id: "${userId}"
+    id: "${decodedToken?.userId}"
     template: { hero: { hero_paragraph: "${textContent}" } }
   ) {
     arikTemplate {
@@ -339,7 +337,7 @@ export const changeHeroParagraph = async (
 
 export const changeLogos = async (logos: Logo[]): LogosData => {
   const {
-    decodedToken: { userId },
+    decodedToken,
   } = getToken();
 
   const logosString = logos
@@ -350,7 +348,7 @@ export const changeLogos = async (logos: Logo[]): LogosData => {
 
   const mutation = `mutation UpdateLogosSection {
   updateUserTemplate(
-    id: "${userId}"
+    id: "${decodedToken?.userId}"
     template: {
       logos: [
         ${logosString}
@@ -370,9 +368,7 @@ export const changeLogos = async (logos: Logo[]): LogosData => {
 };
 
 export const changeServices = async (services: Service[]): ServicesData => {
-  const {
-    decodedToken: { userId },
-  } = getToken();
+  const { decodedToken } = getToken();
 
   const servicesString = services
     .map(
@@ -383,7 +379,7 @@ export const changeServices = async (services: Service[]): ServicesData => {
 
   const mutation = `mutation UpdateLogosSection {
   updateUserTemplate(
-    id: "${userId}"
+    id: "${decodedToken?.userId}"
     template: {
       services: [
         ${servicesString}
@@ -405,13 +401,11 @@ export const changeServices = async (services: Service[]): ServicesData => {
 export const changeWorkExperience = async (
   work: Work[]
 ): WorkExperienceData => {
-  const {
-    decodedToken: { userId },
-  } = getToken();
+  const { decodedToken } = getToken();
 
   const mutation = `mutation UpdateWorkExperienceSection {
   updateUserTemplate(
-    id: "${userId}"
+    id: "${decodedToken?.userId}"
     template: {
       work: [
         ${work
@@ -442,12 +436,10 @@ export const changeWorkExperience = async (
 export const changeProcessSection = async (
   workSteps: WorkSteps
 ): Promise<WorkStepsData> => {
-  const {
-    decodedToken: { userId },
-  } = getToken();
+  const { decodedToken } = getToken();
 
   const mutation = `mutation UpdateProcessDataSection {
-  updateUserTemplate(id: "${userId}", template: {
+  updateUserTemplate(id: "${decodedToken?.userId}", template: {
     process:  {
       process_heading: "${workSteps.process_heading}",
       process_paragraph: "${workSteps.process_paragraph}",
@@ -482,12 +474,10 @@ export const changeProcessSection = async (
 export const changeTestimonialsSectionHeading = async (
   testimonials_heading: string
 ): TestimonialData => {
-  const {
-    decodedToken: { userId },
-  } = getToken();
+  const { decodedToken } = getToken();
 
   const mutation = `mutation ChangeTestimonialsData {
-  updateUserTemplate(id: "${userId}", template: {
+  updateUserTemplate(id: "${decodedToken?.userId}", template: {
     testimonials:  {
       testimonials_heading: "${testimonials_heading}"
     }
@@ -506,12 +496,10 @@ export const changeTestimonialsSectionHeading = async (
 export const changeTestimonialsSectionParagraph = async (
   testimonials_paragraph: string
 ): TestimonialData => {
-  const {
-    decodedToken: { userId },
-  } = getToken();
+  const { decodedToken } = getToken();
 
   const mutation = `mutation ChangeTestimonialsData {
-  updateUserTemplate(id: "${userId}", template: {
+  updateUserTemplate(id: "${decodedToken?.userId}", template: {
     testimonials:  {
       testimonials_paragraph: "${testimonials_paragraph}"
     }
@@ -531,11 +519,11 @@ export const changeTestimonialsSection = async (
   testimonials: Testimonial[]
 ): TestimonialData => {
   const {
-    decodedToken: { userId },
+    decodedToken,
   } = getToken();
 
   const mutation = `mutation ChangeTestimonialsData {
-  updateUserTemplate(id: "${userId}", template: {
+  updateUserTemplate(id: "${decodedToken?.userId}", template: {
     testimonials:  {
       testimonials: [
       ${testimonials
@@ -565,12 +553,10 @@ export const changeTestimonialsSection = async (
 export const changeFooterHeading = async (
   footer_heading: string
 ): TestimonialData => {
-  const {
-    decodedToken: { userId },
-  } = getToken();
+  const { decodedToken } = getToken();
 
   const mutation = `mutation ChangeFooterHeading {
-  updateUserTemplate(id: "${userId}", template: {
+  updateUserTemplate(id: "${decodedToken?.userId}", template: {
     footer:  {
       footer_heading: "${footer_heading}"
     }
@@ -590,11 +576,11 @@ export const changeFooterParagraph = async (
   footer_paragraph: string
 ): TestimonialData => {
   const {
-    decodedToken: { userId },
+    decodedToken,
   } = getToken();
 
   const mutation = `mutation ChangeFooterParagraph {
-  updateUserTemplate(id: "${userId}", template: {
+  updateUserTemplate(id: "${decodedToken?.userId}", template: {
     footer:  {
       footer_paragraph: "${footer_paragraph}"
     }

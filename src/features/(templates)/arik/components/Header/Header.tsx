@@ -12,7 +12,7 @@ import { useGSAP } from "@gsap/react";
 
 import "./header.css";
 import { scrollToElement } from "../../utils/scrollToElement";
-import { redirect } from "next/navigation";
+import { redirect, useSearchParams } from "next/navigation";
 
 gsap.registerPlugin(useGSAP);
 
@@ -20,6 +20,9 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const mobileMenuContent = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLElement>(null);
+
+  const searchParams = useSearchParams();
+  const userId = searchParams.get("userId");
 
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false);
@@ -82,7 +85,7 @@ export default function Header() {
           </nav>
 
           <Link
-            href={`/templates/arik/contact`}
+            href={`/templates/arik/contact?userId=${userId}`}
             className="text-black bg-wheat py-2.5 px-4 rounded-sm hover:bg-wheat/80 active:bg-wheat uppercase"
           >
             Let&apos;s Talk
@@ -114,7 +117,7 @@ export default function Header() {
         </nav>
 
         <Link
-          href={`/templates/arik/contact`}
+          href={`/templates/arik/contact?userId=${userId}`}
           onClick={closeMobileMenu}
           className="absolute top-7 left-8 text-black bg-wheat py-2.5 px-4 rounded-sm hover:bg-wheat/80 active:bg-wheat uppercase block mx-auto"
           data-no-blobity

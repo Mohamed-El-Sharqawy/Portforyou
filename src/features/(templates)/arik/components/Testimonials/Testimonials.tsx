@@ -23,7 +23,7 @@ export default function Testimonials() {
   const { testimonials_heading, testimonials_paragraph } =
     data?.data.user.arikTemplate.testimonials || {};
 
-  const isOwner = decodedToken.userId === userId;
+  const isOwner = decodedToken?.userId === userId;
 
   return (
     <section

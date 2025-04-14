@@ -22,7 +22,7 @@ export default function Services() {
   const { data, isFetching, refetch } = useServicesSectionData(userId!);
   const services = data?.data.user.arikTemplate.services || [];
 
-  const isOwner = userId === decodedToken.userId;
+  const isOwner = userId === decodedToken?.userId;
 
   useGSAP(
     () => {

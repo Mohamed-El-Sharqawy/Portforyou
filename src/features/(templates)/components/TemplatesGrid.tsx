@@ -17,7 +17,7 @@ export default function TemplatesGrid({ templates }: Props) {
   useEffect(() => {
     try {
       const { decodedToken } = getToken();
-      setUserId(decodedToken.userId);
+      setUserId(decodedToken?.userId);
     } catch (error) {
       console.error("Error getting token:", error);
     }

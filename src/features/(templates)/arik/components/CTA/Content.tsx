@@ -26,7 +26,7 @@ export default function Content() {
   const { mutate: enhanceContent, isPending } = useOpenAIMutation();
   const [lastClicked, setLastClicked] = useState<LastClickedField>(null);
 
-  const isOwner = decodedToken.userId === userId;
+  const isOwner = decodedToken?.userId === userId;
 
   const headingRef = useRef<HTMLHeadingElement>(null);
   const paragraphRef = useRef<HTMLParagraphElement>(null);
@@ -49,7 +49,7 @@ export default function Content() {
           );
         }}
         className={cn(
-          "uppercase xl:text-[128px] max-w-[1200px] my-2 leading-tight text-balance md:text-[80px] sm:text-[60px] text-[32px] group relative",
+          "uppercase xl:text-[128px] max-w-[1200px] my-2 leading-tight text-balance md:text-[70px] sm:text-[50px] text-[28px] group relative",
           isHeadingPending && "opacity-50",
           isOwner && "editable cursor-pointer"
         )}

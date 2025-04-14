@@ -52,7 +52,7 @@ export default function Logos() {
 
   const logos = data?.data.user.arikTemplate.logos;
 
-  const isOwner = decodedToken.userId === userId;
+  const isOwner = decodedToken?.userId === userId;
 
   const { mutate } = useChangeLogos();
 

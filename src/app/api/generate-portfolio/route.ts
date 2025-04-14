@@ -202,13 +202,41 @@ export async function POST(request: NextRequest) {
   }
 }`;
 
-    // Create the prompt for OpenAI with strict instructions about array structure
-    const prompt = `You are an expert at creating professional portfolios. I have a resume text that I want you to analyze and use to fill out a GraphQL mutation template for a portfolio website.
+    // Create the prompt for OpenAI with strict instructions about array structure and styling
+    const prompt = `You are an expert at creating stunning, professional portfolio websites. I have a resume text that I want you to transform into an elegant, modern portfolio for the Arik template, which has a dark theme with gold/wheat accents.
 
 Here's the resume text:
 ${resumeText}
 
-Based on this resume, fill out the following GraphQL mutation template with appropriate values. Be creative but professional, and make sure the content reflects the person's skills, experience, and achievements from the resume.
+Based on this resume, fill out the following GraphQL mutation template with captivating, professional content. Don't just copy the resume text verbatim - transform it into compelling portfolio content that follows these style guidelines:
+
+1. HERO SECTION:
+   - hero_heading: Create a powerful, concise professional title (e.g., "Web Developer & Designer" or "UX/UI Designer & Frontend Engineer") - keep it under 40 characters
+   - hero_subheading: Write an impactful tagline that captures their unique value proposition (30-50 characters)
+   - hero_paragraph: Craft an elegant, concise bio (2-3 sentences, 150-200 characters) that highlights their core strengths
+
+2. SERVICES SECTION:
+   - Focus on 3 core services they can offer based on their skills
+   - Each description should be concise (60-80 characters) but impactful
+   - Use professional, confident language that sells their expertise
+
+3. WORK SECTION:
+   - Transform their experience into portfolio projects
+   - Create compelling project titles and appropriate categories
+   - Leave img_url empty but fill in other fields
+
+4. PROCESS SECTION:
+   - process_heading: Create a client-focused heading about their work process
+   - Each step should have a clear, concise heading and valuable content
+   - step_points should be actionable, specific bullet points
+
+5. TESTIMONIALS SECTION:
+   - Create realistic-sounding testimonials based on their experience
+   - Vary the tone and focus of each testimonial
+   - Use professional language that highlights different aspects of their work
+
+6. FOOTER SECTION:
+   - Create a compelling call-to-action
 
 CRITICALLY IMPORTANT: You MUST maintain the EXACT structure of all arrays in the template. Do not add or remove any array items. The backend requires arrays to have exactly the same number of items as shown in the template. For example:
 - logos array MUST have exactly 6 items
@@ -216,7 +244,6 @@ CRITICALLY IMPORTANT: You MUST maintain the EXACT structure of all arrays in the
 - work array MUST have exactly 4 items
 - process.steps array MUST have exactly 5 items
 - testimonials.testimonials array MUST have exactly 6 items
-- don't put example.com in any src, just leave it empty if the text is not detailed enough
 
 If you don't have enough content to fill all items in an array, just leave the remaining items with empty strings, but NEVER change the array structure.
 
@@ -232,7 +259,7 @@ Very important: Return ONLY the filled GraphQL mutation as a valid GraphQL query
         {
           role: "system",
           content:
-            "You are a professional portfolio generator assistant. You generate GraphQL queries based on resume content. You MUST maintain the exact structure of arrays in templates, never adding or removing array items, even if some items remain empty.",
+            "You are a professional portfolio designer specializing in creating elegant, modern content for dark-themed portfolio websites. You transform resume content into compelling, concise portfolio sections while maintaining the exact structure of templates. Your content is sophisticated, professional, and tailored to showcase expertise in the most impressive way.",
         },
         { role: "user", content: prompt },
       ],

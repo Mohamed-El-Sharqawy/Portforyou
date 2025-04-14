@@ -44,9 +44,7 @@ export default function SurveyFormContent() {
     const file = event.target.files?.[0];
     if (!file) return;
 
-    const {
-      decodedToken: { userId },
-    } = getToken();
+    const { decodedToken } = getToken();
 
     // Set loading state
     setIsUploadingResume(true);
@@ -60,7 +58,7 @@ export default function SurveyFormContent() {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ resumeText: text, userId }),
+            body: JSON.stringify({ resumeText: text, userId: decodedToken?.userId }),
           });
 
           if (!response.ok) {

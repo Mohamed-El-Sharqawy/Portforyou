@@ -14,9 +14,9 @@ export default function Contact() {
   useEffect(() => {
     const { decodedToken } = getToken();
 
-    console.log(decodedToken.userId, userId);
+    console.log(decodedToken?.userId, userId);
 
-    if (decodedToken.userId == userId) {
+    if (decodedToken?.userId == userId) {
       toast.success(
         "This page is for the client and you don't need to change anything here.",
         { duration: 30000, position: "top-right", id: "contact-notification" }

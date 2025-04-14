@@ -17,7 +17,7 @@ export default function WorkSteps() {
   const { data } = useWorkStepsSectionData(userId!);
   const process = data?.data.user.arikTemplate.process;
 
-  const isOwner = decodedToken.userId === userId;
+  const isOwner = decodedToken?.userId === userId;
 
   return (
     <section className="container relative" id="work-steps-section">
@@ -35,7 +35,7 @@ export default function WorkSteps() {
           }}
           contentEditable={isOwner}
           suppressContentEditableWarning
-          className={`text-wheat text-center text-5xl leading-tight md:text-8xl md:leading-tight font-medium text-balance max-w-[700px] mx-auto ${isOwner && "editable cursor-pointer"}`}
+          className={`text-wheat text-center text-5xl leading-tight md:text-8xl md:leading-tight font-medium text-balance max-w-[900px] mx-auto ${isOwner && "editable cursor-pointer"}`}
         >
           {process?.process_heading || `Your Website in 5 steps`}
         </h1>

@@ -19,7 +19,7 @@ export default function Projects() {
   const { data, refetch } = useWorkExperienceSectionData(userId!);
   const workExperience = data?.data.user.arikTemplate.work || [];
 
-  const isOwner = decodedToken.userId === userId;
+  const isOwner = decodedToken?.userId === userId;
 
   useGSAP(
     () => {

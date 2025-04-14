@@ -17,7 +17,7 @@ export default function Cards() {
   const process = data?.data.user.arikTemplate.process;
   const steps = process?.steps || [];
 
-  const isOwner = decodedToken.userId === userId;
+  const isOwner = decodedToken?.userId === userId;
 
   return (
     <div className="min-h-screen text-white p-6 md:p-12">

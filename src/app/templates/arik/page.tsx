@@ -8,10 +8,12 @@ import Services from "@/features/(templates)/arik/components/Services/Services";
 import Testimonials from "@/features/(templates)/arik/components/Testimonials/Testimonials";
 import WorkExperience from "@/features/(templates)/arik/components/WorkExperience/WorkExperience";
 import WorkSteps from "@/features/(templates)/arik/components/WorkSteps/WorkSteps";
-import { ArrowLeftCircle } from "lucide-react";
+import AnalyticsTracker from "@/features/(templates)/arik/components/Analytics/AnalyticsTracker";
+import ChatbotAssistant from "@/features/(templates)/arik/components/ChatbotAssistant/ChatbotAssistant";
+import BackToTemplatesLink from "@/features/(templates)/arik/components/BackToTemplatesLink/BackToTemplatesLink";
 
 import type { Viewport } from "next";
-import Link from "next/link";
+import { AnalyticsLink } from "@/features/(templates)/arik/components/Analytics/AnalyticsLink";
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -44,6 +46,9 @@ export const metadata = {
 export default function Home() {
   return (
     <div className="arik-template overflow-x-hidden bg-black text-wheat font-arial">
+      {/* Silently track analytics for this template visit */}
+      <AnalyticsTracker />
+
       {/* If Fetching display the loader */}
       <FetchingLoader />
 
@@ -58,13 +63,15 @@ export default function Home() {
 
       <CopyButton />
 
-      <Link
-        href={"/templates"}
-        className="fixed top-14 left-10 max-[1140px]:top-32 flex items-center gap-x-2"
-      >
-        <ArrowLeftCircle size={28} className="cursor-pointer" />
-        <p className="text-sm">Back to Templates</p>
-      </Link>
+      <div className="fixed top-14 left-10 max-[1140px]:top-32 flex flex-col gap-y-4">
+        <BackToTemplatesLink />
+
+        {/* Analytics link - client-side check for ownership */}
+        <AnalyticsLink />
+      </div>
+      
+      {/* Portfolio Content Assistant Chatbot */}
+      <ChatbotAssistant />
     </div>
   );
 }
