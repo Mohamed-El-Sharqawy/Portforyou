@@ -7,7 +7,9 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export function AnalyticsLink() {
-  const [currentUserId, setCurrentUserId] = useState<string | undefined>(undefined);
+  const [currentUserId, setCurrentUserId] = useState<string | undefined>(
+    undefined
+  );
   const searchParams = useSearchParams();
   const userId = searchParams.get("userId");
 

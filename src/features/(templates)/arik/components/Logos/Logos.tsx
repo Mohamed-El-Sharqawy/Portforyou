@@ -157,8 +157,7 @@ export default function Logos() {
                       });
                     }
                   }}
-                  onProgress={() => {
-                  }}
+                  onProgress={() => {}}
                   onError={() => {
                     setIsUploading(false);
                   }}
