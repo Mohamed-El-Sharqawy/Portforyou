@@ -19,22 +19,25 @@ export default function VisitorChart({ visitors }: VisitorChartProps) {
     if (!chartRef.current || visitors.length === 0) return;
 
     // Process visitor data to count visits per day
-    const visitsPerDay = visitors.reduce<Record<string, number>>((acc, visitor) => {
-      if (!visitor.visitDate) return acc;
-      
-      // Format the date to YYYY-MM-DD to group by day
-      const day = format(new Date(parseInt(visitor.visitDate)), "yyyy-MM-dd");
-      acc[day] = (acc[day] || 0) + 1;
-      return acc;
-    }, {});
+    const visitsPerDay = visitors.reduce<Record<string, number>>(
+      (acc, visitor) => {
+        if (!visitor.visitDate) return acc;
+
+        // Format the date to YYYY-MM-DD to group by day
+        const day = format(new Date(parseInt(visitor.visitDate)), "yyyy-MM-dd");
+        acc[day] = (acc[day] || 0) + 1;
+        return acc;
+      },
+      {}
+    );
 
     // Get the last 30 days or all days if less than 30
     const sortedDays = Object.keys(visitsPerDay).sort();
     const days = sortedDays.slice(Math.max(0, sortedDays.length - 30));
-    const counts = days.map(day => visitsPerDay[day]);
+    const counts = days.map((day) => visitsPerDay[day]);
 
     // Format days for display
-    const formattedDays = days.map(day => format(parseISO(day), "MMM d"));
+    const formattedDays = days.map((day) => format(parseISO(day), "MMM d"));
 
     const config: ChartConfiguration = {
       type: "line",
@@ -91,10 +94,10 @@ export default function VisitorChart({ visitors }: VisitorChartProps) {
           y: {
             beginAtZero: true,
             grid: {
-              color: 'rgba(245, 222, 179, 0.1)',
+              color: "rgba(245, 222, 179, 0.1)",
             },
             ticks: {
-              color: 'rgba(245, 222, 179, 0.7)',
+              color: "rgba(245, 222, 179, 0.7)",
               precision: 0,
             },
           },

@@ -7,14 +7,16 @@ import { useEffect, useState } from "react";
 
 export function AnalyticsLink() {
   const [currentUserId, setCurrentUserId] = useState("");
-  const urlParams = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '');
-  const userId = urlParams.get('userId');
+  const urlParams = new URLSearchParams(
+    typeof window !== "undefined" ? window.location.search : ""
+  );
+  const userId = urlParams.get("userId");
 
   useEffect(() => {
     const { decodedToken } = getToken();
-    setCurrentUserId(decodedToken?.userId)
+    setCurrentUserId(decodedToken?.userId);
   }, []);
-  
+
   // Only show analytics link to the template owner
   if (userId && currentUserId === userId) {
     return (
@@ -27,6 +29,6 @@ export function AnalyticsLink() {
       </Link>
     );
   }
-  
+
   return null;
 }

@@ -13,7 +13,7 @@ export default function BackToTemplatesLink() {
     setUserId(decodedToken?.userId);
   }, []);
 
-  if(!userId) return null;
+  if (!userId) return null;
 
   return (
     <Link href={"/templates"} className="flex items-center gap-x-2">

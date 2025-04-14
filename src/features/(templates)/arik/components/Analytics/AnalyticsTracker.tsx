@@ -14,7 +14,7 @@ export default function AnalyticsTracker() {
   const searchParams = useSearchParams();
   const userId = searchParams.get("userId");
   const [hasTracked, setHasTracked] = useState(false);
-  
+
   const { mutate: recordVisit } = useRecordTemplateVisit();
 
   useEffect(() => {
@@ -24,10 +24,10 @@ export default function AnalyticsTracker() {
         try {
           // Get device information
           const deviceInfo = getDeviceInfo();
-          
+
           // Get location information
           const locationInfo = await getLocationInfo();
-          
+
           // Record the visit
           recordVisit({
             userId,
@@ -39,14 +39,14 @@ export default function AnalyticsTracker() {
               device: deviceInfo.device,
             },
           });
-          
+
           // Set flag to prevent multiple tracking in the same session
           setHasTracked(true);
         } catch (error) {
           console.error("Error tracking template visit:", error);
         }
       };
-      
+
       trackVisit();
     }
   }, [userId, hasTracked, recordVisit]);

@@ -69,7 +69,7 @@ export default function Home() {
         {/* Analytics link - client-side check for ownership */}
         <AnalyticsLink />
       </div>
-      
+
       {/* Portfolio Content Assistant Chatbot */}
       <ChatbotAssistant />
     </div>

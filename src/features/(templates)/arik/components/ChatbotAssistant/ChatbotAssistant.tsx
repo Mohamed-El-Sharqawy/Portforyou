@@ -30,7 +30,7 @@ export default function ChatbotAssistant() {
   const userIdQuery = searchParams.get("userId");
 
   const isOwner = userId === userIdQuery;
-  
+
   useEffect(() => {
     const { decodedToken } = getToken();
     setUserId(decodedToken?.userId);
@@ -42,8 +42,9 @@ export default function ChatbotAssistant() {
       setMessages([
         {
           role: "assistant",
-          content: "Hi! I'm your portfolio content assistant. Ask me to help you write compelling headlines, bios, service descriptions, or any other content for your portfolio."
-        }
+          content:
+            "Hi! I'm your portfolio content assistant. Ask me to help you write compelling headlines, bios, service descriptions, or any other content for your portfolio.",
+        },
       ]);
     }
   }, [messages.length]);
@@ -64,12 +65,18 @@ export default function ChatbotAssistant() {
 
   // Typing animation effect
   useEffect(() => {
-    if (isTyping && currentResponseIndex < messages[messages.length - 1]?.content.length) {
+    if (
+      isTyping &&
+      currentResponseIndex < messages[messages.length - 1]?.content.length
+    ) {
       const timer = setTimeout(() => {
-        setDisplayedText(prev => prev + messages[messages.length - 1].content[currentResponseIndex]);
-        setCurrentResponseIndex(prev => prev + 1);
+        setDisplayedText(
+          (prev) =>
+            prev + messages[messages.length - 1].content[currentResponseIndex]
+        );
+        setCurrentResponseIndex((prev) => prev + 1);
       }, 15); // Speed of typing
-      
+
       return () => clearTimeout(timer);
     } else if (isTyping) {
       setIsTyping(false);
@@ -78,15 +85,15 @@ export default function ChatbotAssistant() {
 
   const handleSubmit = async (e?: React.FormEvent) => {
     e?.preventDefault();
-    
+
     if (!input.trim() || isLoading) return;
-    
+
     // Add user message
     const userMessage = { role: "user" as const, content: input };
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setInput("");
     setIsLoading(true);
-    
+
     try {
       // Call OpenAI API
       const response = await fetch("/api/portfolio-assistant", {
@@ -98,22 +105,24 @@ export default function ChatbotAssistant() {
           messages: [...messages, userMessage],
         }),
       });
-      
+
       if (!response.ok) {
         throw new Error("Failed to get response");
       }
-      
+
       const data = await response.json();
-      
+
       // Add assistant response
-      const assistantMessage = { role: "assistant" as const, content: data.content };
-      setMessages(prev => [...prev, assistantMessage]);
-      
+      const assistantMessage = {
+        role: "assistant" as const,
+        content: data.content,
+      };
+      setMessages((prev) => [...prev, assistantMessage]);
+
       // Start typing animation
       setDisplayedText("");
       setCurrentResponseIndex(0);
       setIsTyping(true);
-      
     } catch (error) {
       console.error("Error:", error);
       toast.error("Failed to get a response. Please try again.");
@@ -134,7 +143,7 @@ export default function ChatbotAssistant() {
     toast.success("Copied to clipboard!");
   };
 
-  if(!isOwner) return null;
+  if (!isOwner) return null;
 
   return (
     <>
@@ -167,7 +176,9 @@ export default function ChatbotAssistant() {
             >
               {/* Header */}
               <div className="p-4 border-b border-wheat/20 flex justify-between items-center">
-                <h2 className="text-wheat text-lg font-medium">Portfolio Content Assistant</h2>
+                <h2 className="text-wheat text-lg font-medium">
+                  Portfolio Content Assistant
+                </h2>
                 <button
                   onClick={() => setIsOpen(false)}
                   className="text-wheat/60 hover:text-wheat transition-colors"
@@ -186,14 +197,18 @@ export default function ChatbotAssistant() {
                     <div
                       className={`max-w-[80%] p-3 rounded-lg ${message.role === "user" ? "bg-wheat/10 text-wheat" : "bg-wheat/5 text-wheat/90"}`}
                     >
-                      {index === messages.length - 1 && message.role === "assistant" && isTyping ? (
+                      {index === messages.length - 1 &&
+                      message.role === "assistant" &&
+                      isTyping ? (
                         <div className="relative">
                           <p className="whitespace-pre-wrap">{displayedText}</p>
                           <span className="inline-block w-2 h-4 bg-wheat/60 ml-1 animate-blink"></span>
                         </div>
                       ) : (
                         <div className="relative group">
-                          <p className="whitespace-pre-wrap">{message.content}</p>
+                          <p className="whitespace-pre-wrap">
+                            {message.content}
+                          </p>
                           {message.role === "assistant" && (
                             <button
                               onClick={() => copyToClipboard(message.content)}
@@ -212,7 +227,10 @@ export default function ChatbotAssistant() {
               </div>
 
               {/* Input area */}
-              <form onSubmit={handleSubmit} className="p-4 border-t border-wheat/20">
+              <form
+                onSubmit={handleSubmit}
+                className="p-4 border-t border-wheat/20"
+              >
                 <div className="relative">
                   <textarea
                     ref={inputRef}
@@ -233,7 +251,9 @@ export default function ChatbotAssistant() {
                   </button>
                 </div>
                 {isLoading && (
-                  <p className="text-wheat/40 text-xs mt-2 animate-pulse">Generating response...</p>
+                  <p className="text-wheat/40 text-xs mt-2 animate-pulse">
+                    Generating response...
+                  </p>
                 )}
               </form>
             </motion.div>

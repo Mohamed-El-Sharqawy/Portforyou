@@ -22,9 +22,7 @@ export function InfoDialog({ title, description }: InfoDialogProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <button 
-          className="h-6 w-6 rounded-full p-0 text-wheat/60 hover:text-wheat hover:bg-transparent"
-        >
+        <button className="h-6 w-6 rounded-full p-0 text-wheat/60 hover:text-wheat hover:bg-transparent">
           <HelpCircle size={16} />
           <span className="sr-only">Info</span>
         </button>

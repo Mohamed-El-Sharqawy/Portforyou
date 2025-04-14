@@ -42,7 +42,7 @@ export const recordTemplateVisit = async (
 
 // Function to get template analytics
 export const getTemplateAnalytics = async (
-  userId: string,
+  userId: string
   // _templateName: string // Unused but kept for API consistency
 ): Promise<{ data: { templateAnalytics: TemplateAnalytics } }> => {
   // Use 'arik' as the templateName for the arikTemplate
@@ -75,6 +75,6 @@ export const useRecordTemplateVisit = () => {
       userId: string;
       // _templateName: string;
       visitorData: VisitorData;
-    }) => recordTemplateVisit(userId, visitorData,),
+    }) => recordTemplateVisit(userId, visitorData),
   });
 };

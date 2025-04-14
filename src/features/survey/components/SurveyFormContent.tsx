@@ -58,7 +58,10 @@ export default function SurveyFormContent() {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ resumeText: text, userId: decodedToken?.userId }),
+            body: JSON.stringify({
+              resumeText: text,
+              userId: decodedToken?.userId,
+            }),
           });
 
           if (!response.ok) {

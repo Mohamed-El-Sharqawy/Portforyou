@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import {  useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 
 export default function Logo() {
   const searchParams = useSearchParams();

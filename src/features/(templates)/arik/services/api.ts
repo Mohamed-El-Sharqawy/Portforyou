@@ -250,9 +250,7 @@ export const changeHeroHeading = async (
     };
   };
 }> => {
-  const {
-    decodedToken,
-  } = getToken();
+  const { decodedToken } = getToken();
 
   const mutation = `
   mutation UpdateHeroSection {
@@ -284,9 +282,7 @@ export const changeHeroSubheading = async (
     };
   };
 }> => {
-  const {
-    decodedToken,
-  } = getToken();
+  const { decodedToken } = getToken();
 
   const mutation = `mutation UpdateHeroSection {
   updateUserTemplate(
@@ -336,9 +332,7 @@ export const changeHeroParagraph = async (
 };
 
 export const changeLogos = async (logos: Logo[]): LogosData => {
-  const {
-    decodedToken,
-  } = getToken();
+  const { decodedToken } = getToken();
 
   const logosString = logos
     .map(
@@ -518,9 +512,7 @@ export const changeTestimonialsSectionParagraph = async (
 export const changeTestimonialsSection = async (
   testimonials: Testimonial[]
 ): TestimonialData => {
-  const {
-    decodedToken,
-  } = getToken();
+  const { decodedToken } = getToken();
 
   const mutation = `mutation ChangeTestimonialsData {
   updateUserTemplate(id: "${decodedToken?.userId}", template: {
@@ -575,9 +567,7 @@ export const changeFooterHeading = async (
 export const changeFooterParagraph = async (
   footer_paragraph: string
 ): TestimonialData => {
-  const {
-    decodedToken,
-  } = getToken();
+  const { decodedToken } = getToken();
 
   const mutation = `mutation ChangeFooterParagraph {
   updateUserTemplate(id: "${decodedToken?.userId}", template: {

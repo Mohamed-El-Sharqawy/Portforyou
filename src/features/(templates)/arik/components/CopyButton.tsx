@@ -29,7 +29,11 @@ export default function CopyButton() {
 
   return (
     <div className={`fixed bottom-8 ${isOwner ? "right-24" : "right-8"} z-50`}>
-      <Button className="text-wheat" text={copied ? "Copied!" : "Copy URL"} onClick={handleCopy}>
+      <Button
+        className="text-wheat"
+        text={copied ? "Copied!" : "Copy URL"}
+        onClick={handleCopy}
+      >
         <Copy className="ml-2" size={16} />
       </Button>
     </div>
