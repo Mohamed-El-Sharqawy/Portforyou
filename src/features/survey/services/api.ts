@@ -3,13 +3,11 @@ import fetcher from "@/services/api";
 
 // Queries
 export const getUserPreferences = async () => {
-  const {
-    decodedToken: { userId },
-  } = getToken();
+  const { decodedToken } = getToken();
 
   const query = `
     query UserPreferences {
-      user(id: "${userId}") {
+      user(id: "${decodedToken?.userId}") {
         preferences {
           colors
           profession
