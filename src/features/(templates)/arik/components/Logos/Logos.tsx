@@ -158,11 +158,9 @@ export default function Logos() {
                     }
                   }}
                   onProgress={() => {
-                    console.log("uploading");
                   }}
                   onError={() => {
                     setIsUploading(false);
-                    console.log("Error in uploading");
                   }}
                   onSuccess={async (e) => {
                     setIsUploading(false);
@@ -179,7 +177,6 @@ export default function Logos() {
                   }}
                   onBlur={() => {
                     setIsUploading(false);
-                    console.log("Blur");
                   }}
                   ref={ref}
                 />

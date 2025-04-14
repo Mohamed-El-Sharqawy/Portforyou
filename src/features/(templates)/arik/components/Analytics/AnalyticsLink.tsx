@@ -3,22 +3,21 @@
 import { getToken } from "@/lib/utils";
 import { BarChart2 } from "lucide-react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export function AnalyticsLink() {
-  const [currentUserId, setCurrentUserId] = useState("");
-  const urlParams = new URLSearchParams(
-    typeof window !== "undefined" ? window.location.search : ""
-  );
-  const userId = urlParams.get("userId");
+  const [currentUserId, setCurrentUserId] = useState<string | undefined>(undefined);
+  const searchParams = useSearchParams();
+  const userId = searchParams.get("userId");
 
   useEffect(() => {
     const { decodedToken } = getToken();
     setCurrentUserId(decodedToken?.userId);
-  }, []);
+  }, [userId]);
 
   // Only show analytics link to the template owner
-  if (userId && currentUserId === userId) {
+  if (currentUserId === userId) {
     return (
       <Link
         href={`/templates/arik/analytics?userId=${userId}`}

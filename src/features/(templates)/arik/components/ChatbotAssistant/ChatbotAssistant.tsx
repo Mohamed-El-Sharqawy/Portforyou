@@ -34,7 +34,7 @@ export default function ChatbotAssistant() {
   useEffect(() => {
     const { decodedToken } = getToken();
     setUserId(decodedToken?.userId);
-  }, []);
+  }, [userIdQuery]);
 
   // Initial welcome message
   useEffect(() => {

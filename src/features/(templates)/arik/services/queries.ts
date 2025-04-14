@@ -24,7 +24,6 @@ export const useLogosSectionData = (userId: string) => {
   return useQuery({
     queryKey: ["logos-section-data"],
     queryFn: () => {
-      console.log(userId);
       return userId ? getLogosSectionData(userId) : null;
     },
     refetchOnWindowFocus: false,

@@ -14,8 +14,6 @@ export default function Contact() {
   useEffect(() => {
     const { decodedToken } = getToken();
 
-    console.log(decodedToken?.userId, userId);
-
     if (decodedToken?.userId == userId) {
       toast.success(
         "This page is for the client and you don't need to change anything here.",
