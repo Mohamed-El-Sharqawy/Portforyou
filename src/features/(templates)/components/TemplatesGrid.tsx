@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default function TemplatesGrid({ templates }: Props) {
-  const [userId, setUserId] = useState<string | null>(null);
+  const [userId, setUserId] = useState<string | undefined>(undefined);
 
   useEffect(() => {
     try {
