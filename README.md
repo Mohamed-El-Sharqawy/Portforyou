@@ -2,11 +2,13 @@
 
 ## Project Overview
 
-This is a modern, full-stack portfolio website built with Next.js 15 and React 19, designed to showcase professional work and provide advanced analytics.
+This is a modern, full-stack portfolio website built with Next.js 15 and React
+19, designed to showcase professional work and provide advanced analytics.
 
 ## Technologies
 
 ### Frontend
+
 - **Framework**: Next.js 15 with React 19
 - **Language**: TypeScript
 - **Styling**: TailwindCSS
@@ -16,6 +18,7 @@ This is a modern, full-stack portfolio website built with Next.js 15 and React 1
 - **File Handling**: FilePond
 
 ### Features
+
 - Responsive portfolio template
 - Visitor analytics tracking
 - Animated UI interactions
@@ -39,6 +42,7 @@ This is a modern, full-stack portfolio website built with Next.js 15 and React 1
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js 20+
 - npm or yarn
 
@@ -46,6 +50,7 @@ This is a modern, full-stack portfolio website built with Next.js 15 and React 1
 
 1. Clone the repository
 2. Install dependencies:
+
 ```bash
 npm install
 # or
@@ -55,6 +60,7 @@ yarn install
 ### Development
 
 Run the development server:
+
 ```bash
 npm run dev
 # or
@@ -66,6 +72,7 @@ Open [http://localhost:3000](http://localhost:3000) to view the application.
 ## Testing
 
 Run end-to-end tests:
+
 ```bash
 npm run test:e2e
 # or
@@ -74,7 +81,8 @@ yarn test:e2e
 
 ## Deployment
 
-The application is configured for easy deployment on Vercel or similar platforms.
+The application is configured for easy deployment on Vercel or similar
+platforms.
 
 ## Contributing
 
