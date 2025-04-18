@@ -92,6 +92,11 @@ export default function SingleProject({
                 };
                 mutate(workExperience);
               }}
+              onPaste={(e) => {
+                e.preventDefault();
+                const text = e.clipboardData.getData('text/plain');
+                document.execCommand('insertText', false, text);
+              }}
             >
               {project.title || fakeWorkExperience[index].title}
             </h4>
@@ -108,6 +113,11 @@ export default function SingleProject({
                   category: e.target.textContent!,
                 };
                 mutate(workExperience);
+              }}
+              onPaste={(e) => {
+                e.preventDefault();
+                const text = e.clipboardData.getData('text/plain');
+                document.execCommand('insertText', false, text);
               }}
             >
               {project.category || fakeWorkExperience[index].category}
@@ -192,6 +202,11 @@ export default function SingleProject({
                       onBlur={() => {
                         setIsUploading(false);
                       }}
+                      onPaste={(e) => {
+                        e.preventDefault();
+                        const text = e.clipboardData.getData('text/plain');
+                        document.execCommand('insertText', false, text);
+                      }}
                       ref={ref}
                     />
                   </ImageKitProvider>
@@ -206,7 +221,7 @@ export default function SingleProject({
                       width={400}
                       height={200}
                       className={cn(
-                        "w-[300px] object-contain cursor-pointer",
+                        "w-[300px] h-[225px] object-cover cursor-pointer",
                         order === index && isUploading && "opacity-15",
                         isUploading && order !== index && "cursor-not-allowed"
                       )}
@@ -226,7 +241,7 @@ export default function SingleProject({
                   <Label>Project Link</Label>
                   <p
                     ref={projectLinkRef}
-                    className={`${isOwner && "editable cursor-pointer"} border-2 border-zinc-700 !p-2 mt-2`}
+                    className={`${isOwner && "editable cursor-pointer"} border-2 border-zinc-700 !p-2 mt-2 max-w-[350px] h-[44px] overflow-auto`}
                     contentEditable
                     suppressContentEditableWarning
                     onBlur={(e) => {
@@ -236,10 +251,41 @@ export default function SingleProject({
                       };
                       mutate(workExperience);
                     }}
+                    onPaste={(e) => {
+                      e.preventDefault();
+                      const text = e.clipboardData.getData('text/plain');
+                      document.execCommand('insertText', false, text);
+                    }}
                   >
                     {project.project_link && project.project_link == "null"
                       ? fakeWorkExperience[index].project_link
                       : project.project_link}
+                  </p>
+                </div>
+
+                <div>
+                  <Label>Image Link</Label>
+                  <p
+                    className={`${isOwner && "editable cursor-pointer"} border-2 border-zinc-700 !p-2 mt-2 max-w-[350px] h-[44px] overflow-auto`}
+                    contentEditable
+                    suppressContentEditableWarning
+                    onBlur={(e) => {
+                      workExperience[index] = {
+                        ...workExperience[index],
+                        img_url: e.target?.textContent ?? "",
+                        img_id: "not_image_kit",
+                      };
+                      mutate(workExperience);
+                    }}
+                    onPaste={(e) => {
+                      e.preventDefault();
+                      const text = e.clipboardData.getData('text/plain');
+                      document.execCommand('insertText', false, text);
+                    }}
+                  >
+                    {project.img_url && project.img_url == "null"
+                      ? fakeWorkExperience[index].img_url
+                      : project.img_url}
                   </p>
                 </div>
               </div>

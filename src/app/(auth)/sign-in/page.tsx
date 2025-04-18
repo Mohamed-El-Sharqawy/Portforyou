@@ -31,8 +31,8 @@ const SignIn = () => {
         cookie.set("token", res.data.login.token, {
           expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
         });
-        // Redirect to survey page
-        window.location.href = "/survey";
+        // Redirect to templates page
+        window.location.href = "/templates";
       }
     } catch (error) {
       setFormError("An unexpected error occurred. Please try again.");

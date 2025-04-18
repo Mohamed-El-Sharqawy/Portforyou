@@ -58,6 +58,11 @@ export default function SingleService({
 
             mutate(services);
           }}
+          onPaste={(e) => {
+            e.preventDefault();
+            const text = e.clipboardData.getData('text/plain');
+            document.execCommand('insertText', false, text);
+          }}
         >
           {isServiceTitlePending && <EnhancingLoader />}
           {title || fakeServices[index].title}
@@ -105,6 +110,11 @@ export default function SingleService({
             };
 
             mutate(services);
+          }}
+          onPaste={(e) => {
+            e.preventDefault();
+            const text = e.clipboardData.getData('text/plain');
+            document.execCommand('insertText', false, text);
           }}
         >
           {isServiceDescriptionPending && <EnhancingLoader />}

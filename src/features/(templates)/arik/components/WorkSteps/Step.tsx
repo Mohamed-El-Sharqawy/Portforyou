@@ -10,7 +10,7 @@ import EnhanceContentButton from "../EnhanceContentButton";
 import CustomTooltip from "@/components/CustomTooltip";
 import { useOpenAIMutation } from "@/services/mutations";
 import { toast } from "sonner";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import EnhancingLoader from "../EnhancingLoader";
 
 type Props = {
@@ -23,7 +23,7 @@ type Props = {
 export default function Step({ step, position, process, isOwner }: Props) {
   const { mutate } = useChangeProcess();
   const { mutate: enhanceContent, isPending } = useOpenAIMutation();
-  const [currentProcess] = useState(process);
+  const [currentProcess, setCurrentProcess] = useState(() => process);
 
   const [lastClicked, setLastClicked] = useState<
     "subheading" | "heading" | "paragraph" | "points" | null
@@ -33,10 +33,16 @@ export default function Step({ step, position, process, isOwner }: Props) {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const paragraphRef = useRef<HTMLParagraphElement>(null);
 
-  const isSubheadingPending = isPending && lastClicked == "subheading";
-  const isHeadingPending = isPending && lastClicked == "heading";
-  const isParagraphPending = isPending && lastClicked == "paragraph";
-  const arePointsPending = isPending && lastClicked == "points";
+  const isSubheadingPending = isPending && lastClicked === "subheading";
+  const isHeadingPending = isPending && lastClicked === "heading";
+  const isParagraphPending = isPending && lastClicked === "paragraph";
+  const arePointsPending = isPending && lastClicked === "points";
+
+  useEffect(() => {
+    if (process !== currentProcess) {
+      setCurrentProcess(process);
+    }
+  }, [process, currentProcess]);
 
   return (
     <article className="relative">
@@ -75,6 +81,11 @@ export default function Step({ step, position, process, isOwner }: Props) {
                       return;
                     mutate(newProcess!);
                   }
+                }}
+                onPaste={(e) => {
+                  e.preventDefault();
+                  const text = e.clipboardData.getData("text/plain");
+                  document.execCommand("insertText", false, text);
                 }}
                 contentEditable={isOwner}
                 suppressContentEditableWarning
@@ -129,6 +140,11 @@ export default function Step({ step, position, process, isOwner }: Props) {
                       return;
                     mutate(newProcess!);
                   }
+                }}
+                onPaste={(e) => {
+                  e.preventDefault();
+                  const text = e.clipboardData.getData("text/plain");
+                  document.execCommand("insertText", false, text);
                 }}
                 contentEditable={isOwner}
                 suppressContentEditableWarning
@@ -185,6 +201,11 @@ export default function Step({ step, position, process, isOwner }: Props) {
                   mutate(newProcess!);
                 }
               }}
+              onPaste={(e) => {
+                e.preventDefault();
+                const text = e.clipboardData.getData("text/plain");
+                document.execCommand("insertText", false, text);
+              }}
               contentEditable={isOwner}
               suppressContentEditableWarning
               className={`text-sm text-wheat/60 ${isOwner && "editable cursor-pointer"} group relative ${isParagraphPending && "opacity-50"}`}
@@ -231,7 +252,7 @@ export default function Step({ step, position, process, isOwner }: Props) {
               {arePointsPending && <EnhancingLoader />}
               {step.step_points?.map((item, pointIndex) => (
                 <li
-                  key={pointIndex}
+                  key={`${position}-${pointIndex}-${item}`}
                   className="text-sm text-wheat flex items-start"
                 >
                   <span className="mr-4">•</span>
@@ -244,13 +265,14 @@ export default function Step({ step, position, process, isOwner }: Props) {
                         const newProcess = process;
                         newProcess.steps[index].step_points[pointIndex] =
                           newValue;
-                        if (
-                          newValue ==
-                          newProcess.steps[index].step_points[pointIndex]
-                        )
-                          return;
+                        
                         mutate(newProcess!);
                       }
+                    }}
+                    onPaste={(e) => {
+                      e.preventDefault();
+                      const text = e.clipboardData.getData("text/plain");
+                      document.execCommand("insertText", false, text);
                     }}
                     contentEditable={isOwner}
                     suppressContentEditableWarning

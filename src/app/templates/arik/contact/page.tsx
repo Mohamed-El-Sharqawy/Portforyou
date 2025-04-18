@@ -1,15 +1,24 @@
 "use client";
 
 import Header from "@/features/(templates)/arik/components/Header/Header";
+import { useUserPreferences } from "@/features/survey/services/queries";
 import { getToken } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { toast } from "sonner";
+import { useContactForm } from "@/features/(templates)/arik/hooks/useContactForm";
 
 export default function Contact() {
   const searchParams = useSearchParams();
   const userId = searchParams.get("userId");
+
+  const { data } = useUserPreferences();
+  const clientEmail = data?.data?.user?.preferences.email;
+
+  const { formData, isLoading, handleChange, handleSubmit } = useContactForm({
+    clientEmail,
+  });
 
   useEffect(() => {
     const { decodedToken } = getToken();
@@ -40,7 +49,7 @@ export default function Contact() {
             Let&apos;s discuss your next project
           </p>
 
-          <form className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
@@ -56,6 +65,9 @@ export default function Contact() {
                 <input
                   type="text"
                   id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   className="w-full px-4 py-3 bg-wheat/10 border border-wheat/20 rounded-lg focus:outline-none focus:border-wheat/40 transition-colors"
                   placeholder="Your name"
                 />
@@ -75,6 +87,9 @@ export default function Contact() {
                 <input
                   type="email"
                   id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   className="w-full px-4 py-3 bg-wheat/10 border border-wheat/20 rounded-lg focus:outline-none focus:border-wheat/40 transition-colors"
                   placeholder="Your email"
                 />
@@ -95,6 +110,9 @@ export default function Contact() {
               <input
                 type="text"
                 id="subject"
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
                 className="w-full px-4 py-3 bg-wheat/10 border border-wheat/20 rounded-lg focus:outline-none focus:border-wheat/40 transition-colors"
                 placeholder="Subject of your message"
               />
@@ -113,7 +131,10 @@ export default function Contact() {
               </label>
               <textarea
                 id="message"
+                name="message"
                 rows={6}
+                value={formData.message}
+                onChange={handleChange}
                 className="w-full px-4 py-3 bg-wheat/10 border border-wheat/20 rounded-lg focus:outline-none focus:border-wheat/40 transition-colors resize-none"
                 placeholder="Your message"
               ></textarea>
@@ -127,7 +148,8 @@ export default function Contact() {
             >
               <button
                 type="submit"
-                className="px-8 py-3 bg-wheat text-black font-medium rounded-lg hover:bg-wheat/90 transition-colors inline-flex items-center space-x-2"
+                disabled={isLoading}
+                className="px-8 py-3 bg-wheat text-black font-medium rounded-lg hover:bg-wheat/90 transition-colors inline-flex items-center space-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <span>Send Message</span>
                 <svg

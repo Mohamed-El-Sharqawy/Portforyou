@@ -132,7 +132,7 @@ export default function SurveyFormContent() {
           className="p-8 space-y-8 rounded-2xl backdrop-blur-sm bg-gray-900/50"
         >
           <div className="space-y-6">
-            <h2 className="mb-6 font-serif text-2xl text-white">
+            <h2 className="mb-6 font-arial text-2xl text-white">
               What are your favorite colors?
               <span className="ml-2 font-sans text-sm text-gray-400">
                 (Select one or more)
@@ -157,7 +157,7 @@ export default function SurveyFormContent() {
           </div>
 
           <div className="space-y-6">
-            <h2 className="mb-6 font-serif text-xl text-white sm:text-2xl">
+            <h2 className="mb-6 font-arial text-xl text-white sm:text-2xl">
               What&apos;s your profession?
             </h2>
             <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
@@ -198,7 +198,7 @@ export default function SurveyFormContent() {
           </div>
 
           <div>
-            <h2 className="mb-6 font-serif text-xl text-white sm:text-2xl">
+            <h2 className="mb-6 font-arial text-xl text-white sm:text-2xl">
               What&apos;s your Email?
             </h2>
             <input

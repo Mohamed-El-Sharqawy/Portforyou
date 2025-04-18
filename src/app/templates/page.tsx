@@ -14,7 +14,7 @@ export default function Templates() {
   const [showAll, setShowAll] = useState(false);
 
   return (
-    <div className="container mx-auto px-4 pt-40 pb-8">
+    <div className="container mx-auto px-4 pt-40 pb-8 font-arial">
       <TemplatesHeadings />
 
       <TemplatesGrid templates={displayedTemplates} />

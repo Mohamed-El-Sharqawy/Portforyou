@@ -33,6 +33,11 @@ export default function WorkSteps() {
               mutate(newProcess!);
             }
           }}
+          onPaste={(e) => {
+            e.preventDefault();
+            const text = e.clipboardData.getData('text/plain');
+            document.execCommand('insertText', false, text);
+          }}
           contentEditable={isOwner}
           suppressContentEditableWarning
           className={`text-wheat text-center text-5xl leading-tight md:text-8xl md:leading-tight font-medium text-balance max-w-[900px] mx-auto ${isOwner && "editable cursor-pointer"}`}
@@ -48,6 +53,11 @@ export default function WorkSteps() {
               newProcess.process_paragraph = e.target.textContent!;
               mutate(newProcess!);
             }
+          }}
+          onPaste={(e) => {
+            e.preventDefault();
+            const text = e.clipboardData.getData('text/plain');
+            document.execCommand('insertText', false, text);
           }}
           contentEditable={isOwner}
           suppressContentEditableWarning

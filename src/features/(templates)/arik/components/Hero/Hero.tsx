@@ -159,6 +159,11 @@ export default function Hero() {
               contentEditable={!isHeroHeadingPending && isOwner}
               suppressContentEditableWarning
               ref={span1Ref}
+              onPaste={(e) => {
+                e.preventDefault();
+                const text = e.clipboardData.getData('text/plain');
+                document.execCommand('insertText', false, text);
+              }}
             >
               {!isFetching && (hero?.hero_heading || "Web Designer")}
             </span>
@@ -198,6 +203,11 @@ export default function Hero() {
               contentEditable={!isHeroSubheadingPending && isOwner}
               suppressContentEditableWarning
               ref={span2Ref}
+              onPaste={(e) => {
+                e.preventDefault();
+                const text = e.clipboardData.getData('text/plain');
+                document.execCommand('insertText', false, text);
+              }}
             >
               {!isFetching && (hero?.hero_subheading || "& Developer")}
             </span>
@@ -238,6 +248,11 @@ export default function Hero() {
             className={`text-wheat/60 max-w-[520px] leading-10 mx-auto text-2xl font-light ${isOwner && "editable cursor-pointer"} ${isHeroParagraphPending ? "!opacity-50" : ""}`}
             contentEditable={!isHeroParagraphPending && isOwner}
             suppressContentEditableWarning
+            onPaste={(e) => {
+              e.preventDefault();
+              const text = e.clipboardData.getData('text/plain');
+              document.execCommand('insertText', false, text);
+            }}
           >
             {!isFetching &&
               (hero?.hero_paragraph ||
