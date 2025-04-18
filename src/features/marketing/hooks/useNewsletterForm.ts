@@ -31,8 +31,8 @@ export default function useNewsletterForm() {
       });
       setIsLoading(false);
       return;
-    } 
-    
+    }
+
     if (!regex.test(form.current.email.value)) {
       toast.error("Please Enter a Valid Email", {
         id: "newsletter_invalid_email",
@@ -54,7 +54,7 @@ export default function useNewsletterForm() {
           message: subscribed,
         }),
       });
-      
+
       const data = await res.json();
 
       if (data?.success) {

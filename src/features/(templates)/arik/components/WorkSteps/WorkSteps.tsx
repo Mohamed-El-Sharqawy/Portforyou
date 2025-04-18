@@ -35,8 +35,8 @@ export default function WorkSteps() {
           }}
           onPaste={(e) => {
             e.preventDefault();
-            const text = e.clipboardData.getData('text/plain');
-            document.execCommand('insertText', false, text);
+            const text = e.clipboardData.getData("text/plain");
+            document.execCommand("insertText", false, text);
           }}
           contentEditable={isOwner}
           suppressContentEditableWarning
@@ -56,8 +56,8 @@ export default function WorkSteps() {
           }}
           onPaste={(e) => {
             e.preventDefault();
-            const text = e.clipboardData.getData('text/plain');
-            document.execCommand('insertText', false, text);
+            const text = e.clipboardData.getData("text/plain");
+            document.execCommand("insertText", false, text);
           }}
           contentEditable={isOwner}
           suppressContentEditableWarning

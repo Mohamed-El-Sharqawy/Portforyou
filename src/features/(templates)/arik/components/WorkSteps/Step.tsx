@@ -265,7 +265,7 @@ export default function Step({ step, position, process, isOwner }: Props) {
                         const newProcess = process;
                         newProcess.steps[index].step_points[pointIndex] =
                           newValue;
-                        
+
                         mutate(newProcess!);
                       }
                     }}

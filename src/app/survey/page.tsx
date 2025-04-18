@@ -22,7 +22,8 @@ export default function Survey() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="mx-auto max-w-3xl text-xl text-center text-white sm:text-3xl md:text-4xl"
         >
-          Your preferences and profession help us improve your experience and expand our template collection
+          Your preferences and profession help us improve your experience and
+          expand our template collection
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -30,7 +31,8 @@ export default function Survey() {
           transition={{ duration: 0.5, delay: 0.5 }}
           className="mx-auto mt-4 max-w-2xl text-sm text-center text-gray-300 sm:text-base"
         >
-          Currently offering 1 template, with more personalized options coming based on community feedback
+          Currently offering 1 template, with more personalized options coming
+          based on community feedback
         </motion.p>
 
         <SurveyFormContent />

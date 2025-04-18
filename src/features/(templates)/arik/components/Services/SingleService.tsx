@@ -60,8 +60,8 @@ export default function SingleService({
           }}
           onPaste={(e) => {
             e.preventDefault();
-            const text = e.clipboardData.getData('text/plain');
-            document.execCommand('insertText', false, text);
+            const text = e.clipboardData.getData("text/plain");
+            document.execCommand("insertText", false, text);
           }}
         >
           {isServiceTitlePending && <EnhancingLoader />}
@@ -113,8 +113,8 @@ export default function SingleService({
           }}
           onPaste={(e) => {
             e.preventDefault();
-            const text = e.clipboardData.getData('text/plain');
-            document.execCommand('insertText', false, text);
+            const text = e.clipboardData.getData("text/plain");
+            document.execCommand("insertText", false, text);
           }}
         >
           {isServiceDescriptionPending && <EnhancingLoader />}

@@ -161,8 +161,8 @@ export default function Hero() {
               ref={span1Ref}
               onPaste={(e) => {
                 e.preventDefault();
-                const text = e.clipboardData.getData('text/plain');
-                document.execCommand('insertText', false, text);
+                const text = e.clipboardData.getData("text/plain");
+                document.execCommand("insertText", false, text);
               }}
             >
               {!isFetching && (hero?.hero_heading || "Web Designer")}
@@ -205,8 +205,8 @@ export default function Hero() {
               ref={span2Ref}
               onPaste={(e) => {
                 e.preventDefault();
-                const text = e.clipboardData.getData('text/plain');
-                document.execCommand('insertText', false, text);
+                const text = e.clipboardData.getData("text/plain");
+                document.execCommand("insertText", false, text);
               }}
             >
               {!isFetching && (hero?.hero_subheading || "& Developer")}
@@ -250,8 +250,8 @@ export default function Hero() {
             suppressContentEditableWarning
             onPaste={(e) => {
               e.preventDefault();
-              const text = e.clipboardData.getData('text/plain');
-              document.execCommand('insertText', false, text);
+              const text = e.clipboardData.getData("text/plain");
+              document.execCommand("insertText", false, text);
             }}
           >
             {!isFetching &&

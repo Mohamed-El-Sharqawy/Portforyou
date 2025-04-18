@@ -94,8 +94,8 @@ export default function SingleProject({
               }}
               onPaste={(e) => {
                 e.preventDefault();
-                const text = e.clipboardData.getData('text/plain');
-                document.execCommand('insertText', false, text);
+                const text = e.clipboardData.getData("text/plain");
+                document.execCommand("insertText", false, text);
               }}
             >
               {project.title || fakeWorkExperience[index].title}
@@ -116,8 +116,8 @@ export default function SingleProject({
               }}
               onPaste={(e) => {
                 e.preventDefault();
-                const text = e.clipboardData.getData('text/plain');
-                document.execCommand('insertText', false, text);
+                const text = e.clipboardData.getData("text/plain");
+                document.execCommand("insertText", false, text);
               }}
             >
               {project.category || fakeWorkExperience[index].category}
@@ -204,8 +204,8 @@ export default function SingleProject({
                       }}
                       onPaste={(e) => {
                         e.preventDefault();
-                        const text = e.clipboardData.getData('text/plain');
-                        document.execCommand('insertText', false, text);
+                        const text = e.clipboardData.getData("text/plain");
+                        document.execCommand("insertText", false, text);
                       }}
                       ref={ref}
                     />
@@ -253,8 +253,8 @@ export default function SingleProject({
                     }}
                     onPaste={(e) => {
                       e.preventDefault();
-                      const text = e.clipboardData.getData('text/plain');
-                      document.execCommand('insertText', false, text);
+                      const text = e.clipboardData.getData("text/plain");
+                      document.execCommand("insertText", false, text);
                     }}
                   >
                     {project.project_link && project.project_link == "null"
@@ -279,8 +279,8 @@ export default function SingleProject({
                     }}
                     onPaste={(e) => {
                       e.preventDefault();
-                      const text = e.clipboardData.getData('text/plain');
-                      document.execCommand('insertText', false, text);
+                      const text = e.clipboardData.getData("text/plain");
+                      document.execCommand("insertText", false, text);
                     }}
                   >
                     {project.img_url && project.img_url == "null"

@@ -50,8 +50,8 @@ export default function Content() {
         }}
         onPaste={(e) => {
           e.preventDefault();
-          const text = e.clipboardData.getData('text/plain');
-          document.execCommand('insertText', false, text);
+          const text = e.clipboardData.getData("text/plain");
+          document.execCommand("insertText", false, text);
         }}
         className={cn(
           "uppercase xl:text-[128px] max-w-[1200px] my-2 leading-tight text-balance md:text-[70px] sm:text-[50px] text-[28px] group relative",
@@ -106,8 +106,8 @@ export default function Content() {
         }}
         onPaste={(e) => {
           e.preventDefault();
-          const text = e.clipboardData.getData('text/plain');
-          document.execCommand('insertText', false, text);
+          const text = e.clipboardData.getData("text/plain");
+          document.execCommand("insertText", false, text);
         }}
         className={cn(
           "text-base sm:text-xl text-wheat/60 w-full px-3 sm:max-w-[500px] sm:px-0 group relative",

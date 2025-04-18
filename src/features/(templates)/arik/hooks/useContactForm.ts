@@ -74,7 +74,7 @@ export const useContactForm = ({ clientEmail }: UseContactFormProps) => {
       });
 
       if (!res.ok) {
-        throw new Error('Failed to send email');
+        throw new Error("Failed to send email");
       }
 
       toast.success("Message sent successfully!");
