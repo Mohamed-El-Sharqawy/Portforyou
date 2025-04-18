@@ -441,7 +441,7 @@ export const changeProcessSection = async (
       ${workSteps.steps
         .map(
           ({ step_heading, step_subheading, step_paragraph, step_points }) =>
-            `{ step_heading: "${step_heading}", step_subheading: "${step_subheading}", step_paragraph: "${step_paragraph}", step_points: [${step_points.map((point) => `"${point}"`).join(", ")}] }`
+            `{ step_heading: "${step_heading}", step_subheading: "${step_subheading}", step_paragraph: "${step_paragraph}", step_points: [${step_points?.map((point) => `"${point}"`).join(", ")}] }`
         )
         .join(",\n        ")}
       ]

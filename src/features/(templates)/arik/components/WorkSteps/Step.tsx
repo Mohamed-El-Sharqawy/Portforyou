@@ -253,12 +253,13 @@ export default function Step({ step, position, process, isOwner }: Props) {
               {step.step_points?.map((item, pointIndex) => (
                 <li
                   key={`${position}-${pointIndex}-${item}`}
-                  className="text-sm text-wheat flex items-start"
+                  className="text-sm text-wheat flex items-start relative group"
                 >
                   <span className="mr-4">•</span>
                   <span
                     onBlur={(e) => {
                       if (process) {
+                        console.log(e.target.textContent);
                         const index = position - 1;
                         const newValue = e.target.textContent!;
 
@@ -276,46 +277,55 @@ export default function Step({ step, position, process, isOwner }: Props) {
                     }}
                     contentEditable={isOwner}
                     suppressContentEditableWarning
-                    className={`${isOwner && "editable cursor-pointer"} relative group`}
+                    className={`${isOwner && "editable cursor-pointer"}`}
                   >
                     {item || fakeSteps[position - 1].step_points[pointIndex]}
-                    {isOwner && (
-                      <CustomTooltip>
-                        <EnhanceContentButton
-                          onClick={(e) => {
-                            if (process) {
-                              setLastClicked("points");
-                              const elementContent =
-                                e.currentTarget.parentElement?.parentElement?.textContent?.replace(
-                                  "Enhance ContentEnhance Content",
-                                  ""
-                                );
-                              if (elementContent) {
-                                enhanceContent(elementContent, {
-                                  onSuccess: (data: string) => {
-                                    const index = position - 1;
-                                    const newProcess = { ...process };
-                                    if (data === elementContent) {
-                                      return toast.success(
-                                        "Content is already perfect 📈"
-                                      );
-                                    }
-                                    newProcess.steps[index].step_points[
-                                      pointIndex
-                                    ] = data;
-                                    mutate(newProcess);
-                                    toast.success(
-                                      "Content enhanced successfully!"
-                                    );
-                                  },
-                                });
-                              }
-                            }
-                          }}
-                        />
-                      </CustomTooltip>
-                    )}
                   </span>
+                  {isOwner && (
+                    <CustomTooltip>
+                      <EnhanceContentButton
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (process) {
+                            const elementContent =
+                              e.currentTarget.parentElement?.parentElement?.textContent?.replace(
+                                "Enhance ContentEnhance Content",
+                                ""
+                              );
+                            setLastClicked("points");
+                            if (elementContent) {
+                              enhanceContent(elementContent, {
+                                onSuccess: (data: string) => {
+                                  const index = position - 1;
+                                  const newProcess = { ...process };
+                                  const sanitizedData = data.replace(
+                                    /\*\*.*?\*\*\s*/g,
+                                    ""
+                                  );
+                                  console.log(
+                                    "Sanitized content to apply:",
+                                    sanitizedData
+                                  );
+                                  newProcess.steps[index].step_points[
+                                    pointIndex
+                                  ] = sanitizedData;
+                                  mutate({
+                                    process_heading: newProcess.process_heading,
+                                    process_paragraph:
+                                      newProcess.process_paragraph,
+                                    steps: newProcess.steps,
+                                  });
+                                  toast.success(
+                                    "Content enhanced successfully!"
+                                  );
+                                },
+                              });
+                            }
+                          }
+                        }}
+                      />
+                    </CustomTooltip>
+                  )}
                 </li>
               ))}
             </ul>
