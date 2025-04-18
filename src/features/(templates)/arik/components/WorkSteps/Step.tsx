@@ -276,7 +276,7 @@ export default function Step({ step, position, process, isOwner }: Props) {
                     }}
                     contentEditable={isOwner}
                     suppressContentEditableWarning
-                    className={`${isOwner && "editable cursor-pointer"} relative`}
+                    className={`${isOwner && "editable cursor-pointer"} relative group`}
                   >
                     {item || fakeSteps[position - 1].step_points[pointIndex]}
                     {isOwner && (

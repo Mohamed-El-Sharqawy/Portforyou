@@ -11,7 +11,7 @@ export default function EnhanceContentButton({
       onClick={onClick}
       {...props}
       className={cn(
-        "absolute top-2 -right-8 text-wheat transition-colors opacity-0 group-hover:opacity-100",
+        "absolute top-2 -right-8 text-wheat transition-colors opacity-0 group-hover:opacity-100 z-[999]",
         className
       )}
     >
