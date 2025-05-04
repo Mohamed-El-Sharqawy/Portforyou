@@ -34,7 +34,7 @@ describe("Authentication Flow", () => {
 
       // Fill the sign-up form
       cy.get("[data-cy=username-signup]").type("newuser");
-      cy.get("[data-cy=email-signup]").type("new2@example.com");
+      cy.get("[data-cy=email-signup]").type("new3@example.com");
       cy.get("[data-cy=password-signup]").type("password123");
 
       // Submit the form

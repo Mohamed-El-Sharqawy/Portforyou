@@ -176,7 +176,10 @@ mutation updateAllUserData($userId: ID!) {
       messages: [
         {
           role: "user",
-          content: `Analyze the following resume content and extract relevant information to fill in the GraphQL template. Fill in the fields that apply to the resume content, and leave fields empty if they don't apply (keep the empty quotes). Return the complete GraphQL mutation with the filled template:\n\n${fullContent}\n\nTemplate to fill:\n${templateStructure}. and don't reply with here's the content or based on the content provided or anything like that just give me the schema directly.`,
+          content: `Analyze the following resume content and extract relevant information to fill in the GraphQL template. 
+          Fill in the fields that apply to the resume content, and leave fields empty if they don't apply (keep the empty quotes)
+          . Return the complete GraphQL mutation with the filled template:\n\n${fullContent}\n\nTemplate to fill:\n${templateStructure}
+          . and don't reply with here's the content or based on the content provided or anything like that just give me the schema directly.`,
         },
       ],
       temperature: 0.7,

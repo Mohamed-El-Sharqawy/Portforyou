@@ -27,6 +27,7 @@ export function InfoDialog({ title, description }: InfoDialogProps) {
           <span className="sr-only">Info</span>
         </button>
       </DialogTrigger>
+      
       <DialogContent className="sm:max-w-md bg-black border-wheat/15 text-wheat">
         <DialogHeader>
           <DialogTitle className="text-wheat">{title}</DialogTitle>

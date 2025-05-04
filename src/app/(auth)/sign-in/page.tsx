@@ -32,7 +32,7 @@ const SignIn = () => {
           expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
         });
         // Redirect to templates page
-        window.location.href = "/templates";
+        window.location.href = "/survey";
       }
     } catch (error) {
       setFormError("An unexpected error occurred. Please try again.");

@@ -24,8 +24,11 @@ export const metadata = {
   title: "Home | Mohamed El-Sharqawy",
   description:
     "I'm a full-stack developer with a passion for creating beautiful and functional websites and applications.",
-  keywords:
-    "full-stack developer, web developer, software engineer, react developer, next.js developer, node.js developer, python developer, django developer, flask developer, sql developer, no-sql developer, database developer, web design, web development, software development, web design and development, web design and development services, web design and development company, web design and development agency, web design and development solutions, web design and development projects, web design and development services, web design and development company, web design and development agency, web design and development solutions, web design and development projects",
+  keywords: `full-stack developer, web developer, software engineer, react developer, next.js developer, node.js developer, python developer, django developer, flask developer, 
+  sql developer, no-sql developer, database developer, web design, web development, software development, web design and development, web design and development services, 
+  web design and development company, web design and development agency, web design and development solutions, web design and development projects, 
+  web design and development services, web design and development company, web design and development agency, web design and development solutions, 
+  web design and development projects`,
   robots: "index, follow",
   author: "Mohamed El-Sharqawy",
   creator: "Mohamed El-Sharqawy",
