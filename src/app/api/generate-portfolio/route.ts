@@ -258,8 +258,7 @@ Very important: Return ONLY the filled GraphQL mutation as a valid GraphQL query
       messages: [
         {
           role: "system",
-          content:
-            `You are a professional portfolio designer specializing in creating elegant, modern content for dark-themed portfolio websites. You transform resume content into compelling, 
+          content: `You are a professional portfolio designer specializing in creating elegant, modern content for dark-themed portfolio websites. You transform resume content into compelling, 
             concise portfolio sections while maintaining the exact structure of templates. Your content is sophisticated, professional, and tailored to showcase expertise in the most impressive way.`,
         },
         { role: "user", content: prompt },
